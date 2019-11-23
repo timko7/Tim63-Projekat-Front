@@ -1,0 +1,21 @@
+<h1>Dodajte Kliniku</h1>
+    <form (ngSubmit)="onSubmit()" #klinikaForm="ngForm">
+        <table>
+            <tr>
+                <td>Ime</td>
+                <td><input type="text" name="ime" #ime="ngModel" [(ngModel)]="klinika.ime"></td>
+               
+            </tr>
+            <tr>
+                <td>Opis</td>
+                <td><input type="text" name="opis" #opis="ngModel" [(ngModel)]="klinika.opis"></td>
+            </tr>
+            <tr>
+                    <td>Adresa</td>
+                    <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="klinika.adresa"></td>
+                </tr>
+                        <tr>
+                                <td><input type="submit" value="Potvrdi"></td>
+                                    </tr>
+            </table>
+        </form>

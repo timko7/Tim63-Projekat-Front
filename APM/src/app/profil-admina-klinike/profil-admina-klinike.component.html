@@ -1,0 +1,57 @@
+<h1>Profil administratora klinike</h1>
+<p>Dobro dosli: {{nazivAdmina}}</p>
+<div class="topnav">
+    <a [routerLink]="['./profilKlinike']">Profil klinike</a>
+    <a [routerLink]="['./tipoviPregleda']">Tipovi pregleda</a>
+    <!-- <a [routerLink]="['./lekari']">Lekari</a> -->
+    <a [routerLink]="['./sale']">Sale</a>
+  </div>
+
+
+
+<div>
+    <h2>Moji podaci:</h2>
+    <table>
+
+      
+         <tr>
+            <td>Id</td>
+            <td>{{admin.id}}</td>
+        </tr>
+      <tr>
+          <td>Ime</td>
+          <td>{{admin.ime}}</td>
+      </tr>
+      <tr>
+          <td>Prezime</td>
+          <td>{{admin.prezime}}</td>
+      </tr>
+      <tr>
+          <td>Email</td>
+          <td>{{admin.email}}</td>
+      </tr>
+      <tr>
+          <td>Password</td>
+          <td>{{admin.password}}</td>
+      </tr>
+      <tr>
+          <td>Grad</td>
+          <td>{{admin.grad}}</td>
+      </tr>
+      <tr>
+          <td>Drzava</td>
+          <td>{{admin.drzava}}</td>
+      </tr>
+      <tr>
+          <td>Adresa</td>
+          <td>{{admin.adresa}}</td>
+      </tr>
+      <tr>
+          <td>Telefon</td>
+          <td>{{admin.telefon}}</td>
+      </tr> 
+    
+                     
+  </table>
+</div>
+
