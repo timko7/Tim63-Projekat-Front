@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Sala } from './sala';
+import { SalaServices } from './sala.services';
 
 @Component({
   selector: 'pm-sale',
@@ -8,13 +10,28 @@ import { Router } from '@angular/router';
 })
 export class SaleComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  sala: Sala;
+  sale: Sala[] = [];
+
+  constructor(private _router: Router, private salaServices: SalaServices) { 
+    this.sala = new Sala();
+  }
 
   ngOnInit() {
+    this.salaServices.getSale().subscribe({
+      next: sale => {
+        this.sale = sale;
+      }
+    })
   }
 
   onBack(): void {
     this._router.navigate(['/adminKlinike']);
+  }
+
+  onSubmit() {
+    this.salaServices.save(this.sala).subscribe();
+    this.sala.naziv = "";
   }
 
 
