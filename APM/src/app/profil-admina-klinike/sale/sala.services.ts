@@ -17,4 +17,8 @@ export class SalaServices {
     public getSale(): Observable<Sala[]> {
         return this._http.get<Sala[]>("/api/sale");
     }
+
+    public obrisi(sala: Sala) {
+        return this._http.delete("/api/sale/obrisi/"+sala.naziv);
+    }
 }

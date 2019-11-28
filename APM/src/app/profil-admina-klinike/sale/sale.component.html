@@ -6,14 +6,17 @@
                 *ngIf='sale'>
             <thead>
             <tr>
-                <th>ID sale</th>
+                <!-- <th>ID sale</th> -->
                 <th>Naziv sale</th>
+                <th>Zauzetost sale</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor='let sala of sale'>
-                <td>{{ sala.id }}</td>
+                <!-- <td>{{ sala.id }}</td> -->
                 <td>{{ sala.naziv }}</td>
+                <td>{{ sala.slobodna ? 'Slobodna' : 'Zauzeta'}}</td>
+                <td><button *ngIf="sala.slobodna" class="btn btn-info" (click)='obrisiSalu(sala)'>Obrisi salu</button></td>
             </tr>
             </tbody>
         </table>

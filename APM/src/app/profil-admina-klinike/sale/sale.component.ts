@@ -32,7 +32,18 @@ export class SaleComponent implements OnInit {
   onSubmit() {
     this.salaServices.save(this.sala).subscribe();
     this.sala.naziv = "";
+    this.refresh();
   }
+
+  refresh(): void {
+    window.location.reload();
+}
+
+obrisiSalu(sala: Sala): void {
+  this.salaServices.obrisi(sala).subscribe();
+  this.refresh();
+}
+
 
 
 }
