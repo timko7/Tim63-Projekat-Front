@@ -14,11 +14,15 @@ export class SalaServices {
         return this._http.post<Sala>("/api/sale/add", sala);
     }
 
-    public getSale(): Observable<Sala[]> {
-        return this._http.get<Sala[]>("/api/sale");
+    public getSale(idKlinike: number): Observable<Sala[]> {
+        return this._http.get<Sala[]>("/api/sale/" + idKlinike);
     }
 
     public obrisi(sala: Sala) {
         return this._http.delete("/api/sale/obrisi/"+sala.naziv);
+    }
+
+    public izmeni(sala: Sala) {     // /api/sale/izmeni/{naziv}
+        return this._http.put("/api/sale/izmeni/" + sala.naziv, sala);
     }
 }

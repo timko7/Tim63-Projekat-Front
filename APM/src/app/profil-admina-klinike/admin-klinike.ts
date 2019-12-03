@@ -8,4 +8,5 @@ export interface IAdminKlinike{
     drzava:string;
     adresa:string;
     telefon:string;
+    idKlinike: number;
 }
