@@ -64,7 +64,7 @@ export class SaleComponent implements OnInit {
       this.sala.idKlinike = this.adminKlinike.idKlinike;
       this.salaServices.save(this.sala).subscribe();
       this.sala.naziv = "";
-      //this.refresh();
+      this.refresh();
     }
     else {
       alert('Uneti su samo prazni stringovi(spaces, tabs)\nUnesite ispravan naziv!');
