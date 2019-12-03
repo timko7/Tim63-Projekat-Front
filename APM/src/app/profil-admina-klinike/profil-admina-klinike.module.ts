@@ -8,6 +8,8 @@ import { LekariComponent } from './lekari/lekari.component';
 import { SaleComponent } from './sale/sale.component';
 import { TipoviService } from './tipovi-pregleda/tipovi-pregleda.service';
 import { AdminKlinikeService } from './profil-amina-klinike.services';
+import { SalaServices } from './sale/sala.services';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -28,10 +30,12 @@ import { AdminKlinikeService } from './profil-amina-klinike.services';
       { path: 'adminKlinike/lekari', component: LekariComponent },
       { path: 'adminKlinike/sale', component: SaleComponent },
     ]),
+    FormsModule
   ],
   providers: [
     TipoviService,
-    AdminKlinikeService
+    AdminKlinikeService,
+    SalaServices
   ]
 })
 export class ProfilAdminaKlinikeModule { }

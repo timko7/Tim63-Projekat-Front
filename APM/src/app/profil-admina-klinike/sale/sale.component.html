@@ -1,7 +1,52 @@
-<p>sale works!</p>
-
+<h2>Sve sale:</h2>
+<div class='card'>
+    <div class='card-body'>
+        <div class='table-responsive'>
+        <table class='table'
+                *ngIf='sale'>
+            <thead>
+            <tr>
+                <!-- <th>ID sale</th> -->
+                <th>Naziv sale</th>
+                <th>Zauzetost sale</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor='let sala of sale'>
+                <!-- <td>{{ sala.id }}</td> -->
+                <td>{{ sala.naziv }}</td>
+                <td>{{ sala.slobodna ? 'Slobodna' : 'Zauzeta'}}</td>
+                <td><button *ngIf="sala.slobodna" class="btn btn-info" (click)='obrisiSalu(sala)'>Obrisi salu</button></td>
+                <td><button *ngIf="sala.slobodna" class="btn btn-info" (click)='izmeniSalu(sala)'>Izmeni salu</button></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
 
 
 <div>
-    <button (click)='onBack()'>Nazad</button>
+    <h3>Dodavanje nove sale:</h3>
+
+    <form class="dodajSalu" (ngSubmit) = "onSubmit()" #salaForm="ngForm">
+        <label>Naziv sale</label>
+        <input type="text" placeholder="Naziv sale" required name="naziv" #naziv="ngModel" [(ngModel)] = "sala.naziv">
+        <input type="submit" value="Dodaj" class="btn btn-info">
+    </form>
+</div>
+
+<div *ngIf='mozesDaMenjas'>
+    <h3>Izmena sale: {{nazivSaleKojeSeMenja}}</h3>
+
+    <form class="dodajSalu" (ngSubmit) = "onSubmitIzmeni()" #salaForm="ngForm">
+        <label>Novi naziv sale</label>
+        <input type="text" placeholder="Naziv sale" required name="nazivIzmena" #nazivIzmena="ngModel" [(ngModel)] = "noviNaziv">
+        <input type="submit" value="Izmeni" class="btn btn-info">
+    </form>
+</div>
+
+
+<div>
+    <button (click)='onBack()' class="btn btn-info">Nazad</button>
 </div>
