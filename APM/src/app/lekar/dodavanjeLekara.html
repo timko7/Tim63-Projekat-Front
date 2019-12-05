@@ -1,49 +1,101 @@
-<html>
-    <body>
-    <h1>Dodavanje Lekara</h1>
-    <form (ngSubmit)="onSubmit()" #pacijentForm="ngForm">
-        <table>
+<h2>Svi Lekari klinike:</h2>
+<div class='card'>
+    <div class='card-body'>
+        <div class='table-responsive'>
+        <table class='table'
+                *ngIf='lekari'>
+            <thead>
             <tr>
-                <td>Ime</td>
-                <td><input type="text" name="ime" #ime="ngModel" [(ngModel)]="lekar.ime"></td>
-               
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Grad</th>
+                <th>Drzava</th>
+                <th>Adresa</th>
+                <th>Telefon</th>
+                <th>Broj osiguranika</th>
+                <th>Radno vreme</th>
+                <th>Zauzetost</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor='let lekar of lekari'>
+                <td>{{ lekar.ime }}</td>
+                <td>{{ lekar.prezime }}</td>
+                <td>{{ lekar.email }}</td>
+                <td>{{ lekar.password }}</td>
+                <td>{{ lekar.grad }}</td>
+                <td>{{ lekar.drzava }}</td>
+                <td>{{ lekar.adresa }}</td>
+                <td>{{ lekar.telefon }}</td>
+                <td>{{ lekar.broj_osiguranika }}</td>
+                <td>{{ lekar.radnoVremeOd }} -- {{ lekar.radnoVremeDo }}</td>
+                <td>{{ lekar.slobodan ? 'Nema zakazan pregled' : 'Ima zakazan pregled'}}</td>
+                <td><button *ngIf="lekar.slobodan" class="btn btn-info" (click)='obrisiLekara(lekar)'>Obrisi</button></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+
+<div>
+<h1>Dodavanje novog lekara:</h1>
+<form class="dodajLekara" (ngSubmit)="onSubmit()" #pacijentForm="ngForm">
+    <table>
+        <tr>
+            <td>Ime</td>
+            <td><input type="text" name="ime" #ime="ngModel" [(ngModel)]="lekar.ime"></td>
+            
+        </tr>
+        <tr>
+            <td>Prezime</td>
+            <td><input type="text" name="prezime" #prezime="ngModel" [(ngModel)]="lekar.prezime"></td>
+        </tr>
+        <tr>
+                <td>Email</td>
+                <td><input type="text" name="email" #email="ngModel" [(ngModel)]="lekar.email"></td>
             </tr>
             <tr>
-                <td>Prezime</td>
-                <td><input type="text" name="prezime" #prezime="ngModel" [(ngModel)]="lekar.prezime"></td>
-            </tr>
-            <tr>
-                    <td>Email</td>
-                    <td><input type="text" name="email" #email="ngModel" [(ngModel)]="lekar.email"></td>
+                    <td>Password</td>
+                    <td><input type="text" name="password" #password="ngModel" [(ngModel)]="lekar.password"></td>
                 </tr>
                 <tr>
-                        <td>Password</td>
-                        <td><input type="text" name="password" #password="ngModel" [(ngModel)]="lekar.password"></td>
+                        <td>Grad</td>
+                        <td><input type="text" name="grad" #grad="ngModel" [(ngModel)]="lekar.grad"></td>
                     </tr>
                     <tr>
-                            <td>Grad</td>
-                            <td><input type="text" name="grad" #grad="ngModel" [(ngModel)]="lekar.grad"></td>
+                        <td>Drzava</td>
+                        <td><input type="text" name="drzava" #drzava="ngModel" [(ngModel)]="lekar.drzava"></td>
+                    </tr>
+                    <tr>
+                        <td>Adresa</td>
+                        <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="lekar.adresa"></td>
+                    </tr>
+                    <tr>
+                            <td>Telefon</td>
+                            <td><input type="text" name="tel" #tel="ngModel" [(ngModel)]="lekar.telefon"></td>
                         </tr>
                         <tr>
-                            <td>Drzava</td>
-                            <td><input type="text" name="drzava" #drzava="ngModel" [(ngModel)]="lekar.drzava"></td>
+                            <td>Broj osiguranika</td>
+                            <td><input type="text" name="broj_osiguranika" #broj_osiguranika="ngModel" [(ngModel)]="lekar.broj_osiguranika"></td>
                         </tr>
                         <tr>
-                            <td>Adresa</td>
-                            <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="lekar.adresa"></td>
+                            <td>Radno vreme</td>
+                            <td>Od<input type="number" name="radnoVremeOd" #radnoVremeOd="ngModel" [(ngModel)]="lekar.radnoVremeOd" min="6" max="24" required>
+                                Do<input type="number" name="radnoVremeDo" #radnoVremeDo="ngModel" [(ngModel)]="lekar.radnoVremeDo" min="6" max="24" required>
+                            </td>
                         </tr>
                         <tr>
-                                <td>Telefon</td>
-                                <td><input type="text" name="tel" #tel="ngModel" [(ngModel)]="lekar.telefon"></td>
+                        <td><input type="submit" value="Dodaj" class="btn btn-info"></td>
                             </tr>
-                            <tr>
-                                <td>Broj osiguranika</td>
-                                <td><input type="text" name="broj_osiguranika" #broj_osiguranika="ngModel" [(ngModel)]="lekar.broj_osiguranika"></td>
-                            </tr>
-                            <tr>
-                            <td><input type="submit" value="Potvrdi"></td>
-                                </tr>
-        </table>
-    </form>
-  </body>  
-</html>
+    </table>
+</form>
+</div>
+
+<div>
+    <button (click)='onBack()' class="btn btn-info">Nazad</button>
+</div>
+

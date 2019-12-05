@@ -16,7 +16,7 @@ export class AdminKlinikeService {
         
         let param: any = {'id': 0};
         //this.http.get(`${ApiUrl}`, {params: param})
-        return this._http.get<IAdminKlinike>("/api/adminiKlinike/user/5");
+        return this._http.get<IAdminKlinike>("/api/login/vratiUlogovanog");
     }
 
 }

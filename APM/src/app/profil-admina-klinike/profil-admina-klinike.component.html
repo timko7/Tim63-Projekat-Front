@@ -1,10 +1,11 @@
 <h1>Profil administratora klinike</h1>
-<p>Dobro dosli: {{nazivAdmina}}</p>
+<p>Dobro dosli: "{{admin.ime}} {{admin.prezime}}"</p>
 <div class="topnav">
     <a [routerLink]="['./profilKlinike']">Profil klinike</a>
     <a [routerLink]="['./tipoviPregleda']">Tipovi pregleda</a>
-    <!-- <a [routerLink]="['./lekari']">Lekari</a> -->
+    <a [routerLink]="['./lekari']">Lekari</a>
     <a [routerLink]="['./sale']">Sale</a>
+    <a (click)='odjaviSe()'>Odjavi se</a>
   </div>
 
 

@@ -1,0 +1,20 @@
+<html>
+    <body>
+<h1>Uloguj se</h1>
+<form (ngSubmit)="login()" #loginForm="ngForm">
+    <table>
+        <tr>
+        <td>Email</td>
+        <td><input type="text" name="email" #email="ngModel" [(ngModel)]="loginZahtev.email"></td>
+    </tr>
+    <tr>
+            <td>Password</td>
+            <td><input type="text" name="password" #password="ngModel" [(ngModel)]="loginZahtev.password"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Potvrdi" ></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

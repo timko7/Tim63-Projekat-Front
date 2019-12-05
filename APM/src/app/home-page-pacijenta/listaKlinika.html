@@ -1,0 +1,35 @@
+<div class='card'>
+    <div class='card-body'>
+      <div class='row' >Pretrazi  klinike</div>
+      <div class="row">
+        <div class='col-md-2'>Pretrazi po imenu</div>
+        <div class='col-md-4'><input type="text" [(ngModel)]='imeKlinike'></div>
+      </div>
+      <div class="row"><input type="submit" value="Pretrazi"></div>
+      <div class='table-responsive'>
+        <table class='table'
+               *ngIf='filtriraneKlinike'>
+          <thead>
+            <tr>
+              <th>ID Klinike</th>
+              <th>Naziv</th>
+              <th>Opis</th>
+              <th>Adresa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let klinika of filtriraneKlinike'>
+              <td>{{ klinika.id }}</td>
+              <td>{{ klinika.ime }}</td>
+              <td>{{ klinika.opis }}</td>
+              <td>{{ klinika.adresa }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+
+<div>
+    <button (click)='onBack()'>Nazad</button>
+</div>

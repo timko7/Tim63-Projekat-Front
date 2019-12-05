@@ -1,4 +1,4 @@
-export interface IAdminKlinike{
+export class IAdminKlinike{
     id: number;
     ime:string;
     prezime:string;
