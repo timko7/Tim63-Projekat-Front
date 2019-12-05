@@ -63,4 +63,10 @@ export class TipoviPregledaComponent implements OnInit {
     window.location.reload();
   }
 
+  obrisiTip(tip: ITipPregleda): void {
+    this.tipoviService.obrisi(tip).subscribe();
+    this.refresh();
+    }
+
+
 }

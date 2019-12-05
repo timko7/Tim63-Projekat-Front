@@ -18,4 +18,8 @@ export class TipoviService {
         return this._http.get<ITipPregleda[]>("/api/tipoviPregleda/" + idKlinike);
     }
 
+    obrisi(tip: ITipPregleda) {
+        return this._http.delete("/api/tipoviPregleda/obrisi/" + tip.id);
+    }
+
 }
