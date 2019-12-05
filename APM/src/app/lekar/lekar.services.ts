@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LekarServces{
+        
     private pacijetUrl:string;
 
     constructor(private http:HttpClient){
@@ -16,8 +17,18 @@ export class LekarServces{
       return this.http.get<Lekar[]>("/api/lekari");
     }
 
-        public save(lekar:Lekar){
-            return this.http.post<Lekar>("/api/lekari/dodajLekara",lekar);
-        }
+    public save(lekar:Lekar){
+        return this.http.post<Lekar>("/api/lekari/dodajLekara",lekar);
+    }
+
+    public getLekare(idKlinike: number): Observable<Lekar[]> {
+        return this.http.get<Lekar[]>("/api/lekari/" + idKlinike);
+    }
+
+    public obrisi(lekar: Lekar) {
+        return this.http.delete("/api/lekari/" + lekar.id);
+    }
+
+    
 
 }

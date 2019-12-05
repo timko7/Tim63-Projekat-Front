@@ -15,30 +15,34 @@ import { KlinikaServices } from './klinika/klinika.services';
 import { LekarComponent } from './lekar/lekar-components';
 import { LekarServces } from './lekar/lekar.services';
 import { ProfilAdminaKlinikeModule } from './profil-admina-klinike/profil-admina-klinike.module';
+import { LoginComponent } from './login/login.component';
+import { LoginServces } from './login/login.services';
+import { HomePagePacijentaModule } from './home-page-pacijenta/home-page-pacijenta.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     PacijentComponent,
     KlinikaComponent,
-    LekarComponent,
-    HomeComponent
+    LoginComponent,
+    //HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     // AppRoutingModule,
     ProfilAdminaKlinikeModule,
+    HomePagePacijentaModule,
     RouterModule.forRoot([
       { path: 'signup', component: PacijentComponent },
       { path: 'napraviKliniku', component: KlinikaComponent },
-      { path: 'dodajLekara', component: LekarComponent },
-      { path: 'homePage', component: HomeComponent }
+     { path: 'login', component: LoginComponent },
+     // { path: 'homePage', component: HomeComponent }
 
     ]),
     FormsModule
   ],
-  providers:[PacijentServces, KlinikaServices, LekarServces],
+  providers:[PacijentServces, KlinikaServices,LoginServces],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

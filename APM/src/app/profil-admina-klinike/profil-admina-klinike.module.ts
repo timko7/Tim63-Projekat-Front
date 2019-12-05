@@ -4,12 +4,13 @@ import { RouterModule } from '@angular/router';
 import { ProfilAdminaKlinikeComponent } from './profil-admina-klinike.component';
 import { ProfilKlinikeComponent } from '../profilKlinike/profil-klinike.component';
 import { TipoviPregledaComponent } from './tipovi-pregleda/tipovi-pregleda.component';
-import { LekariComponent } from './lekari/lekari.component';
 import { SaleComponent } from './sale/sale.component';
 import { TipoviService } from './tipovi-pregleda/tipovi-pregleda.service';
 import { AdminKlinikeService } from './profil-amina-klinike.services';
 import { SalaServices } from './sale/sala.services';
 import { FormsModule } from '@angular/forms';
+import { LekarComponent } from '../lekar/lekar-components';
+import { LekarServces } from '../lekar/lekar.services';
 
 
 
@@ -17,8 +18,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     ProfilAdminaKlinikeComponent,
     TipoviPregledaComponent,
-    LekariComponent,
     SaleComponent,
+    LekarComponent,
     ProfilKlinikeComponent
   ],
   imports: [
@@ -27,7 +28,7 @@ import { FormsModule } from '@angular/forms';
       { path: 'adminKlinike', component: ProfilAdminaKlinikeComponent },
       { path: 'adminKlinike/profilKlinike', component: ProfilKlinikeComponent },
       { path: 'adminKlinike/tipoviPregleda', component: TipoviPregledaComponent },
-      { path: 'adminKlinike/lekari', component: LekariComponent },
+      { path: 'adminKlinike/lekari', component: LekarComponent },
       { path: 'adminKlinike/sale', component: SaleComponent },
     ]),
     FormsModule
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
   providers: [
     TipoviService,
     AdminKlinikeService,
-    SalaServices
+    SalaServices,
+    LekarServces
   ]
 })
 export class ProfilAdminaKlinikeModule { }
