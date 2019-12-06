@@ -19,7 +19,7 @@ export class SalaServices {
     }
 
     public obrisi(sala: Sala) {
-        return this._http.delete("/api/sale/obrisi/"+sala.naziv);
+        return this._http.delete("/api/sale/obrisi/"+sala.id);
     }
 
     public izmeni(sala: Sala) {     // /api/sale/izmeni/{naziv}

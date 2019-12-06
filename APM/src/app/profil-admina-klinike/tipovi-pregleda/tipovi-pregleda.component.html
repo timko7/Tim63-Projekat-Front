@@ -1,4 +1,4 @@
-<p>tipovi-pregleda works!</p>
+<h2>Svi tipovi pregleda:</h2>
 
 <div class='card'>
     <div class='card-body'>
@@ -7,14 +7,16 @@
                *ngIf='tipovi'>
           <thead>
             <tr>
-              <th>ID Tipa</th>
-              <th>Naziv</th>
+              <th>Naziv tipa</th>
+              <th>Slobodan tip</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor='let tip of tipovi'>
-              <td>{{ tip.id }}</td>
               <td>{{ tip.nazivTipa }}</td>
+              <td>{{ tip.slobodan ? 'Nema zakazanih pregleda' : 'Ima zakazanih pregleda'}}</td>
+              <td><button *ngIf="tip.slobodan" class="btn btn-info" (click) = "obrisiTip(tip)">Obrisi tip</button></td>
+              <td><button *ngIf="tip.slobodan" class="btn btn-info" (click)='izmeniTip(tip)'>Izmeni tip</button></td>
             </tr>
           </tbody>
         </table>
@@ -23,5 +25,26 @@
 </div>
 
 <div>
-    <button (click)='onBack()'>Nazad</button>
+  <h3>Dodavanje novog tipa:</h3>
+
+  <form class="dodajTip" (ngSubmit) = "onSubmit()" #tipForm="ngForm">
+      <label>Naziv tipa</label>
+      <input type="text" placeholder="Naziv tipa" required name="naziv" #naziv="ngModel" [(ngModel)] = "tip.nazivTipa">
+      <input type="submit" value="Dodaj" class="btn btn-info">
+  </form>
+</div>
+
+<div *ngIf='mozesDaMenjas'>
+  <h3>Izmena tipa: {{nazivTipaKojiSeMenja}}</h3>
+
+  <form class="dodajTip" (ngSubmit) = "onSubmitIzmeni()" #tipForm="ngForm">
+      <label>Unesite novi naziv tipa</label>
+      <input type="text" placeholder="Naziv tipa" required name="nazivIzmena" #nazivIzmena="ngModel" [(ngModel)] = "noviNaziv">
+      <input type="submit" value="Izmeni" class="btn btn-info">
+  </form>
+</div>
+
+
+<div>
+    <button (click)='onBack()' class="btn btn-info">Nazad</button>
 </div>
