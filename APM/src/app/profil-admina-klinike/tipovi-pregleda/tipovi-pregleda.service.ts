@@ -22,4 +22,8 @@ export class TipoviService {
         return this._http.delete("/api/tipoviPregleda/obrisi/" + tip.id);
     }
 
+    izmeni(tipZaIzmenu: ITipPregleda) {
+        return this._http.put("/api/tipoviPregleda/izmeni/" + tipZaIzmenu.nazivTipa, tipZaIzmenu);
+    }
+
 }

@@ -66,7 +66,19 @@ export class TipoviPregledaComponent implements OnInit {
   obrisiTip(tip: ITipPregleda): void {
     this.tipoviService.obrisi(tip).subscribe();
     this.refresh();
-    }
+  }
+
+  izmeniTip(tip: ITipPregleda): void {
+    this.mozesDaMenjas = true;
+    this.nazivTipaKojiSeMenja = tip.nazivTipa;
+    this.tipZaIzmenu = tip;
+  }  
+
+  onSubmitIzmeni() {
+    this.tipZaIzmenu.nazivTipa = this.noviNaziv;
+    this.tipoviService.izmeni(this.tipZaIzmenu).subscribe();
+    this.mozesDaMenjas = false;
+  }
 
 
 }
