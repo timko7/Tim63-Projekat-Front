@@ -5,5 +5,6 @@ export class Pregled {
     idTipa: number;
     idSale: number;
     idLekara: number;
+    idKlinike:number;
     cena: number;
 }

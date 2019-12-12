@@ -4,6 +4,10 @@
     <div class="row">
       <div class='col-md-2'>Pretrazi po adresi</div>
       <div class='col-md-4'><input type="text" [(ngModel)]='adresaKlinike'></div>
+      <div class='col-md-2'>Pretrazi po tipu</div>
+       <select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip">
+        <option *ngFor="let tip of tipoviKlinika" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
+    </select>
     </div>
     <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()'></div>
 
@@ -20,19 +24,16 @@
                *ngIf='filtriraneKlinike'>
           <thead>
             <tr>
-              <th>ID Klinike</th>
               <th>Naziv</th>
-              <th>Opis</th>
               <th>Adresa</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor='let klinika of filtriraneKlinike'>
-              <td>{{ klinika.id }}</td>
               <td>{{ klinika.ime }}</td>
-              <td>{{ klinika.opis }}</td>
               <td>{{ klinika.adresa }}</td>
               <td><button class="btn btn-info" (click)='idiNaListuLekara(klinika)'>Vidi lekare klinike</button></td>
+              <td><button class="btn btn-info" (click)='idiNaPreglede(klinika)'>Vidi unapred definisane preglede klinike</button></td>
             </tr>
           </tbody>
         </table>
@@ -57,15 +58,13 @@
         </div>
         <div class="row" *ngIf='!dugmeZaPretraguKlinike'>
           <div class='col-md-2'>Pretrazi po tipu pregleda</div>
-          <div class='col-md-4'><input type="text" [(ngModel)]='prezimeLekara'></div>
+          <div class='col-md-4'><select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip2">
+            <option *ngFor="let tip of tipoviIzabraneKlinike" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
+        </select></div>
         </div>
       <div class="row"><input type="submit" value="Pretrazi" (click)='pretraziLekare()'></div>
 
 </div>
-
-
-
-
 
 
     <div class='card-body'>
@@ -106,6 +105,32 @@
   </div>
 </div>
 
+<div class='table-responsive' >
+  <table class='table'
+         *ngIf='dugmeZaPrikazPregleda'>
+    <thead>
+      <tr>
+        <th>ID Pregleda</th>
+        <th>Datum Pregleda</th>
+        <th>Lekar</th>
+        <th>Sala</th>
+        <th>Tip pregleda</th>
+        <th>Cena Pregleda</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let pregled of preglediKlinike'>
+        <td>{{ pregled.id }}</td>
+        <td>{{ pregled.datumVreme }}</td>
+        <td>{{ pregled.idLekara }}</td>
+        <td>{{ pregled.idSale }}</td>
+        <td>{{ pregled.idTipa }}</td>
+        <td>{{ pregled.cena }}</td>
+        <td><button class="btn btn-info">Rezervisi</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
 <div>

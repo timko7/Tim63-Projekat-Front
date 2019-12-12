@@ -16,6 +16,9 @@ export class LekarServces{
     public findAll(): Observable<Lekar[]> {
       return this.http.get<Lekar[]>("/api/lekari");
     }
+    public findLekar(id:number):Observable<Lekar>{
+      return this.http.get<Lekar>("/api/lekari/lekar/" + id);
+    }
 
     public save(lekar:Lekar){
         return this.http.post<Lekar>("/api/lekari/dodajLekara",lekar);
