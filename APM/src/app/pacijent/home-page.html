@@ -39,8 +39,50 @@
                 <td>Broj osiguranika</td>
                 <td>{{pacijent.broj_osiguranika}}</td>
             </tr>
-                           
+            <a (click)="logOut()"  class="btn btn-info">Izloguj se</a> 
+            <a (click)="izmeni(pacijent)"  class="btn btn-info">Izmeni podatke</a>
         </table>
     </form>
+
+    <div *ngIf='mozesDaMenjas'>
+            <h3>Izmena licnih podataka</h3>
+        
+            <form (ngSubmit)="izmeniPacijenta()" #pacijentForm="ngForm">
+                <table>
+                    <tr>
+                        <td>Ime</td>
+                        <td><input type="text" name="ime" #ime="ngModel" [(ngModel)]="pacijent.ime"></td>
+                       
+                    </tr>
+                    <tr>
+                        <td>Prezime</td>
+                        <td><input type="text" name="prezime" #prezime="ngModel" [(ngModel)]="pacijent.prezime"></td>
+                    </tr>
+                        <tr>
+                                <td>Password</td>
+                                <td><input type="password" name="password" #password="ngModel" [(ngModel)]="pacijent.password"></td>
+                            </tr>
+                            <tr>
+                                    <td>Grad</td>
+                                    <td><input type="text" name="grad" #grad="ngModel" [(ngModel)]="pacijent.grad"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drzava</td>
+                                    <td><input type="text" name="drzava" #drzava="ngModel" [(ngModel)]="pacijent.drzava"></td>
+                                </tr>
+                                <tr>
+                                    <td>Adresa</td>
+                                    <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="pacijent.adresa"></td>
+                                </tr>
+                                <tr>
+                                        <td>Telefon</td>
+                                        <td><input type="text" name="tel" #tel="ngModel" [(ngModel)]="pacijent.telefon"></td>
+                                    </tr>
+                                    <tr>
+                                    <td><input type="submit" value="Izmeni"></td>
+                                        </tr>
+                </table>
+            </form>
+        </div>
   </body>  
 </html>

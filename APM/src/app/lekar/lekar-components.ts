@@ -19,6 +19,11 @@ export class LekarComponent implements OnInit {
     lekar: Lekar;
     lekari: Lekar[] = [];
     adminKlinike: IAdminKlinike;
+    _imeLekara:string;
+    _prezimeLekara:string;
+    lekariPretrage:Lekar[]=[];
+    dugmeZaPretragu=false;
+
     
     constructor(private route:ActivatedRoute,private router:Router,private lekarService:LekarServces, private adminKlinikeService: AdminKlinikeService){
         this.lekar=new Lekar();
@@ -71,7 +76,54 @@ export class LekarComponent implements OnInit {
         this.lekarService.obrisi(lekar).subscribe();
         this.refresh();
     }
+    get imeLekara():string{
+      return this._imeLekara;
+    }
+  
+    get prezimeLekara():string{
+      return this._prezimeLekara;
+    }
+  
+    set imeLekara(value:string){
+      this._imeLekara=value;
+    }
+  
+    set prezimeLekara(value:string){
+      this._prezimeLekara=value;
+    }
+    
+    pretraziLekare(){
+      this.dugmeZaPretragu=true;
+      //this.lekarPretrage=new Lekar();
+      for(let lekar of this.lekari){
+        if(lekar.ime==this.imeLekara && lekar.prezime==this.prezimeLekara)
+          this.lekariPretrage.push(lekar);
+          this.lekari=this.lekariPretrage;
+         console.log(this.lekari);
+        
+      }
+       
+        //this.dugmeZaPretragu=false;
+        this.imeLekara="";
+        this.prezimeLekara="";
+        }
 
+        nazad(){
+          this.lekariPretrage=[];
+          this.dugmeZaPretragu=false;
+          this.adminKlinikeService.getAdminKlinike().subscribe({
+            next: admin => {
+              this.adminKlinike = admin;
+    
+              this.lekarService.getLekare(this.adminKlinike.idKlinike).subscribe({
+                next: lekari => {
+                  this.lekari = lekari;
+                }
+              });
+    
+            }
+          });
+        }
     
 
 }

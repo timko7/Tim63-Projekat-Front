@@ -19,6 +19,10 @@ export class SaleComponent implements OnInit {
   mozesDaMenjas: boolean = false;
   nazivSaleKojeSeMenja: string;
   noviNaziv: string;
+  _nazivSale:string;
+  _zauzetostSale:string;
+  pom:Sala[]=[];
+  filtriraneSale:Sala[]=[];
 
   constructor(private _router: Router, private salaServices: SalaServices, private adminKlinikeService: AdminKlinikeService) { 
     this.sala = new Sala();
@@ -30,7 +34,7 @@ export class SaleComponent implements OnInit {
     //   });
   }
 
-  ngOnInit() {
+  ngOnInit():void {
     
     this.adminKlinikeService.getAdminKlinike().subscribe({
         next: admin => {
@@ -39,25 +43,17 @@ export class SaleComponent implements OnInit {
           this.salaServices.getSale(this.adminKlinike.idKlinike).subscribe({
             next: sale => {
               this.sale = sale;
+              
             }
           });
-
+        
         }
       });
+      this.filtriraneSale=this.sale;
       
-    // this.salaServices.getSale(this.adminKlinike.idKlinike).subscribe({
-    //   next: sale => {
-    //     this.sale = sale;
-    //   }
-    // });
-
-    
-
   }
 
-  onBack(): void {
-    this._router.navigate(['/adminKlinike']);
-  }
+
 
   onSubmit() {
     if (this.sala.naziv.replace(/\s/g, '').length) {
@@ -75,6 +71,9 @@ export class SaleComponent implements OnInit {
 
   refresh(): void {
     window.location.reload();
+  }
+  onBack(): void {
+    this._router.navigate(['/adminKlinike']);
   }
 
     obrisiSalu(sala: Sala): void {
@@ -95,7 +94,56 @@ export class SaleComponent implements OnInit {
         this.mozesDaMenjas = false;
     }
 
+    get nazivSale():string{
+      return this._nazivSale;
+    }
+  
+    get zauzetostSale():string{
+      return this._zauzetostSale;
+    }
+  
+    set nazivSale(value:string){
+      this._nazivSale=value;
+    }
+  
+    set zauzetostSale(value:string){
+      this._zauzetostSale=value;
+      this.filtriraneSale= this.zauzetostSale ? this.filtriraj(this.zauzetostSale):this.sale;
+    }
 
+    filtriraj(poljeZaFilter:string):Sala[]{
+      poljeZaFilter=poljeZaFilter.toLowerCase();
+      return this.sale.filter((sala:Sala)=>(sala.slobodna? "Slobodna":"Zauzeta").toLowerCase().indexOf(poljeZaFilter)!=-1);
+  
+    }
+
+    preuzmiZaPretragu(){
+
+        for(let sala of this.sale){
+         if(sala.naziv==this.nazivSale)
+              this.pom.push(sala);
+              this.filtriraneSale=this.pom;
+        }
+        this.nazivSale="";
+        this.pom=[];
+    }
+
+    nazad(){
+      this.pom=[];
+      this.adminKlinikeService.getAdminKlinike().subscribe({
+        next: admin => {
+          this.adminKlinike = admin;
+
+          this.salaServices.getSale(this.adminKlinike.idKlinike).subscribe({
+            next: sale => {
+              this.sale = sale;
+            }
+          });
+
+        }
+      });
+      this.filtriraneSale=this.sale;
+    }
 
 
 }

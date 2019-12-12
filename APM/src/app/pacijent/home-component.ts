@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import{Pacijent} from '../pacijent/pacijent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginServces } from '../login/login.services';
+import { PacijentServces } from './pacijent.services';
 
 
 @Component({
@@ -13,15 +14,18 @@ import { LoginServces } from '../login/login.services';
 
 export class HomeComponent implements OnInit{
 
+    mozesDaMenjas:boolean=false;
+    pacijentZaIzmenu:Pacijent;
+    pacijent : Pacijent;
+    request:Request;
 
     ngOnInit(): void {
         this.preuzmiPodatke();
     }
    
-    pacijent : Pacijent;
-    request:Request;
+   
     
-    constructor(private route:ActivatedRoute,private router:Router,private paciejentService:LoginServces){
+    constructor(private route:ActivatedRoute,private router:Router,private paciejentService:LoginServces,private ser:PacijentServces){
         this.pacijent=new Pacijent();
     }
     preuzmiPodatke(){
@@ -31,6 +35,15 @@ export class HomeComponent implements OnInit{
             }
         })
 
+    }
+    izmeni(novi:Pacijent){
+        this.mozesDaMenjas=true;
+        this.pacijentZaIzmenu=novi;
+
+    }
+    izmeniPacijenta(){
+        this.ser.update(this.pacijentZaIzmenu).subscribe();
+        this.mozesDaMenjas=false;
     }
 
     logOut(){
