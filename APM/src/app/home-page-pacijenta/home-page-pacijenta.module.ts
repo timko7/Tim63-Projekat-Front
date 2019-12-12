@@ -6,6 +6,8 @@ import { HomeComponent } from '../pacijent/home-component';
 import { ListaKlinikaComponent } from './lista-klinika-component';
 import { LoginServces } from '../login/login.services';
 import { FormsModule } from '@angular/forms';
+import { KlinikaServices } from '../klinika/klinika.services';
+import { LekarServces } from '../lekar/lekar.services';
 
 
 
@@ -27,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule, 
   ],
   providers: [
-      LoginServces
+      LoginServces,KlinikaServices,LekarServces
   ]
 })
 export class HomePagePacijentaModule { }

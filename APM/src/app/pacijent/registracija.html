@@ -5,40 +5,85 @@
         <table>
             <tr>
                 <td>Ime</td>
-                <td><input type="text" name="ime" #ime="ngModel" [(ngModel)]="pacijent.ime"></td>
-               
+                <td><input type="text" required name="ime" #ime="ngModel"  [(ngModel)]="pacijent.ime" [ngClass]="{'form-control':true,
+                'is-invalid': !ime?.valid && !ime?.touched,
+                'is-valid': ime?.valid && ime?.touched}" ></td>
+                <td *ngIf="ime?.errors?.required && ime?.touched"> Polje se mora popuniti
+                    </td>
             </tr>
+            
             <tr>
                 <td>Prezime</td>
-                <td><input type="text" name="prezime" #prezime="ngModel" [(ngModel)]="pacijent.prezime"></td>
+                <td><input type="text" required name="prezime" #prezime="ngModel" [(ngModel)]="pacijent.prezime" [ngClass]="{'form-control':true,
+                    'is-invalid': !prezime?.valid && !prezime?.touched,
+                    'is-valid': prezime?.valid && prezime?.touched}" ></td>
+
+                    <td *ngIf="prezime?.errors?.required && prezime?.touched"> Polje se mora popuniti
+                        </td>
             </tr>
             <tr>
                     <td>Email</td>
-                    <td><input type="text" name="email" #email="ngModel" [(ngModel)]="pacijent.email"></td>
+                    <td><input type="email" required name="email" #email="ngModel" [(ngModel)]="pacijent.email" [ngClass]="{'form-control':true,
+                        'is-invalid': !email?.email && !email?.touched,
+                        'is-valid': email?.valid && email?.touched}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"></td>
+
+                        <td *ngIf="email?.errors?.required && email?.touched"> Polje se mora popuniti</td>
+                        <td *ngIf="email?.errors?.pattern && email?.touched"> Email nije validan</td>
                 </tr>
                 <tr>
                         <td>Password</td>
-                        <td><input type="text" name="password" #password="ngModel" [(ngModel)]="pacijent.password"></td>
+                        <td><input type="password" required name="password" #password="ngModel" [(ngModel)]="pacijent.password" [ngClass]="{'form-control':true,
+                            'is-invalid': !password?.valid && !password?.touched,
+                            'is-valid': password?.valid && password?.touched}" minlength="8"></td>
+
+                            <td *ngIf="password?.errors?.required && password?.touched"> Polje se mora popuniti</td>
+                            <td *ngIf="password?.errors?.minlength && password?.touched"> Sifra sadrzi minimalno 8 karaktera</td>
                     </tr>
                     <tr>
                             <td>Grad</td>
-                            <td><input type="text" name="grad" #grad="ngModel" [(ngModel)]="pacijent.grad"></td>
+                            <td><input type="text" required name="grad" #grad="ngModel" [(ngModel)]="pacijent.grad" [ngClass]="{'form-control':true,
+                                'is-invalid': !grad?.valid && !grad?.touched,
+                                'is-valid': grad?.valid && grad?.touched}"></td>
+
+                                <td *ngIf="grad?.errors?.required && grad?.touched"> Polje se mora popuniti
+                                    </td>
                         </tr>
                         <tr>
                             <td>Drzava</td>
-                            <td><input type="text" name="drzava" #drzava="ngModel" [(ngModel)]="pacijent.drzava"></td>
+                            <td><input type="text" required name="drzava" #drzava="ngModel" [(ngModel)]="pacijent.drzava" [ngClass]="{'form-control':true,
+                                'is-invalid': !drzava?.valid && !drzava?.touched,
+                                'is-valid': drzava?.valid && drzava?.touched}"></td>
+
+                                <td *ngIf="drzava?.errors?.required && drzava?.touched"> Polje se mora popuniti
+                                    </td>
                         </tr>
                         <tr>
                             <td>Adresa</td>
-                            <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="pacijent.adresa"></td>
+                            <td><input type="text" required name="adresa" #adresa="ngModel" [(ngModel)]="pacijent.adresa" [ngClass]="{'form-control':true,
+                                'is-invalid': !adresa?.valid && !adresa?.touched,
+                                'is-valid': adresa?.valid && adresa?.touched}"></td>
+                                <td *ngIf="adresa?.errors?.required && adresa?.touched"> Polje se mora popuniti
+                                    </td>
                         </tr>
                         <tr>
                                 <td>Telefon</td>
-                                <td><input type="text" name="tel" #tel="ngModel" [(ngModel)]="pacijent.telefon"></td>
+                                <td><input type="text" required name="tel" #tel="ngModel" [(ngModel)]="pacijent.telefon" [ngClass]="{'form-control':true,
+                                    'is-invalid': !tel?.valid && !tel?.touched,
+                                    'is-valid': tel?.valid && tel?.touched}" pattern="^[0-9]{9,10}" ></td>
+
+                                    <td *ngIf="tel?.errors?.required && tel?.touched"> Polje se mora popuniti</td>
+                                    <td *ngIf="tel?.errors?.pattern && tel?.touched"> Polje mora biti samo broj duzine 9 ili 10 cifara</td>
+                                   
                             </tr>
                             <tr>
                                 <td>Broj osiguranika</td>
-                                <td><input type="text" name="broj_osiguranika" #broj_osiguranika="ngModel" [(ngModel)]="pacijent.broj_osiguranika"></td>
+                                <td><input type="text" required name="broj_osiguranika" #broj_osiguranika="ngModel" [(ngModel)]="pacijent.broj_osiguranika" [ngClass]="{'form-control':true,
+                                    'is-invalid': !broj_osiguranika?.valid && !broj_osiguranika?.touched,
+                                    'is-valid': broj_osiguranika?.valid && broj_osiguranika?.touched}"
+                                    pattern="^[0-9]{8}"></td>
+
+                                <td *ngIf="broj_osiguranika?.errors?.required && broj_osiguranika?.touched"> Polje se mora popuniti</td>
+                                <td *ngIf="broj_osiguranika?.errors?.pattern && broj_osiguranika?.touched"> Polje se mora biti samo broj</td>
                             </tr>
                             <tr>
                             <td><input type="submit" value="Potvrdi"></td>

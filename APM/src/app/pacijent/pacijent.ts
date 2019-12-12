@@ -1,4 +1,5 @@
 export class Pacijent{
+    id:number;
     ime:string;
     prezime:string;
     email:string;

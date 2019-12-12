@@ -1,11 +1,20 @@
 <div class='card'>
+  <div class='card-body'>
+    <div class='row' >Pretrazu  klinike</div>
+    <div class="row">
+      <div class='col-md-2'>Pretrazi po adresi</div>
+      <div class='col-md-4'><input type="text" [(ngModel)]='adresaKlinike'></div>
+    </div>
+    <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()'></div>
+
+<div class='card'>
     <div class='card-body'>
-      <div class='row' >Pretrazi  klinike</div>
+      <div class='row' >Filtriraj  klinike</div>
       <div class="row">
-        <div class='col-md-2'>Pretrazi po imenu</div>
+        <div class='col-md-2'>Filtriraj po imenu</div>
         <div class='col-md-4'><input type="text" [(ngModel)]='imeKlinike'></div>
       </div>
-      <div class="row"><input type="submit" value="Pretrazi"></div>
+     
       <div class='table-responsive'>
         <table class='table'
                *ngIf='filtriraneKlinike'>
@@ -23,12 +32,81 @@
               <td>{{ klinika.ime }}</td>
               <td>{{ klinika.opis }}</td>
               <td>{{ klinika.adresa }}</td>
+              <td><button class="btn btn-info" (click)='idiNaListuLekara(klinika)'>Vidi lekare klinike</button></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 </div>
+
+
+
+<div class='card' *ngIf='prikaziLekare'>
+<h2>Svi Lekari klinike:{{izabranaKlinika.ime}}</h2>
+
+<div>
+
+      <div class="row">
+        <div class='col-md-2'>Pretrazi po imenu</div>
+        <div class='col-md-4'><input type="text" [(ngModel)]='imeLekara'></div>
+      </div>
+      <div class="row">
+          <div class='col-md-2'>Pretrazi po prezimenu</div>
+          <div class='col-md-4'><input type="text" [(ngModel)]='prezimeLekara'></div>
+        </div>
+        <div class="row" *ngIf='!dugmeZaPretraguKlinike'>
+          <div class='col-md-2'>Pretrazi po tipu pregleda</div>
+          <div class='col-md-4'><input type="text" [(ngModel)]='prezimeLekara'></div>
+        </div>
+      <div class="row"><input type="submit" value="Pretrazi" (click)='pretraziLekare()'></div>
+
+</div>
+
+
+
+
+
+
+    <div class='card-body'>
+        <div class='table-responsive'>
+        <table class='table'
+                *ngIf='lekari'>
+            <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Grad</th>
+                <th>Drzava</th>
+                <th>Adresa</th>
+                <th>Telefon</th>
+                <th>Radno vreme</th>
+                <th>Zauzetost</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor='let lekar of lekari'>
+                <td>{{ lekar.ime }}</td>
+                <td>{{ lekar.prezime }}</td>
+                <td>{{ lekar.email }}</td>
+                <td>{{ lekar.grad }}</td>
+                <td>{{ lekar.drzava }}</td>
+                <td>{{ lekar.adresa }}</td>
+                <td>{{ lekar.telefon }}</td>
+                <td>{{ lekar.radnoVremeOd }} -- {{ lekar.radnoVremeDo }}</td>
+                <td>{{ lekar.slobodan ? 'Nema zakazan pregled' : 'Ima zakazan pregled'}}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div>
+      <button (click)='nazad()'>Prikazi ponovo</button>
+  </div>
+</div>
+
+
 
 <div>
     <button (click)='onBack()'>Nazad</button>

@@ -19,5 +19,8 @@ export class KlinikaServices{
         public save(klinika:Klinika){
             return this.http.post<Klinika>("/api/klinike/napraviKliniku",klinika);
         }
+        public vratiKliniku(klinika:Klinika){
+          return this.http.get<Klinika>("/api/klinike/" + klinika.id);
+        }
 
 }

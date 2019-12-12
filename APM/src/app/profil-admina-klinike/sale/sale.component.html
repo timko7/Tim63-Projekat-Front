@@ -1,9 +1,29 @@
 <h2>Sve sale:</h2>
+
+
+<div class='card'>
+        <div class='card-body'>
+          <div class="row">
+            <div class='col-md-2'>Pretrazi po nazivu</div>
+            <div class='col-md-4'><input type="text" [(ngModel)]='nazivSale'></div>
+          </div>
+          </div>
+</div>
+          <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()'></div>
+      
+      <div class='card'>
+          <div class='card-body'>
+            <div class="row">
+              <div class='col-md-2'>Filtriraj po zauzetosti</div>
+              <div class='col-md-4'><input type="text" [(ngModel)]='zauzetostSale'></div>
+            </div>
+        </div>
+      </div>
 <div class='card'>
     <div class='card-body'>
         <div class='table-responsive'>
         <table class='table'
-                *ngIf='sale'>
+                *ngIf='filtriraneSale'>
             <thead>
             <tr>
                 <!-- <th>ID sale</th> -->
@@ -12,7 +32,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor='let sala of sale'>
+            <tr *ngFor='let sala of filtriraneSale'>
                 <!-- <td>{{ sala.id }}</td> -->
                 <td>{{ sala.naziv }}</td>
                 <td>{{ sala.slobodna ? 'Slobodna' : 'Zauzeta'}}</td>
@@ -22,9 +42,11 @@
             </tbody>
         </table>
         </div>
+        <div>
+                <button (click)='nazad()'>Prikazi ponovo</button>
+            </div>
     </div>
 </div>
-
 
 <div>
     <h3>Dodavanje nove sale:</h3>

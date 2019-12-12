@@ -23,5 +23,9 @@ export class PacijentServces{
     public login(email: string, password: string){
       return this.http.post("/api/pacijenti/login", {email, password});
   }
+  public update(pacijentZaIzmenu:Pacijent){
+    return this.http.put("/api/pacijenti/"+pacijentZaIzmenu.id, pacijentZaIzmenu);
+  }
+ 
  
 }
