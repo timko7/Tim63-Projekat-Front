@@ -11,6 +11,8 @@ import { SalaServices } from './sale/sala.services';
 import { FormsModule } from '@angular/forms';
 import { LekarComponent } from '../lekar/lekar-components';
 import { LekarServces } from '../lekar/lekar.services';
+import { PreglediComponent } from './pregledi/pregledi.component';
+import { PreglediService } from './pregledi/pregledi.service';
 
 
 
@@ -20,7 +22,8 @@ import { LekarServces } from '../lekar/lekar.services';
     TipoviPregledaComponent,
     SaleComponent,
     LekarComponent,
-    ProfilKlinikeComponent
+    ProfilKlinikeComponent,
+    PreglediComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +33,7 @@ import { LekarServces } from '../lekar/lekar.services';
       { path: 'adminKlinike/tipoviPregleda', component: TipoviPregledaComponent },
       { path: 'adminKlinike/lekari', component: LekarComponent },
       { path: 'adminKlinike/sale', component: SaleComponent },
+      { path: 'adminKlinike/pregledi', component: PreglediComponent },
     ]),
     FormsModule
   ],
@@ -37,7 +41,8 @@ import { LekarServces } from '../lekar/lekar.services';
     TipoviService,
     AdminKlinikeService,
     SalaServices,
-    LekarServces
+    LekarServces,
+    PreglediService
   ]
 })
 export class ProfilAdminaKlinikeModule { }

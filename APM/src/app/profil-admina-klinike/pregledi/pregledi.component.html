@@ -1,0 +1,39 @@
+<div class="pregledi">
+    <h3>Definisanje novog pregleda:</h3>
+
+    <form class="dodajPregled" (ngSubmit) = "onSubmit()" #pregledForm="ngForm">
+        <label class="label">Trajanje pregleda (u minutima): </label>
+        <input type="number" required name="trajanje" #trajanje="ngModel" [(ngModel)] = "pregledZaDodati.trajanjePregleda">
+        
+        <br><label class="label">Datum i vreme: </label>
+        <input type="datetime-local" required name="datumIVreme" #datumIVreme="ngModel" [(ngModel)] = "pregledZaDodati.datumVreme" [value]="datumVreme"> {{ pregledZaDodati.datumVreme }}
+
+        <br><label class="label">Tip: </label>
+        <select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip">
+            <!-- <option *ngFor='let tip of tipoviKlinike'>{{ tip.nazivTipa }}</option> -->
+            <option *ngFor="let tip of tipoviKlinike" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
+        </select>
+        
+        <br>
+        <label class="label">Sala: </label>
+        <select [(ngModel)] = "izabranaSala" name="nameSala">
+            <option *ngFor='let sala of saleKlinike' [ngValue]="sala" >{{ sala.naziv }}</option>
+        </select>
+        
+        <br>
+        <label class="label">Lekar: </label>
+        <select [(ngModel)] = "izabraniLekar" name="nameLekar">
+            <option *ngFor='let lekar of lekariKlinike' [ngValue]="lekar" >{{ lekar.ime }} {{ lekar.prezime }}</option>
+        </select>
+        
+        <br>
+        <label class="label">Cena: </label>
+        <input type="number" required name="cena" #naziv="ngModel" [(ngModel)] = "pregledZaDodati.cena">
+        <br>
+
+        <input type="submit" value="Dodaj" class="btn btn-info">
+    </form>
+</div>
+
+
+<p>pregledi works!</p>
