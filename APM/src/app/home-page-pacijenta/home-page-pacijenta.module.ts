@@ -29,7 +29,7 @@ import { LekarServces } from '../lekar/lekar.services';
     FormsModule, 
   ],
   providers: [
-      LoginServces,,KlinikaServices,LekarServces
+      LoginServces,KlinikaServices,LekarServces
   ]
 })
 export class HomePagePacijentaModule { }
