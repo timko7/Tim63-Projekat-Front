@@ -11,53 +11,66 @@
 
 
 
-<div>
-    <h2>Moji podaci:</h2>
-    <table>
+<div class='card'>
+    <div class='card-body'>
+      <h1>Moji podaci:</h1>
+      <div class='table-responsive'>
+        <table class="table">
+            <tr>
+                <td>Ime</td>
+                <td>{{admin.ime}}</td>
+            </tr>
+            <tr>
+                <td>Prezime</td>
+                <td>{{admin.prezime}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{admin.email}}</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>{{admin.password}}</td>
+                <td><button class="btn btn-info" (click)='izmeniPassword()'>Promeni password</button></td>
+            </tr>
+            <tr>
+                <td>Grad</td>
+                <td>{{admin.grad}}</td>
+            </tr>
+            <tr>
+                <td>Drzava</td>
+                <td>{{admin.drzava}}</td>
+            </tr>
+            <tr>
+                <td>Adresa</td>
+                <td>{{admin.adresa}}</td>
+            </tr>
+            <tr>
+                <td>Telefon</td>
+                <td>{{admin.telefon}}</td>
+            </tr>
 
-      
-         <tr>
-            <td>Id</td>
-            <td>{{admin.id}}</td>
-        </tr>
-      <tr>
-          <td>Ime</td>
-          <td>{{admin.ime}}</td>
-      </tr>
-      <tr>
-          <td>Prezime</td>
-          <td>{{admin.prezime}}</td>
-      </tr>
-      <tr>
-          <td>Email</td>
-          <td>{{admin.email}}</td>
-      </tr>
-      <tr>
-          <td>Password</td>
-          <td>{{admin.password}}</td>
-      </tr>
-      <tr>
-          <td>Grad</td>
-          <td>{{admin.grad}}</td>
-      </tr>
-      <tr>
-          <td>Drzava</td>
-          <td>{{admin.drzava}}</td>
-      </tr>
-      <tr>
-          <td>Adresa</td>
-          <td>{{admin.adresa}}</td>
-      </tr>
-      <tr>
-          <td>Telefon</td>
-          <td>{{admin.telefon}}</td>
-      </tr> 
-      <tr>
-          <td>Id klinike u kojoj radi</td>
-          <td>{{admin.idKlinike}}</td>
-      </tr> 
-    
-                     
-  </table>
+        </table>
+      </div>
+    </div>
+
+</div>
+
+
+<div *ngIf='mozesDaMenjasPass'>
+    <div class='card'>
+        <div class='card-body'>
+            <h3>Promena passworda: </h3>
+            <div class='table-responsive'>
+                <form class="formAdmin" (ngSubmit) = "onSubmitIzmeniPass()" #izmenaPassForm="ngForm">
+                    <label>Unesite stari password</label>
+                    <input type="text" placeholder="stari password" required name="stariPasswordName" #stariPasswordName="ngModel" [(ngModel)] = "stariPassword">
+                    <label>Unesite novi password</label>
+                    <input type="password" placeholder="novi password" required name="noviPasswordName" #noviPasswordName="ngModel" [(ngModel)] = "noviPassword">
+                    <input type="submit" value="Izmeni" class="btn btn-info">
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 

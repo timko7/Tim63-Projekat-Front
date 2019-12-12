@@ -9,4 +9,5 @@ export class IAdminKlinike{
     adresa:string;
     telefon:string;
     idKlinike: number;
+    prviPutLogovan: boolean;
 }

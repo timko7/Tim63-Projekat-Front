@@ -19,4 +19,10 @@ export class AdminKlinikeService {
         return this._http.get<IAdminKlinike>("/api/login/vratiUlogovanog");
     }
 
+    promeniLozinku(idAdmina: number, noviPassword: string) {
+        return this._http.put("/api/adminiKlinike/promeniLozinku/" + idAdmina, noviPassword);
+    }
+
+
+
 }
