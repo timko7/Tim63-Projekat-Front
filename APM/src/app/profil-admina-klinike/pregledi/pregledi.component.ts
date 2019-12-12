@@ -28,7 +28,6 @@ export class PreglediComponent implements OnInit {
   pregledZaDodati: Pregled;
 
   mozesDodati: boolean = true;
-  //izabraniDatum: Date;
 
 
   constructor(private adminKlinikeService: AdminKlinikeService, private tipService: TipoviService, private saleService: SalaServices, private lekarService: LekarServces, private pregledService: PreglediService) { 
@@ -37,7 +36,6 @@ export class PreglediComponent implements OnInit {
     this.izabraniTip = new ITipPregleda();
     this.izabranaSala = new Sala();
     this.izabraniLekar = new Lekar();
-    //this.izabraniDatum = new Date();
   }
 
   ngOnInit() {
@@ -98,13 +96,10 @@ export class PreglediComponent implements OnInit {
     if (this.mozesDodati == true) {
       this.pregledService.dodaj(this.pregledZaDodati).subscribe();
       alert("Uspesno definisan pregled!!");
-      //this.refresh();
+      this.refresh();
     }
 
     console.log("Izabrano je: ", this.izabraniTip, this.izabranaSala, this.izabraniLekar);
-    // if(this.izabraniTip.nazivTipa == undefined || this.izabranaSala.naziv == undefined || this.izabraniLekar.ime == undefined || 
-    //       this.pregledZaDodati.trajanjePregleda < 1 || this.pregledZaDodati.cena < 0) {
-    //   alert("Unesite ispravne podatke!!");
   }
 
   refresh(): void {
