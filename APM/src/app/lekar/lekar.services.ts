@@ -28,6 +28,10 @@ export class LekarServces{
         return this.http.get<Lekar[]>("/api/lekari/" + idKlinike);
     }
 
+    public getLekarePoTipu(idTipa: number): Observable<Lekar[]> {
+      return this.http.get<Lekar[]>("/api/lekari/vratiPoTipu/" + idTipa);
+  }
+
     public obrisi(lekar: Lekar) {
         return this.http.delete("/api/lekari/" + lekar.id);
     }

@@ -119,12 +119,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let pregled of preglediKlinike'>
+      <tr *ngFor='let pregled of preglediKlinike; index as i'>
         <td>{{ pregled.id }}</td>
         <td>{{ pregled.datumVreme }}</td>
-        <td>{{ pregled.idLekara }}</td>
-        <td>{{ pregled.idSale }}</td>
-        <td>{{ pregled.idTipa }}</td>
+        <td>{{  izabraniLekari[i].ime }}</td>
+        <td>{{ izabraneSale[i].naziv }}</td>
+        <td>{{ izabraniTipovi[i].nazivTipa }}</td>
         <td>{{ pregled.cena }}</td>
         <td><button class="btn btn-info">Rezervisi</button></td>
       </tr>

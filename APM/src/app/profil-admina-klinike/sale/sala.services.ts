@@ -18,6 +18,10 @@ export class SalaServices {
         return this._http.get<Sala[]>("/api/sale/" + idKlinike);
     }
 
+    public getSala(idSale: number): Observable<Sala> {
+        return this._http.get<Sala>("/api/sale/uzmiSalu/" + idSale);
+    }
+
     public obrisi(sala: Sala) {
         return this._http.delete("/api/sale/obrisi/"+sala.id);
     }

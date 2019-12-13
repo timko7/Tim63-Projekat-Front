@@ -18,6 +18,11 @@ export class TipoviService {
         return this._http.get<ITipPregleda[]>("/api/tipoviPregleda/" + idKlinike);
     }
     
+    getTip(idTipa: number) : Observable<ITipPregleda> {
+        
+        return this._http.get<ITipPregleda>("/api/tipoviPregleda/tipPoId/" + idTipa);
+    }
+    
     sviTipovi() : Observable<ITipPregleda[]> {
         
         return this._http.get<ITipPregleda[]>("/api/tipoviPregleda");
