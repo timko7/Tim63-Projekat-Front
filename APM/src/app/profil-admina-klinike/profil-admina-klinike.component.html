@@ -11,53 +11,97 @@
 
 
 
-<div>
-    <h2>Moji podaci:</h2>
-    <table>
+<div class='card'>
+    <div class='card-body'>
+      <h1>Moji podaci:</h1>
+      <div class='table-responsive'>
+        <table class="table">
+            <tr>
+                <td>Ime</td>
+                <td>{{admin.ime}}</td>
+            </tr>
+            <tr>
+                <td>Prezime</td>
+                <td>{{admin.prezime}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{admin.email}}</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>{{admin.password}}</td>
+                <td><button class="btn btn-info" (click)='izmeniPassword()'>Promeni password</button></td>
+            </tr>
+            <tr>
+                <td>Grad</td>
+                <td>{{admin.grad}}</td>
+            </tr>
+            <tr>
+                <td>Drzava</td>
+                <td>{{admin.drzava}}</td>
+            </tr>
+            <tr>
+                <td>Adresa</td>
+                <td>{{admin.adresa}}</td>
+            </tr>
+            <tr>
+                <td>Telefon</td>
+                <td>{{admin.telefon}}</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-info" (click)='izmeniPodatke()'>Izmeni podatke</button></td>
+            </tr>
+            
 
-      
-         <tr>
-            <td>Id</td>
-            <td>{{admin.id}}</td>
-        </tr>
-      <tr>
-          <td>Ime</td>
-          <td>{{admin.ime}}</td>
-      </tr>
-      <tr>
-          <td>Prezime</td>
-          <td>{{admin.prezime}}</td>
-      </tr>
-      <tr>
-          <td>Email</td>
-          <td>{{admin.email}}</td>
-      </tr>
-      <tr>
-          <td>Password</td>
-          <td>{{admin.password}}</td>
-      </tr>
-      <tr>
-          <td>Grad</td>
-          <td>{{admin.grad}}</td>
-      </tr>
-      <tr>
-          <td>Drzava</td>
-          <td>{{admin.drzava}}</td>
-      </tr>
-      <tr>
-          <td>Adresa</td>
-          <td>{{admin.adresa}}</td>
-      </tr>
-      <tr>
-          <td>Telefon</td>
-          <td>{{admin.telefon}}</td>
-      </tr> 
-      <tr>
-          <td>Id klinike u kojoj radi</td>
-          <td>{{admin.idKlinike}}</td>
-      </tr> 
-    
-                     
-  </table>
+        </table>
+      </div>
+    </div>
+
 </div>
 
+
+<div *ngIf='mozesDaMenjasPass'>
+    <div class='card'>
+        <div class='card-body'>
+            <h3>Promena passworda: </h3>
+            <div class='table-responsive'>
+                <form class="formAdmin" (ngSubmit) = "onSubmitIzmeniPass()" #izmenaPassForm="ngForm">
+                    <label>Unesite stari password</label>
+                    <input type="text" placeholder="stari password" required name="stariPasswordName" #stariPasswordName="ngModel" [(ngModel)] = "stariPassword">
+                    <label>Unesite novi password</label>
+                    <input type="password" placeholder="novi password" required name="noviPasswordName" #noviPasswordName="ngModel" [(ngModel)] = "noviPassword">
+                    <input type="submit" value="Izmeni" class="btn btn-info">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf='mozesDaMenjasPodatke'>
+  <h3>Promena mojih podataka:</h3>
+  <div class='card'>
+    <div class='card-body'>
+        <div class='table-responsive'>
+            <form class="formAdmin" (ngSubmit) = "onSubmitIzmeniPodatke()" #izmenaPOdatkaForm="ngForm">
+                <label>Promenite ime:</label>
+                <input type="text" required name="promenaImena" #promenaImena="ngModel" [(ngModel)] = "adminSaNovimPodacima.ime">
+                <label>Promenite prezime</label>
+                <input type="text" required name="promenaPrezimena" #promenaPrezimena="ngModel" [(ngModel)] = "adminSaNovimPodacima.prezime">
+                <label>Promenite grad:</label>
+                <input type="text" required name="promenaGrada" #promenaGrada="ngModel" [(ngModel)] = "adminSaNovimPodacima.grad">
+                <label>Promenite drzavu:</label>
+                <input type="text" required name="promenaDrzave" #promenaDrzave="ngModel" [(ngModel)] = "adminSaNovimPodacima.drzava">
+                <label>Promenite adresu:</label>
+                <input type="text" required name="promenaAdrese" #promenaAdrese="ngModel" [(ngModel)] = "adminSaNovimPodacima.adresa">
+                <label>Promenite telefon:</label>
+                <input type="text" required name="promenaTelefona" #promenaTelefona="ngModel" [(ngModel)] = "adminSaNovimPodacima.telefon">
+
+                
+                <input type="submit" value="Izmeni" class="btn btn-info">
+            </form>
+        </div>
+    </div>
+  </div>
+</div>

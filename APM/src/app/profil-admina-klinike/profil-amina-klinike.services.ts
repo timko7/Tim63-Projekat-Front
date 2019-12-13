@@ -7,7 +7,7 @@ import { IAdminKlinike } from './admin-klinike';
 
 @Injectable()
 export class AdminKlinikeService {
-     
+       
     private adminKlinike: IAdminKlinike;
 
     constructor(private _http: HttpClient) {}
@@ -18,5 +18,15 @@ export class AdminKlinikeService {
         //this.http.get(`${ApiUrl}`, {params: param})
         return this._http.get<IAdminKlinike>("/api/login/vratiUlogovanog");
     }
+
+    promeniLozinku(idAdmina: number, noviPassword: string) {
+        return this._http.put("/api/adminiKlinike/promeniLozinku/" + idAdmina, noviPassword);
+    }
+
+    izmeniPodatke(admin: IAdminKlinike) {
+        return this._http.put("/api/adminiKlinike/promeniPodatke/", admin);
+    }
+
+
 
 }
