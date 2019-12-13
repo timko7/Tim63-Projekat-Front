@@ -17,6 +17,11 @@ export class TipoviService {
         
         return this._http.get<ITipPregleda[]>("/api/tipoviPregleda/" + idKlinike);
     }
+    
+    sviTipovi() : Observable<ITipPregleda[]> {
+        
+        return this._http.get<ITipPregleda[]>("/api/tipoviPregleda");
+    }
 
     obrisi(tip: ITipPregleda) {
         return this._http.delete("/api/tipoviPregleda/obrisi/" + tip.id);

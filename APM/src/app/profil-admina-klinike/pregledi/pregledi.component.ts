@@ -72,7 +72,8 @@ export class PreglediComponent implements OnInit {
     //this.pregledZaDodati.datumVreme
     this.pregledZaDodati.idTipa = this.izabraniTip.id;
     this.pregledZaDodati.idSale = this.izabranaSala.id;
-    this.pregledZaDodati.idLekara = this.izabraniLekar.id;
+    this.pregledZaDodati.idLekara = this.izabraniLekar.id; 
+    this.pregledZaDodati.idKlinike=this.izabraniLekar.idKlinike;
     //this.pregledZaDodati.cena
     //this.pregledZaDodati.datumVreme = this.toDateString(this.izabraniDatum);
     let datumVremeSada: string = this.toDateString(new Date);
