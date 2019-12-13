@@ -4,6 +4,8 @@ import { Lekar } from './lekar';
 import { LekarServces } from './lekar.services';
 import { AdminKlinikeService } from '../profil-admina-klinike/profil-amina-klinike.services';
 import { IAdminKlinike } from '../profil-admina-klinike/admin-klinike';
+import { TipoviService } from '../profil-admina-klinike/tipovi-pregleda/tipovi-pregleda.service';
+import { ITipPregleda } from '../profil-admina-klinike/tipovi-pregleda/tip-pregleda';
 
 @Component({
 
@@ -22,11 +24,15 @@ export class LekarComponent implements OnInit {
     _imeLekara:string;
     _prezimeLekara:string;
     lekariPretrage:Lekar[]=[];
+    tipoviKlinike:ITipPregleda[]=[];
     dugmeZaPretragu=false;
+    izabraniTip:ITipPregleda;
 
     
-    constructor(private route:ActivatedRoute,private router:Router,private lekarService:LekarServces, private adminKlinikeService: AdminKlinikeService){
+    constructor(private route:ActivatedRoute,private router:Router,private lekarService:LekarServces, private adminKlinikeService: AdminKlinikeService,
+       private tipService:TipoviService){
         this.lekar=new Lekar();
+        this.izabraniTip=new ITipPregleda();
     }
 
     ngOnInit(): void {
@@ -39,13 +45,18 @@ export class LekarComponent implements OnInit {
                   this.lekari = lekari;
                 }
               });
-    
+              this.tipService.getTipovi(this.adminKlinike.idKlinike).subscribe({
+                next: tipovi => {
+                  this.tipoviKlinike = tipovi;
+                }
+              });
             }
           });
     }
 
     onSubmit() {
         this.lekar.idKlinike = this.adminKlinike.idKlinike;
+        this.lekar.idTipa=this.izabraniTip.id;
         this.lekarService.save(this.lekar).subscribe();
         alert("sacuvan korisnik "+this.lekar.ime+" "+this.lekar.prezime)
         this.lekar.ime="";

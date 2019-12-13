@@ -9,6 +9,7 @@ import { PreglediService } from '../profil-admina-klinike/pregledi/pregledi.serv
 import { Sala } from '../profil-admina-klinike/sale/sala';
 import { ITipPregleda } from '../profil-admina-klinike/tipovi-pregleda/tip-pregleda';
 import { TipoviService } from '../profil-admina-klinike/tipovi-pregleda/tipovi-pregleda.service';
+import { SalaServices } from '../profil-admina-klinike/sale/sala.services';
 
 
 
@@ -43,13 +44,23 @@ export class ListaKlinikaComponent implements OnInit{
   pom:Klinika[]=[];
   preglediKlinike:Pregled[]=[];
 
+  izabraniLekari: Lekar[] = [];
+  izabraneSale: Sala[] = [];
+  izabraniTipovi: ITipPregleda[] = [];
+  index: number = 0;
+
 
 
   constructor(private _router: Router,private klinikaService:KlinikaServices,private lekarServices:LekarServces,
-    private pregledService:PreglediService,private tipService:TipoviService) {
+    private pregledService:PreglediService,private tipService:TipoviService,private salaService:SalaServices) {
+
     this.izabranaKlinika=new Klinika();
     this.izabraniTip=new ITipPregleda();
     this.izabraniTip2=new ITipPregleda();
+    this.izabraniLekari.splice(0,this.izabraniLekari.length);
+    this.izabraneSale.splice(0,this.izabraneSale.length);
+    this.izabraniTipovi.splice(0,this.izabraniTipovi.length);
+
   
     
   }
@@ -132,23 +143,10 @@ export class ListaKlinikaComponent implements OnInit{
     this.izabranaKlinika=klinika;
   
         if(this.tipIzabran==true){
-        this.pregledService.getPregledeKlinikePoTipu(this.izabraniTip.id).subscribe({
-          next: pregledi=>{
-            this.preglediZaLekre=pregledi;
-          
-    
-        for(let pregled of this.preglediZaLekre){
-         this.lekarPregleda=new Lekar();
-         this.lekarServices.findLekar(pregled.idLekara).subscribe({
-            next:lekar=> {this.lekarPregleda=lekar
-            this.lekari.push(this.lekarPregleda);
-            }
-         });
-         
-        }
-
-    }
-  });
+          this.lekarServices.getLekarePoTipu(this.izabraniTip.id).subscribe({
+            next:lekari=>{this.lekari=lekari;}
+          })
+       
   console.log(this.lekari);
 }
 else{ 
@@ -189,7 +187,7 @@ pretraziLekare(){
     this.prezimeLekara="";
   }else{
     for(let lekar of this.lekari){
-      if(lekar.ime==this.imeLekara && lekar.prezime==this.prezimeLekara && lekar.idKlinike==this.izabraniTip2.idKlinike)
+      if(lekar.ime==this.imeLekara && lekar.prezime==this.prezimeLekara && lekar.idTipa==this.izabraniTip2.id)
          this.lekariPretrage.push(lekar);
         this.lekari=this.lekariPretrage;
         console.log(this.lekari);
@@ -222,10 +220,30 @@ pretraziLekare(){
         this.pregledService.getPregledeKlinike(klinika.id).subscribe({
           next: pregledi=>{
             this.preglediKlinike=pregledi;
+           
+    
+       // this.izabraniLekari.splice(0, this.izabraniLekari.length);
+        for(let pregled of this.preglediKlinike){
+        this.lekarServices.findLekar(pregled.idLekara).subscribe({
+          next: lekarr=>{this.izabraniLekari.push(lekarr)
           }
         });
-
+        this.salaService.getSala(pregled.idSale).subscribe({
+          next: sala=>{
+            this.izabraneSale.push(sala);
+          }
+        });
+        this.tipService.getTip(pregled.idTipa).subscribe({
+          next: tip=>{
+            this.izabraniTipovi.push(tip);
+          }
+        });
+      }
+      }
+    });
+    this.index=this.preglediKlinike.length;
+ 
     }
 
-
+    
 }

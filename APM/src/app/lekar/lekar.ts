@@ -13,4 +13,5 @@ export class Lekar{
     radnoVremeDo: number;
     slobodan: boolean;
     idKlinike: number;
+    idTipa: number;
 }
