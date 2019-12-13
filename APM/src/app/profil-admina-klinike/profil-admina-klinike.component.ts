@@ -22,8 +22,19 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
 
   promenioPass: boolean = false;
 
+  mozesDaMenjasPodatke: boolean = false;
+  adminSaNovimPodacima: IAdminKlinike;
+  menjaniPodaci: boolean = false;
+
   constructor(private _router: Router,private adminService:AdminKlinikeService, private loginService: LoginServces) {
       this.admin = new IAdminKlinike();
+      this.adminSaNovimPodacima = new IAdminKlinike();
+      this.adminSaNovimPodacima.ime = "";
+      this.adminSaNovimPodacima.prezime = "";
+      this.adminSaNovimPodacima.grad = "";
+      this.adminSaNovimPodacima.drzava = "";
+      this.adminSaNovimPodacima.adresa = "";
+      this.adminSaNovimPodacima.telefon = "";
    }
 
   ngOnInit() {
@@ -54,6 +65,7 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
 
   izmeniPassword() {
       this.mozesDaMenjasPass = true;
+      this.mozesDaMenjasPodatke = false;
   }
 
   onSubmitIzmeniPass() {
@@ -65,9 +77,58 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
       }
   }
 
-    krajIzmene(): void {
-        this.promenioPass = true;
-        this.odjaviSe();
-    }
+  krajIzmene(): void {
+      this.promenioPass = true;
+      this.odjaviSe();
+  }
+
+  izmeniPodatke() {
+      this.mozesDaMenjasPodatke = true;
+      this.mozesDaMenjasPass = false;
+  }
+
+  onSubmitIzmeniPodatke() {
+      if(this.adminSaNovimPodacima.ime.replace(/\s/g, '').length) {
+        this.admin.ime = this.adminSaNovimPodacima.ime;
+        this.menjaniPodaci = true;
+      }
+
+      if(this.adminSaNovimPodacima.prezime.replace(/\s/g, '').length) {
+        this.admin.prezime = this.adminSaNovimPodacima.prezime;
+        this.menjaniPodaci = true;
+      }
+
+      if(this.adminSaNovimPodacima.grad.replace(/\s/g, '').length) {
+        this.admin.grad = this.adminSaNovimPodacima.grad;
+        this.menjaniPodaci = true;
+      }
+
+      if(this.adminSaNovimPodacima.drzava.replace(/\s/g, '').length) {
+        this.admin.drzava = this.adminSaNovimPodacima.drzava;
+        this.menjaniPodaci = true;
+      }
+
+      if(this.adminSaNovimPodacima.adresa.replace(/\s/g, '').length) {
+        this.admin.adresa = this.adminSaNovimPodacima.adresa;
+        this.menjaniPodaci = true;
+      }
+
+      if(this.adminSaNovimPodacima.telefon.replace(/\s/g, '').length) {
+        this.admin.telefon = this.adminSaNovimPodacima.telefon;
+        this.menjaniPodaci = true;
+      }
+
+      if(this.menjaniPodaci == true) {
+        this.adminService.izmeniPodatke(this.admin).subscribe(()=> {
+          this.mozesDaMenjasPodatke = false; 
+          this.mozesDaMenjasPass = false;
+          this.menjaniPodaci = false;
+          this.odjaviSe();
+        });
+      }
+      
+      
+
+  }
 
 }
