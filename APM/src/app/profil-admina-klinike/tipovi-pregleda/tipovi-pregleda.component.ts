@@ -17,7 +17,7 @@ export class TipoviPregledaComponent implements OnInit {
   adminKlinike: IAdminKlinike;
   tipZaIzmenu: ITipPregleda;
   mozesDaMenjas: boolean = false;
-  nazivTipaKojiSeMenja: string;
+  nazivTipaKojiSeMenja: string = "";
   noviNaziv: string;
 
 
@@ -69,8 +69,9 @@ export class TipoviPregledaComponent implements OnInit {
   }
 
   izmeniTip(tip: ITipPregleda): void {
+    this.noviNaziv = "";
     this.mozesDaMenjas = true;
-    this.nazivTipaKojiSeMenja = tip.nazivTipa;
+    this.nazivTipaKojiSeMenja = tip.nazivTipa.slice(0, tip.nazivTipa.length);
     this.tipZaIzmenu = tip;
   }  
 
@@ -78,6 +79,7 @@ export class TipoviPregledaComponent implements OnInit {
     this.tipZaIzmenu.nazivTipa = this.noviNaziv;
     this.tipoviService.izmeni(this.tipZaIzmenu).subscribe();
     this.mozesDaMenjas = false;
+    this.nazivTipaKojiSeMenja = "";
   }
 
 

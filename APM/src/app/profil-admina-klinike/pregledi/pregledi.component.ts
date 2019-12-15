@@ -9,6 +9,7 @@ import { AdminKlinikeService } from '../profil-amina-klinike.services';
 import { IAdminKlinike } from '../admin-klinike';
 import { Pregled } from './pregled';
 import { PreglediService } from './pregledi.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './pregledi.component.html',
@@ -30,7 +31,7 @@ export class PreglediComponent implements OnInit {
   mozesDodati: boolean = true;
 
 
-  constructor(private adminKlinikeService: AdminKlinikeService, private tipService: TipoviService, private saleService: SalaServices, private lekarService: LekarServces, private pregledService: PreglediService) { 
+  constructor(private _router:Router, private adminKlinikeService: AdminKlinikeService, private tipService: TipoviService, private saleService: SalaServices, private lekarService: LekarServces, private pregledService: PreglediService) { 
     this.pregledZaDodati = new Pregled();
     this.pregledZaDodati.datumVreme = this.toDateString(new Date);
     this.izabraniTip = new ITipPregleda();
@@ -112,7 +113,11 @@ export class PreglediComponent implements OnInit {
        + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
        + ("0" + (date.getDate())).slice(-2))
        + 'T' + date.toTimeString().slice(0,5);
-}
+  }
+
+  onBack(): void {
+    this._router.navigate(['/adminKlinike']);
+  }
 
   
   

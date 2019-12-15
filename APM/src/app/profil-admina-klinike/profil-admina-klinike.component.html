@@ -1,13 +1,17 @@
-<h1>Profil administratora klinike</h1>
-<p>Dobro dosli: "{{admin.ime}} {{admin.prezime}}"</p>
-<div class="topnav">
-    <a [routerLink]="['./profilKlinike']">Profil klinike</a>
-    <a [routerLink]="['./tipoviPregleda']">Tipovi pregleda</a>
-    <a [routerLink]="['./lekari']">Lekari</a>
-    <a [routerLink]="['./sale']">Sale</a>
-    <a [routerLink]="['./pregledi']">Pregledi</a>
-    <a (click)='odjaviSe()'>Odjavi se</a>
-  </div>
+<div class="card">
+    <div class="card-body">
+        <h1>Profil administratora klinike</h1>
+        <h3>Dobro dosli: "{{admin.ime}} {{admin.prezime}}"</h3>
+        <div class="topnav">
+            <a [routerLink]="['./profilKlinike']">Profil klinike</a>
+            <a [routerLink]="['./tipoviPregleda']">Tipovi pregleda</a>
+            <a [routerLink]="['./lekari']">Lekari</a>
+            <a [routerLink]="['./sale']">Sale</a>
+            <a [routerLink]="['./pregledi']">Pregledi</a>
+            <a (click)='odjaviSe()'>Odjavi se</a>
+        </div>
+    </div>
+</div>
 
 
 
@@ -50,6 +54,10 @@
                 <td>{{admin.telefon}}</td>
             </tr>
             <tr>
+                <td>Naziv klinike u kojoj radim</td>
+                <td>{{ klinika.ime }}</td>
+            </tr>
+            <tr>
                 <td><button class="btn btn-info" (click)='izmeniPodatke()'>Izmeni podatke</button></td>
             </tr>
             
@@ -64,7 +72,7 @@
 <div *ngIf='mozesDaMenjasPass'>
     <div class='card'>
         <div class='card-body'>
-            <h3>Promena passworda: </h3>
+            <h3>Promena passworda: <span *ngIf="greskaZaPass" style="color: red;">Stara i nova lozinka se ne poklapaju!</span></h3> 
             <div class='table-responsive'>
                 <form class="formAdmin" (ngSubmit) = "onSubmitIzmeniPass()" #izmenaPassForm="ngForm">
                     <label>Unesite stari password</label>
@@ -80,9 +88,9 @@
 
 
 <div *ngIf='mozesDaMenjasPodatke'>
-  <h3>Promena mojih podataka:</h3>
   <div class='card'>
     <div class='card-body'>
+        <h3>Promena mojih podataka:</h3>
         <div class='table-responsive'>
             <form class="formAdmin" (ngSubmit) = "onSubmitIzmeniPodatke()" #izmenaPOdatkaForm="ngForm">
                 <label>Promenite ime:</label>
@@ -100,6 +108,7 @@
 
                 
                 <input type="submit" value="Izmeni" class="btn btn-info">
+                <input type="button" value="Ponisti" class="btn btn-info" style="margin-left: 15px;" (click)='ponisti()'>
             </form>
         </div>
     </div>
