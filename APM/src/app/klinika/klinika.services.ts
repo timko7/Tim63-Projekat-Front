@@ -22,5 +22,10 @@ export class KlinikaServices{
         public vratiKliniku(klinika:Klinika){
           return this.http.get<Klinika>("/api/klinike/" + klinika.id);
         }
+    
+        
+    public getKlinika(klinikaId:number): Observable<Klinika> {
+      return this.http.get<Klinika>("/api/klinike/" + klinikaId);
+    }
 
 }

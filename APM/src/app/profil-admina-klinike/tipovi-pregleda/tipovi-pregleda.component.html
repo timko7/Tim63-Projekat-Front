@@ -1,7 +1,7 @@
-<h2>Svi tipovi pregleda:</h2>
 
 <div class='card'>
     <div class='card-body'>
+      <h2>Svi tipovi pregleda:</h2>
       <div class='table-responsive'>
         <table class='table'
                *ngIf='tipovi'>
@@ -24,27 +24,35 @@
     </div>
 </div>
 
-<div>
-  <h3>Dodavanje novog tipa:</h3>
+<div class='card'>
+  <div class='card-body'>
+    <h3>Dodavanje novog tipa:</h3>
 
-  <form class="dodajTip" (ngSubmit) = "onSubmit()" #tipForm="ngForm">
-      <label>Naziv tipa</label>
-      <input type="text" placeholder="Naziv tipa" required name="naziv" #naziv="ngModel" [(ngModel)] = "tip.nazivTipa">
-      <input type="submit" value="Dodaj" class="btn btn-info">
-  </form>
+    <form class="dodajTip" (ngSubmit) = "onSubmit()" #tipForm="ngForm">
+        <label>Naziv tipa</label>
+        <input type="text" placeholder="Naziv tipa" required name="naziv" #naziv="ngModel" [(ngModel)] = "tip.nazivTipa">
+        <input type="submit" value="Dodaj" class="btn btn-info">
+    </form>
+  </div>
 </div>
 
 <div *ngIf='mozesDaMenjas'>
-  <h3>Izmena tipa: {{nazivTipaKojiSeMenja}}</h3>
+  <div class='card'>
+    <div class='card-body'>
+      <h3>Izmena tipa: {{nazivTipaKojiSeMenja}}</h3>
 
-  <form class="dodajTip" (ngSubmit) = "onSubmitIzmeni()" #tipForm="ngForm">
-      <label>Unesite novi naziv tipa</label>
-      <input type="text" placeholder="Naziv tipa" required name="nazivIzmena" #nazivIzmena="ngModel" [(ngModel)] = "noviNaziv">
-      <input type="submit" value="Izmeni" class="btn btn-info">
-  </form>
+      <form class="dodajTip" (ngSubmit) = "onSubmitIzmeni()" #tipForm="ngForm">
+          <label>Unesite novi naziv tipa</label>
+          <input type="text" placeholder="Naziv tipa" required name="nazivIzmena" #nazivIzmena="ngModel" [(ngModel)] = "noviNaziv">
+          <input type="submit" value="Izmeni" class="btn btn-info">
+      </form>
+    </div>
+  </div>
 </div>
 
 
-<div>
+<div class='card'>
+  <div class='card-body'>
     <button (click)='onBack()' class="btn btn-info">Nazad</button>
+  </div>
 </div>

@@ -3,6 +3,8 @@ import { Routes, Router } from '@angular/router';
 import { IAdminKlinike } from './admin-klinike';
 import { AdminKlinikeService } from './profil-amina-klinike.services';
 import { LoginServces } from '../login/login.services';
+import { Klinika } from '../klinika/klinika';
+import { KlinikaServices } from '../klinika/klinika.services';
 
 @Component({
   templateUrl: './profil-admina-klinike.component.html',
@@ -14,6 +16,7 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
 
   adminiKlinike: IAdminKlinike[] = [];
   admin : IAdminKlinike ;
+  klinika: Klinika;
   request: Request;
 
   mozesDaMenjasPass: boolean = false;
@@ -21,13 +24,15 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
   noviPassword: string;
 
   promenioPass: boolean = false;
+  greskaZaPass: boolean = false;
 
   mozesDaMenjasPodatke: boolean = false;
   adminSaNovimPodacima: IAdminKlinike;
   menjaniPodaci: boolean = false;
 
-  constructor(private _router: Router,private adminService:AdminKlinikeService, private loginService: LoginServces) {
+  constructor(private _router: Router,private adminService:AdminKlinikeService, private loginService: LoginServces, private klinikaServis: KlinikaServices) {
       this.admin = new IAdminKlinike();
+      this.klinika = new Klinika();
       this.adminSaNovimPodacima = new IAdminKlinike();
       this.adminSaNovimPodacima.ime = "";
       this.adminSaNovimPodacima.prezime = "";
@@ -45,6 +50,11 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
             if(this.admin.prviPutLogovan == true) {
               alert("Prvi put ste ulogovani!\nMolimo promenite lozinku!");
             }
+            this.klinikaServis.getKlinika(this.admin.idKlinike).subscribe({
+              next: klinika => {
+                this.klinika = klinika;
+              }
+            });
         }
       });
       //this.admin = this.adminiKlinike[0];
@@ -60,12 +70,15 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
   }
 
   kraj() {
-      this._router.navigate(["/login"]);
+      this._router.navigate(["/welcome"]);
   }
 
   izmeniPassword() {
       this.mozesDaMenjasPass = true;
       this.mozesDaMenjasPodatke = false;
+      this.greskaZaPass = false;
+      this.stariPassword = "";
+      this.noviPassword = "";
   }
 
   onSubmitIzmeniPass() {
@@ -73,18 +86,20 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
           this.adminService.promeniLozinku(this.admin.id, this.noviPassword).subscribe(()=>this.krajIzmene());
           this.mozesDaMenjasPass = false;
       } else {
-          alert("Neuspesna izmena lozinke. Nije uneta stara lozinka!");
+        this.greskaZaPass = true;
       }
   }
 
   krajIzmene(): void {
       this.promenioPass = true;
+      alert("Promenili ste lozinku.\nMolimo ulogujte se ponovo.")
       this.odjaviSe();
   }
 
   izmeniPodatke() {
       this.mozesDaMenjasPodatke = true;
       this.mozesDaMenjasPass = false;
+      this.greskaZaPass = false;
   }
 
   onSubmitIzmeniPodatke() {
@@ -126,9 +141,10 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
           this.odjaviSe();
         });
       }
-      
-      
+  }
 
+  ponisti() {
+    this.mozesDaMenjasPodatke = false;
   }
 
 }

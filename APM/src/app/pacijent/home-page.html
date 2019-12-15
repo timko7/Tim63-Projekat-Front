@@ -1,88 +1,98 @@
-<html>
-    <body>
-    <h1>Home page</h1>
-    <form  #pacijentForm="ngForm">
-        <table>
-            <tr>
-                <td>Ime</td>
-                <td>{{pacijent.ime}}</td>
-            </tr>
-            <tr>
-                <td>Prezime</td>
-                <td>{{pacijent.prezime}}</td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>{{pacijent.email}}</td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td>{{pacijent.password}}</td>
-            </tr>
-            <tr>
-                <td>Grad</td>
-                <td>{{pacijent.grad}}</td>
-            </tr>
-            <tr>
-                <td>Drzava</td>
-                <td>{{pacijent.drzava}}</td>
-            </tr>
-            <tr>
-                <td>Adresa</td>
-                <td>{{pacijent.adresa}}</td>
-            </tr>
-            <tr>
-                <td>Telefon</td>
-                <td>{{pacijent.telefon}}</td>
-            </tr>
-            <tr>
-                <td>Broj osiguranika</td>
-                <td>{{pacijent.broj_osiguranika}}</td>
-            </tr>
-            <a (click)="logOut()"  class="btn btn-info">Izloguj se</a> 
-            <a (click)="izmeni(pacijent)"  class="btn btn-info">Izmeni podatke</a>
-        </table>
-    </form>
+<div class='card'>
+    <div class='card-body'>
+        <h1>Home page</h1>
+        <form  #pacijentForm="ngForm">
+            <table>
+                <tr>
+                    <td>Ime</td>
+                    <td>{{pacijent.ime}}</td>
+                </tr>
+                <tr>
+                    <td>Prezime</td>
+                    <td>{{pacijent.prezime}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{pacijent.email}}</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>{{pacijent.password}}</td>
+                </tr>
+                <tr>
+                    <td>Grad</td>
+                    <td>{{pacijent.grad}}</td>
+                </tr>
+                <tr>
+                    <td>Drzava</td>
+                    <td>{{pacijent.drzava}}</td>
+                </tr>
+                <tr>
+                    <td>Adresa</td>
+                    <td>{{pacijent.adresa}}</td>
+                </tr>
+                <tr>
+                    <td>Telefon</td>
+                    <td>{{pacijent.telefon}}</td>
+                </tr>
+                <tr>
+                    <td>Broj osiguranika</td>
+                    <td>{{pacijent.broj_osiguranika}}</td>
+                </tr>
+                <a (click)="logOut()"  class="btn btn-info">Izloguj se</a> 
+                <a (click)="izmeni(pacijent)"  class="btn btn-info" style="margin-left: 15px;">Izmeni podatke</a>
+            </table>
+        </form>
+    </div>
+</div>
 
-    <div *ngIf='mozesDaMenjas'>
+<div *ngIf='mozesDaMenjas'>
+    <div class='card'>
+        <div class='card-body'>
             <h3>Izmena licnih podataka</h3>
-        
+
             <form (ngSubmit)="izmeniPacijenta()" #pacijentForm="ngForm">
                 <table>
                     <tr>
                         <td>Ime</td>
                         <td><input type="text" name="ime" #ime="ngModel" [(ngModel)]="pacijent.ime"></td>
-                       
                     </tr>
                     <tr>
                         <td>Prezime</td>
                         <td><input type="text" name="prezime" #prezime="ngModel" [(ngModel)]="pacijent.prezime"></td>
                     </tr>
-                        <tr>
-                                <td>Password</td>
-                                <td><input type="password" name="password" #password="ngModel" [(ngModel)]="pacijent.password"></td>
-                            </tr>
-                            <tr>
-                                    <td>Grad</td>
-                                    <td><input type="text" name="grad" #grad="ngModel" [(ngModel)]="pacijent.grad"></td>
-                                </tr>
-                                <tr>
-                                    <td>Drzava</td>
-                                    <td><input type="text" name="drzava" #drzava="ngModel" [(ngModel)]="pacijent.drzava"></td>
-                                </tr>
-                                <tr>
-                                    <td>Adresa</td>
-                                    <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="pacijent.adresa"></td>
-                                </tr>
-                                <tr>
-                                        <td>Telefon</td>
-                                        <td><input type="text" name="tel" #tel="ngModel" [(ngModel)]="pacijent.telefon"></td>
-                                    </tr>
-                                    <tr>
-                                    <td><input type="submit" value="Izmeni"></td>
-                                        </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password" #password="ngModel" [(ngModel)]="pacijent.password"></td>
+                    </tr>
+                    <tr>
+                        <td>Grad</td>
+                        <td><input type="text" name="grad" #grad="ngModel" [(ngModel)]="pacijent.grad"></td>
+                    </tr>
+                    <tr>
+                        <td>Drzava</td>
+                        <td><input type="text" name="drzava" #drzava="ngModel" [(ngModel)]="pacijent.drzava"></td>
+                    </tr>
+                    <tr>
+                        <td>Adresa</td>
+                        <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="pacijent.adresa"></td>
+                    </tr>
+                    <tr>
+                        <td>Telefon</td>
+                        <td><input type="text" name="tel" #tel="ngModel" [(ngModel)]="pacijent.telefon"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Izmeni" class="btn btn-info"></td>
+                    </tr>
                 </table>
             </form>
         </div>
-  </body>  
-</html>
+    </div>
+</div>
+
+<div class='card'>
+  <div class='card-body'>
+    <button (click)='onBack()' class="btn btn-info">Nazad</button>
+  </div>
+</div>
+
