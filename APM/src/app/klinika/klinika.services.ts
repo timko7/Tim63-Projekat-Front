@@ -7,6 +7,7 @@ import { Klinika } from './klinika';
 
 @Injectable()
 export class KlinikaServices{
+  
     private klinikaUrl:string;
 
     constructor(private http:HttpClient){
@@ -26,6 +27,10 @@ export class KlinikaServices{
         
     public getKlinika(klinikaId:number): Observable<Klinika> {
       return this.http.get<Klinika>("/api/klinike/" + klinikaId);
+    }
+
+    azurirajKliniku(stariNazivKlinike: string, klinika: Klinika) {
+      return this.http.put("/api/klinike/promeniPodatke/" + stariNazivKlinike, klinika);
     }
 
 }
