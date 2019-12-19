@@ -9,11 +9,65 @@
 
 <div class="card">
     <div class="card-body">
-        <h2>Stranica u izradi!!</h2>
-        <div>
-            <button (click)='onBack()' class="btn btn-info">Nazad</button>
+        <h1>Profil klinike: '{{ klinika.ime }}'</h1>
+        <h2></h2>
+        
+        <hr>
+
+        <h1>Podaci klinike:</h1>
+        <div class='table-responsive'>
+          <table class="table">
+              <tr>
+                  <td>Ime</td>
+                  <td>{{ klinika.ime }}</td>
+              </tr>
+              <tr>
+                  <td>Opis</td>
+                  <td>{{ klinika.opis }}</td>
+              </tr>
+              <tr>
+                  <td>Adresa</td>
+                  <td>{{ klinika.adresa }}</td>
+              </tr>
+              <tr>
+                <td>Lokacija na mapi</td>
+                <td>
+                    <div class="mapouter"><div class="gmap_canvas"><iframe width="758" height="525" id="gmap_canvas" [src]='mapURL(klinika.adresa)' frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://ytify.com">ytify.com</a></div><style>.mapouter{position:relative;text-align:right;height:525px;width:758px;}.gmap_canvas {overflow:hidden;background:none!important;height:525px;width:758px;}</style></div>
+                </td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-info" (click)='izmeniPodatke()'>Izmeni podatke</button></td>
+            </tr>
+          </table>
         </div>
+
     </div>
 </div>
 
+<div *ngIf='mozesDaMenjasPodatke'>
+    <div class='card'>
+      <div class='card-body'>
+          <h3>Promena podataka klinike:</h3>
+          <div class='table-responsive'>
+              <form class="formKlinika" (ngSubmit) = "onSubmitIzmeniPodatke()" #izmenaPOdatkaForm="ngForm">
+                  <label>Promenite ime:</label>
+                  <input type="text" name="promenaImena" #promenaImena="ngModel" [(ngModel)] = "novoImeKlinike">
+                  <label>Promenite opis</label>
+                  <input type="text" name="promenaOpisa" #promenaOpisa="ngModel" [(ngModel)] = "noviOpisKlinike">
+                  <label>Promenite adresu:</label>
+                  <input type="text" name="promenaAdrese" #promenaAdrese="ngModel" [(ngModel)] = "novaAdresaKlinike">
+                  
+                  <input type="submit" value="Izmeni" class="btn btn-info">
+                  <input type="button" value="Ponisti" class="btn btn-info" style="margin-left: 15px;" (click)='ponisti()'>
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
 
+
+<div class="card">
+    <div class="card-body">
+        <button (click)='onBack()' class="btn btn-info">Nazad</button>
+    </div>
+</div>
