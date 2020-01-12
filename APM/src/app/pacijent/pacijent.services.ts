@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pacijent } from './pacijent';
+import { Korisnik } from '../login/Korisnik';
 
 @Injectable()
 export class PacijentServces{
@@ -14,6 +15,9 @@ export class PacijentServces{
   
     public findAll(): Observable<Pacijent[]> {
       return this.http.get<Pacijent[]>("/api/pacijenti");
+    }
+    public vratiKorisnika(id:number):Observable<Pacijent>{
+      return this.http.get<Korisnik>("/api/pacijenti/user/" + id);
     }
 
     public save(pacijent:Pacijent){

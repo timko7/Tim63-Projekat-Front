@@ -55,7 +55,10 @@ export class LoginComponent implements OnInit{
                  }
                    else if(this.korisnik.uloga=="ADMINKLINIKE"){
                       this.router.navigate(["/adminKlinike"]);
-                  }
+                  } 
+                  else if(this.korisnik.uloga=="LEKAR"){
+                    this.router.navigate(["/lekar"]);
+                }
                   else{
                      this.router.navigate(["/signup"]);
                   }

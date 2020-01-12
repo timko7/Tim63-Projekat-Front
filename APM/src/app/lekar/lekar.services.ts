@@ -35,7 +35,12 @@ export class LekarServces{
     public obrisi(lekar: Lekar) {
         return this.http.delete("/api/lekari/" + lekar.id);
     }
+    public oceniLekara(lekar:Lekar){
+      return this.http.put("/api/lekari/oceniLekara/"+lekar.id, lekar);
+    }
 
-    
+    public update(lekar:Lekar){
+      return this.http.put("/api/lekari/"+lekar.id, lekar);
+    }
 
 }

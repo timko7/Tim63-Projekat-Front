@@ -61,36 +61,41 @@
           <div><input type="submit" value="Pretrazi" (click)='pretraziLekare()' class="btn btn-info"></div>
     </div>
 
-    <div class='table-responsive'>
-    <table class='table'
-            *ngIf='lekari'>
-        <thead>
-        <tr>
-            <th>Ime</th>
-            <th>Prezime</th>
-            <th>Email</th>
-            <th>Grad</th>
-            <th>Drzava</th>
-            <th>Adresa</th>
-            <th>Telefon</th>
-            <th>Radno vreme</th>
-            <th>Zauzetost</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor='let lekar of lekari'>
-            <td>{{ lekar.ime }}</td>
-            <td>{{ lekar.prezime }}</td>
-            <td>{{ lekar.email }}</td>
-            <td>{{ lekar.grad }}</td>
-            <td>{{ lekar.drzava }}</td>
-            <td>{{ lekar.adresa }}</td>
-            <td>{{ lekar.telefon }}</td>
-            <td>{{ lekar.radnoVremeOd }} -- {{ lekar.radnoVremeDo }}</td>
-            <td>{{ lekar.slobodan ? 'Nema zakazan pregled' : 'Ima zakazan pregled'}}</td>
-        </tr>
-        </tbody>
-    </table>
+
+    <div class='card-body'>
+        <div class='table-responsive'>
+        <table class='table'
+                *ngIf='lekari'>
+            <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Grad</th>
+                <th>Drzava</th>
+                <th>Adresa</th>
+                <th>Telefon</th>
+                <th>Radno vreme</th>
+                <th>Zauzetost</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor='let lekar of lekari'>
+                <td>{{ lekar.ime }}</td>
+                <td>{{ lekar.prezime }}</td>
+                <td>{{ lekar.email }}</td>
+                <td>{{ lekar.grad }}</td>
+                <td>{{ lekar.drzava }}</td>
+                <td>{{ lekar.adresa }}</td>
+                <td>{{ lekar.telefon }}</td>
+                <td>{{ lekar.radnoVremeOd }} -- {{ lekar.radnoVremeDo }}</td>
+                <td>{{ lekar.slobodan ? 'Nema zakazan pregled' : 'Ima zakazan pregled'}}</td>
+                <td><button class="btn btn-info" (click)='rezervisiPregledPekoLekara(lekar)'>Rezervisi</button></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
     </div>
     <div>
       <button (click)='nazad()' class="btn btn-info">Prikazi ponovo</button>
@@ -120,7 +125,7 @@
         <td>{{ izabraneSale[i].naziv }}</td>
         <td>{{ izabraniTipovi[i].nazivTipa }}</td>
         <td>{{ pregled.cena }}</td>
-        <td><button class="btn btn-info">Rezervisi</button></td>
+        <td><button class="btn btn-info" (click)='rezervisiPregled(pregled)'>Rezervisi</button></td>
       </tr>
     </tbody>
   </table>

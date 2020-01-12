@@ -1,0 +1,88 @@
+<html>
+    <body>
+    <h1>Home page</h1>
+    <form  #lekarForm="ngForm">
+        <table>
+            <tr>
+                <td>Ime</td>
+                <td>{{lekar.ime}}</td>
+            </tr>
+            <tr>
+                <td>Prezime</td>
+                <td>{{lekar.prezime}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{lekar.email}}</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>{{lekar.password}}</td>
+            </tr>
+            <tr>
+                <td>Grad</td>
+                <td>{{lekar.grad}}</td>
+            </tr>
+            <tr>
+                <td>Drzava</td>
+                <td>{{lekar.drzava}}</td>
+            </tr>
+            <tr>
+                <td>Adresa</td>
+                <td>{{lekar.adresa}}</td>
+            </tr>
+            <tr>
+                <td>Telefon</td>
+                <td>{{lekar.telefon}}</td>
+            </tr>
+            <tr>
+                <td>Broj osiguranika</td>
+                <td>{{lekar.broj_osiguranika}}</td>
+            </tr>
+            <a (click)="logOut()"  class="btn btn-info">Izloguj se</a> 
+            <a (click)="izmeni(lekar)"  class="btn btn-info">Izmeni podatke</a>
+        </table>
+    </form>
+
+    <div *ngIf='mozesDaMenjas'>
+            <h3>Izmena licnih podataka</h3>
+        
+            <form (ngSubmit)="izmeniLekara()" #lekarForm="ngForm">
+                <table>
+                    <tr>
+                        <td>Ime</td>
+                        <td><input type="text" name="ime" #ime="ngModel" [(ngModel)]="lekar.ime"></td>
+                       
+                    </tr>
+                    <tr>
+                        <td>Prezime</td>
+                        <td><input type="text" name="prezime" #prezime="ngModel" [(ngModel)]="lekar.prezime"></td>
+                    </tr>
+                        <tr>
+                                <td>Password</td>
+                                <td><input type="password" name="password" #password="ngModel" [(ngModel)]="lekar.password"></td>
+                            </tr>
+                            <tr>
+                                    <td>Grad</td>
+                                    <td><input type="text" name="grad" #grad="ngModel" [(ngModel)]="lekar.grad"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drzava</td>
+                                    <td><input type="text" name="drzava" #drzava="ngModel" [(ngModel)]="lekar.drzava"></td>
+                                </tr>
+                                <tr>
+                                    <td>Adresa</td>
+                                    <td><input type="text" name="adresa" #adresa="ngModel" [(ngModel)]="lekar.adresa"></td>
+                                </tr>
+                                <tr>
+                                        <td>Telefon</td>
+                                        <td><input type="text" name="tel" #tel="ngModel" [(ngModel)]="lekar.telefon"></td>
+                                    </tr>
+                                    <tr>
+                                    <td><input type="submit" value="Izmeni"></td>
+                                        </tr>
+                </table>
+            </form>
+        </div>
+  </body>  
+</html>

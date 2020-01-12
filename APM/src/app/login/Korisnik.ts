@@ -8,7 +8,7 @@ export class Korisnik{
      drzava:string;
      adresa:string;
      telefon:string;
-     broj_osiguranika:number;
+     broj_osiguranika:string;
      uloga:string;
   
 }

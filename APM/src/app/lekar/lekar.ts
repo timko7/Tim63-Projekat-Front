@@ -8,10 +8,12 @@ export class Lekar{
     drzava:string;
     adresa:string;
     telefon:string;
-    broj_osiguranika:number;
+    broj_osiguranika:string;
     radnoVremeOd: number;
     radnoVremeDo: number;
     slobodan: boolean;
     idKlinike: number;
     idTipa: number;
+    ocena:number;
+    srednjaOcena:number;
 }
