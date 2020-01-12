@@ -18,7 +18,11 @@ import { ProfilAdminaKlinikeModule } from './profil-admina-klinike/profil-admina
 import { LoginComponent } from './login/login.component';
 import { LoginServces } from './login/login.services';
 import { HomePagePacijentaModule } from './home-page-pacijenta/home-page-pacijenta.module';
+
 import { ProfilLekaraKlinikeModule } from './lekar/lekar.module';
+
+import { WelcomeComponent } from './home_klinCentra/welcome.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +30,7 @@ import { ProfilLekaraKlinikeModule } from './lekar/lekar.module';
     PacijentComponent,
     KlinikaComponent,
     LoginComponent,
+    WelcomeComponent
     //HomeComponent
   ],
   imports: [
@@ -36,9 +41,12 @@ import { ProfilLekaraKlinikeModule } from './lekar/lekar.module';
     HomePagePacijentaModule,
     ProfilLekaraKlinikeModule,
     RouterModule.forRoot([
+      { path: 'welcome', component: WelcomeComponent },
       { path: 'signup', component: PacijentComponent },
-      { path: 'napraviKliniku', component: KlinikaComponent },
-     { path: 'login', component: LoginComponent },
+      // { path: 'napraviKliniku', component: KlinikaComponent },
+      { path: 'login', component: LoginComponent },
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
      // { path: 'homePage', component: HomeComponent }
 
     ]),

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import{Pacijent} from '../pacijent/pacijent';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginServces } from '../login/login.services';
 import { PacijentServces } from './pacijent.services';
 
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit{
    
    
     
-    constructor(private route:ActivatedRoute,private router:Router,private paciejentService:LoginServces,private ser:PacijentServces){
+    constructor(private _router: Router, private router:Router,private paciejentService:LoginServces,private ser:PacijentServces){
         this.pacijent=new Pacijent();
     }
     preuzmiPodatke(){
@@ -52,5 +52,9 @@ export class HomeComponent implements OnInit{
     kraj(){
         this.router.navigate(["/login"]);
     }
+
+    onBack(): void {
+        this._router.navigate(['/homePagePacijent']);
+      }
   
 }

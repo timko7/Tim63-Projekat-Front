@@ -1,70 +1,65 @@
 <div class='card'>
   <div class='card-body'>
-    <div class='row' >Pretrazu  klinike</div>
+    <h3>Pretrazi klinike:</h3>
     <div class="row">
       <div class='col-md-2'>Pretrazi po adresi</div>
       <div class='col-md-4'><input type="text" [(ngModel)]='adresaKlinike'></div>
       <div class='col-md-2'>Pretrazi po tipu</div>
-       <select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip">
+      <select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip">
         <option *ngFor="let tip of tipoviKlinika" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
-    </select>
+      </select>
     </div>
-    <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()'></div>
-
-<div class='card'>
-    <div class='card-body'>
-      <div class='row' >Filtriraj  klinike</div>
-      <div class="row">
-        <div class='col-md-2'>Filtriraj po imenu</div>
-        <div class='col-md-4'><input type="text" [(ngModel)]='imeKlinike'></div>
-      </div>
-     
-      <div class='table-responsive'>
-        <table class='table'
-               *ngIf='filtriraneKlinike'>
-          <thead>
-            <tr>
-              <th>Naziv</th>
-              <th>Adresa</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor='let klinika of filtriraneKlinike'>
-              <td>{{ klinika.ime }}</td>
-              <td>{{ klinika.adresa }}</td>
-              <td><button class="btn btn-info" (click)='idiNaListuLekara(klinika)'>Vidi lekare klinike</button></td>
-              <td><button class="btn btn-info" (click)='idiNaPreglede(klinika)'>Vidi unapred definisane preglede klinike</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()' class="btn btn-info">
+    <br><br>
+    <h2>Lista svih klinika:</h2>
+    <!-- <div><h3>Filtriraj klinike:</h3></div> -->
+    <div class="row">
+      <div class='col-md-2'>Filtriraj po nazivu</div>
+      <div class='col-md-4'><input type="text" [(ngModel)]='imeKlinike'></div>
     </div>
+    
+    <div class='table-responsive'>
+      <table class='table'
+              *ngIf='filtriraneKlinike'>
+        <thead>
+          <tr>
+            <th>Naziv</th>
+            <th>Adresa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let klinika of filtriraneKlinike'>
+            <td>{{ klinika.ime }}</td>
+            <td>{{ klinika.adresa }}</td>
+            <td><button class="btn btn-info" (click)='idiNaListuLekara(klinika)'>Vidi lekare klinike</button></td>
+            <td><button class="btn btn-info" (click)='idiNaPreglede(klinika)'>Vidi unapred definisane preglede klinike</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
-
 
 <div class='card' *ngIf='prikaziLekare'>
-<h2>Svi Lekari klinike:{{izabranaKlinika.ime}}</h2>
-
-<div>
-
-      <div class="row">
-        <div class='col-md-2'>Pretrazi po imenu</div>
-        <div class='col-md-4'><input type="text" [(ngModel)]='imeLekara'></div>
-      </div>
-      <div class="row">
-          <div class='col-md-2'>Pretrazi po prezimenu</div>
-          <div class='col-md-4'><input type="text" [(ngModel)]='prezimeLekara'></div>
-        </div>
-        <div class="row" *ngIf='!dugmeZaPretraguKlinike'>
-          <div class='col-md-2'>Pretrazi po tipu pregleda</div>
-          <div class='col-md-4'><select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip2">
-            <option *ngFor="let tip of tipoviIzabraneKlinike" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
-        </select></div>
-        </div>
-      <div class="row"><input type="submit" value="Pretrazi" (click)='pretraziLekare()'></div>
-
-</div>
+  <div class='card-body'>
+    <h2>Svi Lekari klinike: {{izabranaKlinika.ime}}</h2>
+    <div>
+          <div class="row">
+            <div class='col-md-2'>Pretrazi po imenu</div>
+            <div class='col-md-4'><input type="text" [(ngModel)]='imeLekara'></div>
+          </div>
+          <div class="row">
+              <div class='col-md-2'>Pretrazi po prezimenu</div>
+              <div class='col-md-4'><input type="text" [(ngModel)]='prezimeLekara'></div>
+            </div>
+            <div class="row" *ngIf='!dugmeZaPretraguKlinike'>
+              <div class='col-md-2'>Pretrazi po tipu pregleda</div>
+              <div class='col-md-4'><select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip2">
+                <option *ngFor="let tip of tipoviIzabraneKlinike" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
+            </select></div>
+            </div>
+          <div><input type="submit" value="Pretrazi" (click)='pretraziLekare()' class="btn btn-info"></div>
+    </div>
 
 
     <div class='card-body'>
@@ -100,11 +95,14 @@
             </tbody>
         </table>
         </div>
+
     </div>
     <div>
-      <button (click)='nazad()'>Prikazi ponovo</button>
+      <button (click)='nazad()' class="btn btn-info">Prikazi ponovo</button>
+    </div>
   </div>
 </div>
+
 
 <div class='table-responsive' >
   <table class='table'
@@ -134,6 +132,8 @@
 </div>
 
 
-<div>
-    <button (click)='onBack()'>Nazad</button>
+<div class='card'>
+  <div class='card-body'>
+    <button (click)='onBack()' class="btn btn-info">Nazad</button>
+  </div>
 </div>

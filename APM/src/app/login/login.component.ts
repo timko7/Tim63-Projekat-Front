@@ -20,6 +20,7 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit{
     korisnik:Korisnik;
     respnse:Response;
+    odgovor: boolean = false;
     
    loginZahtev:Login;
     
@@ -35,8 +36,10 @@ export class LoginComponent implements OnInit{
 
 
     login(){
-        
-        this.loginService.ulogujSe(this.loginZahtev).subscribe(result=>this.vratiKorisnika());
+        this.odgovor = false;
+        this.loginService.ulogujSe(this.loginZahtev).subscribe(result=>this.vratiKorisnika(),
+            err => this.odgovor = true
+        );
       
     }
 

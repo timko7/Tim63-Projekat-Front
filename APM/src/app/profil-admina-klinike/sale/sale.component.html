@@ -1,74 +1,87 @@
-<h2>Sve sale:</h2>
 
-
-<div class='card'>
-        <div class='card-body'>
-          <div class="row">
-            <div class='col-md-2'>Pretrazi po nazivu</div>
-            <div class='col-md-4'><input type="text" [(ngModel)]='nazivSale'></div>
-          </div>
-          </div>
-</div>
-          <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()'></div>
-      
-      <div class='card'>
-          <div class='card-body'>
-            <div class="row">
-              <div class='col-md-2'>Filtriraj po zauzetosti</div>
-              <div class='col-md-4'><input type="text" [(ngModel)]='zauzetostSale'></div>
-            </div>
-        </div>
-      </div>
 <div class='card'>
     <div class='card-body'>
+        <h2>Sve sale klinike:</h2>
         <div class='table-responsive'>
-        <table class='table'
-                *ngIf='filtriraneSale'>
-            <thead>
-            <tr>
-                <!-- <th>ID sale</th> -->
-                <th>Naziv sale</th>
-                <th>Zauzetost sale</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor='let sala of filtriraneSale'>
-                <!-- <td>{{ sala.id }}</td> -->
-                <td>{{ sala.naziv }}</td>
-                <td>{{ sala.slobodna ? 'Slobodna' : 'Zauzeta'}}</td>
-                <td><button *ngIf="sala.slobodna" class="btn btn-info" (click)='obrisiSalu(sala)'>Obrisi salu</button></td>
-                <td><button *ngIf="sala.slobodna" class="btn btn-info" (click)='izmeniSalu(sala)'>Izmeni salu</button></td>
-            </tr>
-            </tbody>
-        </table>
+            <table class='table'
+                    *ngIf='filtriraneSale'>
+                <thead>
+                    <tr>
+                        <!-- <th>ID sale</th> -->
+                        <th>Naziv sale</th>
+                        <th>Zauzetost sale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let sala of filtriraneSale'>
+                        <!-- <td>{{ sala.id }}</td> -->
+                        <td>{{ sala.naziv }}</td>
+                        <td>{{ sala.slobodna ? 'Slobodna' : 'Zauzeta'}}</td>
+                        <td><button *ngIf="sala.slobodna" class="btn btn-info" (click)='obrisiSalu(sala)'>Obrisi salu</button></td>
+                        <td><button *ngIf="sala.slobodna" class="btn btn-info" (click)='izmeniSalu(sala)'>Izmeni salu</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div>
-                <button (click)='nazad()'>Prikazi ponovo</button>
-            </div>
+            <button (click)='nazad()' class="btn btn-info">Prikazi ponovo</button>
+        </div>
     </div>
 </div>
 
-<div>
-    <h3>Dodavanje nove sale:</h3>
+<div class='card'>
+    <div class='card-body'>
+        <div class="row">
+            <div class='col-md-2'>Pretrazi po nazivu</div>
+            <div class='col-md-4'><input type="text" [(ngModel)]='nazivSale'></div>
+        </div>
+        <div>
+            <input type="submit" value="Pretrazi" class="btn btn-info" (click)='preuzmiZaPretragu()'>
+        </div>
+    </div>
+</div>
 
-    <form class="dodajSalu" (ngSubmit) = "onSubmit()" #salaForm="ngForm">
-        <label>Naziv sale</label>
-        <input type="text" placeholder="Naziv sale" required name="naziv" #naziv="ngModel" [(ngModel)] = "sala.naziv">
-        <input type="submit" value="Dodaj" class="btn btn-info">
-    </form>
+
+<div class='card'>
+    <div class='card-body'>
+        <div class="row">
+            <div class='col-md-2'>Filtriraj po zauzetosti</div>
+            <div class='col-md-4'><input type="text" [(ngModel)]='zauzetostSale'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='card'>
+    <div class='card-body'>
+        <h3>Dodavanje nove sale:</h3>
+
+        <form class="dodajSalu" (ngSubmit) = "onSubmit()" #salaForm="ngForm">
+            <label>Naziv sale</label>
+            <input type="text" placeholder="Naziv sale" required name="naziv" #naziv="ngModel" [(ngModel)] = "sala.naziv">
+            <input type="submit" value="Dodaj" class="btn btn-info">
+        </form>
+    </div>
 </div>
 
 <div *ngIf='mozesDaMenjas'>
-    <h3>Izmena sale: {{nazivSaleKojeSeMenja}}</h3>
+    <div class='card'>
+        <div class='card-body'>
+            <h3>Izmena sale: {{nazivSaleKojeSeMenja}}</h3>
 
-    <form class="dodajSalu" (ngSubmit) = "onSubmitIzmeni()" #salaForm="ngForm">
-        <label>Novi naziv sale</label>
-        <input type="text" placeholder="Naziv sale" required name="nazivIzmena" #nazivIzmena="ngModel" [(ngModel)] = "noviNaziv">
-        <input type="submit" value="Izmeni" class="btn btn-info">
-    </form>
+            <form class="dodajSalu" (ngSubmit) = "onSubmitIzmeni()" #salaForm="ngForm">
+                <label>Novi naziv sale</label>
+                <input type="text" placeholder="Naziv sale" required name="nazivIzmena" #nazivIzmena="ngModel" [(ngModel)] = "noviNaziv">
+                <input type="submit" value="Izmeni" class="btn btn-info">
+            </form>
+        </div>
+    </div>
 </div>
 
 
-<div>
-    <button (click)='onBack()' class="btn btn-info">Nazad</button>
+<div class='card'>
+    <div class='card-body'>
+        <button (click)='onBack()' class="btn btn-info">Nazad</button>
+    </div>
 </div>
