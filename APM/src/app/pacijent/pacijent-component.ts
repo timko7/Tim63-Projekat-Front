@@ -33,7 +33,7 @@ export class PacijentComponent{
         this.pacijent.drzava="";
         this.pacijent.adresa="";
         this.pacijent.telefon="";
-        this.pacijent.broj_osiguranika=null;
+        this.pacijent.broj_osiguranika="";
         this.router.navigate(["/homePage"]);
 
       }

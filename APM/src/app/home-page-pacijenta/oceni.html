@@ -1,0 +1,44 @@
+<div class="ocenaLekara">
+<div class='table-responsive'>
+    <table class='table'
+           *ngIf='lekari'>
+      <thead>
+        <tr>
+          <th>Ime lekara</th>
+          <th>Prezime lekara</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let pregled of zakazaniPregledi; index as i'>
+          <td *ngIf='pregled.odradjen'>{{ lekari[i].ime }}</td>
+          <td *ngIf='pregled.odradjen'>{{ lekari[i].prezime }}</td>
+         <td *ngIf='pregled.odradjen'><input type="number" name="ocena" #ocena="ngModel" [(ngModel)]="lekari[i].ocena"></td>
+          <td *ngIf='pregled.odradjen'><button class="btn btn-info" (click)='oceni(lekari[i])'>Oceni</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="ocenaKlinika">
+    <div class='table-responsive'>
+        <table class='table'
+               *ngIf='klinike'>
+          <thead>
+            <tr>
+              <th>Ime lekara</th>
+              <th>Prezime lekara</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let pregled of zakazaniPregledi; index as i'>
+              <td *ngIf='pregled.odradjen'>{{ klinike[i].ime }}</td>
+              <td *ngIf='pregled.odradjen'>{{ klinike[i].adresa }}</td>
+             <td *ngIf='pregled.odradjen'><input type="number" name="ocena" #ocena="ngModel" [(ngModel)]="klinike[i].ocena"></td>
+              <td *ngIf='pregled.odradjen'><button class="btn btn-info" (click)='oceniKliniku(klinike[i])'>Oceni</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

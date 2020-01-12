@@ -95,6 +95,7 @@
                 <td>{{ lekar.telefon }}</td>
                 <td>{{ lekar.radnoVremeOd }} -- {{ lekar.radnoVremeDo }}</td>
                 <td>{{ lekar.slobodan ? 'Nema zakazan pregled' : 'Ima zakazan pregled'}}</td>
+                <td><button class="btn btn-info" (click)='rezervisiPregledPekoLekara(lekar)'>Rezervisi</button></td>
             </tr>
             </tbody>
         </table>
@@ -126,7 +127,7 @@
         <td>{{ izabraneSale[i].naziv }}</td>
         <td>{{ izabraniTipovi[i].nazivTipa }}</td>
         <td>{{ pregled.cena }}</td>
-        <td><button class="btn btn-info">Rezervisi</button></td>
+        <td><button class="btn btn-info" (click)='rezervisiPregled(pregled)'>Rezervisi</button></td>
       </tr>
     </tbody>
   </table>

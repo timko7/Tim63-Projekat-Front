@@ -22,5 +22,11 @@ export class KlinikaServices{
         public vratiKliniku(klinika:Klinika){
           return this.http.get<Klinika>("/api/klinike/" + klinika.id);
         }
+        public vratiKlinikuPoId(id:number){
+          return this.http.get<Klinika>("/api/klinike/" +id);
+        }
+        public oceniKliniku(k:Klinika){
+          return this.http.put("/api/klinike/oceniKliniku/"+k.id, k);
+        }
 
 }

@@ -1,0 +1,69 @@
+<div>
+
+  <div class="row">
+    <div class='col-md-2'>Pretrazi po imenu</div>
+    <div class='col-md-4'><input type="text" [(ngModel)]='imePacijenta'></div>
+  </div>
+  <div class="row">
+      <div class='col-md-2'>Pretrazi po prezimenu</div>
+      <div class='col-md-4'><input type="text" [(ngModel)]='prezimePacijenta'></div>
+    </div>
+    <div class="row">
+      <div class='col-md-2'>Pretrazi po jedinstvenom broju</div>
+      <div class='col-md-4'><input type="text" [(ngModel)]='brojPacijenta'></div>
+    </div>
+  <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()'></div>
+
+</div>
+
+<div *ngIf='dugmeZaPretragu==false'>
+<div class='table-responsive'>
+    <table class='table'
+           *ngIf='zakazaniPregledi'>
+      <thead>
+        <tr>
+          <th>Ime pacijenta</th>
+          <th>Prezime pacijenta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let pregled of zakazaniPregledi; index as i'>
+          <td>{{pacijentiZaPregled[i].ime }}</td>
+          <td>{{pacijentiZaPregled[i].prezime }}</td>
+          <td><button class="btn btn-info" (click)='zapocniPregled(pregled)'>Zapocni pregled</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <div *ngIf='dugmeZaPretragu==true'>
+
+ 
+ <div *ngIf='dodatBroj==false'> 
+  <div class="row">
+    <div class='col-md-2'>Filtriraj po jedinstvenom broju</div>
+    <div class='col-md-4'><input type="text" [(ngModel)]='jedinstveniBroj'></div>
+  </div>
+</div>
+
+  <div class='table-responsive'>
+    <table class='table'
+           *ngIf='filtriraniPacijenti'>
+      <thead>
+        <tr>
+          <th>Id pregleda</th>
+          <th>Ime pacijenta</th>
+          <th>Prezime pacijenta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor='let pacijent of filtriraniPacijenti; index1 as ii'>
+          <td>{{pacijent.ime }}</td>
+          <td>{{pacijent.prezime }}</td>
+          <td><button class="btn btn-info" (click)='zapocniPregled(pacijent)'>Zapocni pregled</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

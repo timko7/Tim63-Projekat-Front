@@ -10,6 +10,10 @@ import { Sala } from '../profil-admina-klinike/sale/sala';
 import { ITipPregleda } from '../profil-admina-klinike/tipovi-pregleda/tip-pregleda';
 import { TipoviService } from '../profil-admina-klinike/tipovi-pregleda/tipovi-pregleda.service';
 import { SalaServices } from '../profil-admina-klinike/sale/sala.services';
+import { zakazaniPregled } from './zakazaniPregled';
+import { LoginServces } from '../login/login.services';
+import { ZakazaniPregledService } from './zakazaniPregled.services';
+import { Korisnik } from '../login/Korisnik';
 
 
 
@@ -49,10 +53,13 @@ export class ListaKlinikaComponent implements OnInit{
   izabraniTipovi: ITipPregleda[] = [];
   index: number = 0;
 
+  zakazaniPregled:zakazaniPregled;
+  korisnik:Korisnik;
 
 
   constructor(private _router: Router,private klinikaService:KlinikaServices,private lekarServices:LekarServces,
-    private pregledService:PreglediService,private tipService:TipoviService,private salaService:SalaServices) {
+    private pregledService:PreglediService,private tipService:TipoviService,private salaService:SalaServices,private loginService:LoginServces,
+    private zakazaniPregledi:ZakazaniPregledService) {
 
     this.izabranaKlinika=new Klinika();
     this.izabraniTip=new ITipPregleda();
@@ -60,7 +67,8 @@ export class ListaKlinikaComponent implements OnInit{
     this.izabraniLekari.splice(0,this.izabraniLekari.length);
     this.izabraneSale.splice(0,this.izabraneSale.length);
     this.izabraniTipovi.splice(0,this.izabraniTipovi.length);
-
+      this.zakazaniPregled=new zakazaniPregled();
+      this.korisnik=new Korisnik();
   
     
   }
@@ -119,7 +127,9 @@ export class ListaKlinikaComponent implements OnInit{
 
     this.filtriraneKlinike=this.klinike;
     
-       
+    this.loginService.getKorisnika().subscribe({next: korisnik=>{
+      this.korisnik=korisnik;}
+    })
     
   }
   onBack(): void {
@@ -244,6 +254,36 @@ pretraziLekare(){
     this.index=this.preglediKlinike.length;
  
     }
+rezervisiPregled(pregled:Pregled){
+  this.zakazaniPregled.idKlinike=pregled.idKlinike;
+  this.zakazaniPregled.idLekara=pregled.idLekara;
+  this.zakazaniPregled.idSale=pregled.idSale;
+  this.zakazaniPregled.idTipa=pregled.idTipa;
+  this.zakazaniPregled.datumVreme=pregled.datumVreme;
+  this.zakazaniPregled.trajanjePregleda=pregled.trajanjePregleda;
+  this.zakazaniPregled.cena=pregled.cena;
+  
+  
+  this.zakazaniPregled.idPacijenta=this.korisnik.id;
+  this.zakazaniPregledi.save(this.zakazaniPregled).subscribe();
+  alert("rezervisan pregled ");
 
+
+}
+
+rezervisiPregledPekoLekara(lekar:Lekar){
+  this.zakazaniPregled.idKlinike=lekar.idKlinike;
+  this.zakazaniPregled.idLekara=lekar.id;
+  //this.zakazaniPregled.idSale=pregled.idSale;
+  this.zakazaniPregled.idTipa=lekar.idTipa;
+  //this.zakazaniPregled.datumVreme=pregled.datumVreme;
+  //this.zakazaniPregled.trajanjePregleda=pregled.trajanjePregleda;
+  //this.zakazaniPregled.cena=pregled.cena;
+  
+  
+  this.zakazaniPregled.idPacijenta=this.korisnik.id;
+  this.zakazaniPregledi.save(this.zakazaniPregled).subscribe();
+  alert("rezervisan pregled ");
+}
     
 }

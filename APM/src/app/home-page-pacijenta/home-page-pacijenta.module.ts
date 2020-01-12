@@ -8,6 +8,8 @@ import { LoginServces } from '../login/login.services';
 import { FormsModule } from '@angular/forms';
 import { KlinikaServices } from '../klinika/klinika.services';
 import { LekarServces } from '../lekar/lekar.services';
+import { ZakazaniPregledService } from './zakazaniPregled.services';
+import { OceniComponent } from './oceni-lekara-kliniku.component';
 
 
 
@@ -16,7 +18,8 @@ import { LekarServces } from '../lekar/lekar.services';
   declarations: [
     HomePagePacijentComponent,
     ListaKlinikaComponent,
-    HomeComponent
+    HomeComponent,
+    OceniComponent
   ],
   imports: [
     CommonModule,
@@ -24,12 +27,13 @@ import { LekarServces } from '../lekar/lekar.services';
       { path: 'homePagePacijent', component: HomePagePacijentComponent },
       { path: 'homePagePacijent/listaKlinika', component: ListaKlinikaComponent },
       { path: 'homePagePacijent/homePage', component: HomeComponent },
+      { path: 'homePagePacijent/oceni', component: OceniComponent },
 
     ]),
     FormsModule, 
   ],
   providers: [
-      LoginServces,KlinikaServices,LekarServces
+      LoginServces,KlinikaServices,LekarServces,ZakazaniPregledService
   ]
 })
 export class HomePagePacijentaModule { }
