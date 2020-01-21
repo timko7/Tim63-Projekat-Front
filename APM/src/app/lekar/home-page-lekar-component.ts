@@ -25,6 +25,9 @@ export class HomePageLekarComponent{
       next: lekar=>{
           this.lekar=lekar;
           console.log('Lekar', this.lekar);
+          if(this.lekar == null) {
+            this._router.navigate(["/welcome"]);
+          }
           /*if(this.admin.prviPutLogovan == true) {
             alert("Prvi put ste ulogovani!\nMolimo promenite lozinku!");
           }*/

@@ -47,6 +47,9 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
         next: admin=>{
             this.admin=admin;
             console.log('Admin', this.admin);
+            if(this.admin == null) {
+              this._router.navigate(["/welcome"]);
+            }
             if(this.admin.prviPutLogovan == true) {
               alert("Prvi put ste ulogovani!\nMolimo promenite lozinku!");
             }
