@@ -37,6 +37,9 @@ export class ProfilLekaraComponent implements OnInit{
     preuzmiPodatke(){
         this.pacijentService.getKorisnika().subscribe({
             next: korisnik=>{this.korisnik=korisnik;
+                if(this.korisnik == null) {
+                    this.router.navigate(["/welcome"]);
+                  }
                 this.lekarService.findLekar(this.korisnik.id).subscribe({
                    next:lekar=>{this.lekar=lekar;}
                 })

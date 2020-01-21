@@ -6,12 +6,18 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LekarServces{
-        
+          
     private pacijetUrl:string;
 
     constructor(private http:HttpClient){
       //  this.pacijetUrl='http//localhost:8080/api/pacijenti';
     }
+
+
+    getLekaraKlinike() : Observable<Lekar> {
+      return this.http.get<Lekar>("/api/login/vratiUlogovanog");
+    }
+
   
     public findAll(): Observable<Lekar[]> {
       return this.http.get<Lekar[]>("/api/lekari");

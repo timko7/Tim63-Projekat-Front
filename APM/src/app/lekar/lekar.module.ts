@@ -9,6 +9,10 @@ import { HomePageLekarComponent } from './home-page-lekar-component';
 import { ProfilLekaraComponent } from './profil-lekara.component';
 import { PacijentiKlinikeComponent } from './pacijenti-klinike.component';
 import { LoginServces } from '../login/login.services';
+import { RadniKalendarComponent } from './radniKalendar/radni-kalendar.component';
+import { GodOdmorOdsustvoComponent } from './godOdmorOdsustvo/god-odmor-odsustvo.component';
+import { ZapocinjanjePregledaIUnosInfComponent } from './zapocinjanjePregledaIUnosInf/zapocinjanje-pregleda-iunos-inf.component';
+import { ZakazivanjePregledaOperacijaComponent } from './zakazivanjePregledaOperacija/zakazivanje-pregleda-operacija.component';
 
 
 
@@ -18,7 +22,11 @@ import { LoginServces } from '../login/login.services';
 
     HomePageLekarComponent,
     ProfilLekaraComponent,
-    PacijentiKlinikeComponent
+    PacijentiKlinikeComponent,
+    RadniKalendarComponent,
+    GodOdmorOdsustvoComponent,
+    ZapocinjanjePregledaIUnosInfComponent,
+    ZakazivanjePregledaOperacijaComponent
 
   ],
   imports: [
@@ -27,6 +35,10 @@ import { LoginServces } from '../login/login.services';
       { path: 'lekar', component: HomePageLekarComponent },
       { path: 'lekar/pacijentiKlinike', component: PacijentiKlinikeComponent },
       { path: 'lekar/profilLekara', component: ProfilLekaraComponent },
+      { path: 'lekar/radniKalendar', component: RadniKalendarComponent },
+      { path: 'lekar/godisnjiOdmorOdsustvo', component: GodOdmorOdsustvoComponent },
+      { path: 'lekar/zapocinjanjePregledaIUnosInf', component: ZapocinjanjePregledaIUnosInfComponent },
+      { path: 'lekar/zakazivanjePregledaOperacija', component: ZakazivanjePregledaOperacijaComponent },
     ]),
     FormsModule
   ],

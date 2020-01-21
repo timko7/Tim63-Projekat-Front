@@ -32,6 +32,9 @@ export class WelcomeComponent implements OnInit {
                 else if(this.korisnik.uloga=="ADMINKLINIKE"){
                     this.router.navigate(["/adminKlinike"]);
                 }
+                else if(this.korisnik.uloga=="LEKAR"){
+                    this.router.navigate(["/lekar"]);
+                }
             }   
         }
     });
