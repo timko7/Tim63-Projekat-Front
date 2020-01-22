@@ -13,6 +13,7 @@ import { LekarComponent } from '../lekar/lekar-components';
 import { LekarServces } from '../lekar/lekar.services';
 import { PreglediComponent } from './pregledi/pregledi.component';
 import { PreglediService } from './pregledi/pregledi.service';
+import { ZahteviZaOdsustvoComponent } from './zahteviZaOdsustvo/zahtevi-za-odsustvo.component';
 
 
 
@@ -23,7 +24,8 @@ import { PreglediService } from './pregledi/pregledi.service';
     SaleComponent,
     LekarComponent,
     ProfilKlinikeComponent,
-    PreglediComponent
+    PreglediComponent,
+    ZahteviZaOdsustvoComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { PreglediService } from './pregledi/pregledi.service';
       { path: 'adminKlinike/lekari', component: LekarComponent },
       { path: 'adminKlinike/sale', component: SaleComponent },
       { path: 'adminKlinike/pregledi', component: PreglediComponent },
+      { path: 'adminKlinike/zahteviZaOdsustvo', component: ZahteviZaOdsustvoComponent },
     ]),
     FormsModule
   ],

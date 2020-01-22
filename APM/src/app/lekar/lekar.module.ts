@@ -13,6 +13,7 @@ import { RadniKalendarComponent } from './radniKalendar/radni-kalendar.component
 import { GodOdmorOdsustvoComponent } from './godOdmorOdsustvo/god-odmor-odsustvo.component';
 import { ZapocinjanjePregledaIUnosInfComponent } from './zapocinjanjePregledaIUnosInf/zapocinjanje-pregleda-iunos-inf.component';
 import { ZakazivanjePregledaOperacijaComponent } from './zakazivanjePregledaOperacija/zakazivanje-pregleda-operacija.component';
+import { OdsustvoServices } from './godOdmorOdsustvo/odsustvo.services';
 
 
 
@@ -44,7 +45,7 @@ import { ZakazivanjePregledaOperacijaComponent } from './zakazivanjePregledaOper
   ],
   providers: [
 
-    LekarServces,LoginServces
+    LekarServces,LoginServces, OdsustvoServices
     
   ]
 })

@@ -5,6 +5,7 @@ import { AdminKlinikeService } from './profil-amina-klinike.services';
 import { LoginServces } from '../login/login.services';
 import { Klinika } from '../klinika/klinika';
 import { KlinikaServices } from '../klinika/klinika.services';
+import { Korisnik } from '../login/Korisnik';
 
 @Component({
   templateUrl: './profil-admina-klinike.component.html',
@@ -16,6 +17,7 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
 
   adminiKlinike: IAdminKlinike[] = [];
   admin : IAdminKlinike ;
+  adminKorisnik: Korisnik;
   klinika: Klinika;
   request: Request;
 
@@ -60,6 +62,33 @@ export class ProfilAdminaKlinikeComponent implements OnInit {
             });
         }
       });
+
+      /*this.loginService.getKorisnika().subscribe({
+        next: adminK => {
+          this.adminKorisnik = adminK;
+          if(this.adminKorisnik == null || this.adminKorisnik.uloga != "ADMINKLINIKE") {
+            this.loginService.IzlogujSe(this.request).subscribe(result=>this._router.navigate(["/welcome"]));
+          }
+          this.adminService.getAdminKlinike().subscribe({
+            next: admin => {
+              this.admin = admin;
+              console.log('Admin', this.admin);
+              if(this.admin == null) {
+                this._router.navigate(["/welcome"]);
+              }
+              if(this.admin.prviPutLogovan == true) {
+                alert("Prvi put ste ulogovani!\nMolimo promenite lozinku!");
+              }
+              this.klinikaServis.getKlinika(this.admin.idKlinike).subscribe({
+                next: klinika => {
+                  this.klinika = klinika;
+                }
+              });
+          }
+        })
+      }
+    });*/
+
       //this.admin = this.adminiKlinike[0];
       
   }
