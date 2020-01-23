@@ -40,14 +40,10 @@ export class GodOdmorOdsustvoComponent implements OnInit {
 
   onSubmit() {
     this.mozesDodati = true;
-    //this.pregledZaDodati.trajanjePregleda = 
-    //this.pregledZaDodati.datumVreme
     this.zahtevZaPoslati.idLekara = this.lekarKlinike.id;
     this.zahtevZaPoslati.idKlinike = this.lekarKlinike.idKlinike;
     this.zahtevZaPoslati.prihvacen = false;
     this.zahtevZaPoslati.obradjen = false;
-    //this.pregledZaDodati.cena
-    //this.pregledZaDodati.datumVreme = this.toDateString(this.izabraniDatum);
     let datumVremeSada: string = this.toDateString(new Date);
 
     if (datumVremeSada > this.zahtevZaPoslati.datumPocetka || datumVremeSada > this.zahtevZaPoslati.datumZavrsetka || this.zahtevZaPoslati.datumZavrsetka < this.zahtevZaPoslati.datumPocetka) {
@@ -55,21 +51,10 @@ export class GodOdmorOdsustvoComponent implements OnInit {
       this.mozesDodati = false;
     }
 
-    /*if ( this.pregledZaDodati.trajanjePregleda < 1 ||
-        this.pregledZaDodati.idTipa == undefined ||
-        this.pregledZaDodati.idSale == undefined ||
-        this.pregledZaDodati.idLekara == undefined ||
-        this.pregledZaDodati.cena < 0 ) {
-          alert("Neispravno uneti podaci!!\nPonovite unos!");
-          this.mozesDodati = false;
-          console.log("DATE now: ", this.toDateString(new Date));
-          console.log("Izabrani date: ", this.pregledZaDodati.datumVreme);
-      }*/
-
     if (this.mozesDodati == true) {
       this.odsustvoService.posalji(this.zahtevZaPoslati).subscribe();
-      //alert("Uspesno definisan pregled!!");
-      //this.refresh();
+      alert("Zahtev uspesno poslat!!");
+      this._router.navigate(['/lekar']);    
     }
   }
 

@@ -6,6 +6,7 @@ import { OdsustvoServices } from 'src/app/lekar/godOdmorOdsustvo/odsustvo.servic
 import { AdminKlinikeService } from '../profil-amina-klinike.services';
 import { Lekar } from 'src/app/lekar/lekar';
 import { LekarServces } from 'src/app/lekar/lekar.services';
+import { OdbijanjeZahtevaOdsustvo } from 'src/app/lekar/godOdmorOdsustvo/odbijanjeZahtevaOdsustvo';
 
 @Component({
   selector: 'pm-zahtevi-za-odsustvo',
@@ -59,6 +60,7 @@ export class ZahteviZaOdsustvoComponent implements OnInit {
 
 
   odobriZahtev(zahtev: ZahtevOdsustvo) {
+    this.zahteviService.odobriZahtev(zahtev).subscribe(() => window.location.reload());
     // vamo pozovi odobrenje zahteva .....
     this.mozesDaObradis = false;
   }
@@ -66,7 +68,12 @@ export class ZahteviZaOdsustvoComponent implements OnInit {
 
   odbiZahtev(zahtev: ZahtevOdsustvo) {
     if (this.razlogOdbijanja.replace(/\s/g, '').length) {
+      let raz: OdbijanjeZahtevaOdsustvo = new OdbijanjeZahtevaOdsustvo();
+      raz.zahtevOdsustvo = zahtev;
+      raz.razlogOdbijanja = this.razlogOdbijanja;
+      this.zahteviService.odbiZahtev(raz).subscribe(() => window.location.reload());
       // vamo pozovi odbijanje zahteva
+      this.mozesDaObradis = false;
     }
     else {
       alert('Nije unet razlog za odbijanje zahteva!');

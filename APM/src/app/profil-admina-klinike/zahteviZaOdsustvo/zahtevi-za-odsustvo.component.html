@@ -7,6 +7,7 @@
                *ngIf='sviZahtevi'>
           <thead>
             <tr>
+              <th>Id zahteva</th>  
               <th>Ime lekara</th>
               <th>Prezime lekara</th>
               <th>Datum pocetka</th>
@@ -15,6 +16,7 @@
           </thead>
           <tbody>
             <tr *ngFor='let zahtev of sviZahtevi; index as i'>
+              <td>{{ zahtev.id }}</td>
               <td>{{ izabraniLekari[i].ime }}</td>
               <td>{{ izabraniLekari[i].prezime }}</td>
               <td>{{ zahtev.datumPocetka }}</td>
@@ -35,12 +37,14 @@
         <table class='table'>
           <thead>
             <tr>
+              <th>Id zahteva</th>
               <th>Datum pocetka</th>
               <th>Datum zavrsetka</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>{{ zahtevZaObradu.id }}</td>
               <td>{{ zahtevZaObradu.datumPocetka }}</td>
               <td>{{ zahtevZaObradu.datumZavrsetka }}</td>
               <td><button class="btn btn-info" (click) = "odobriZahtev(zahtevZaObradu)">Odobri zahtev</button></td>
