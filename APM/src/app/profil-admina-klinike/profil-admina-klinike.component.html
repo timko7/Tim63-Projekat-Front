@@ -73,7 +73,7 @@
 <div *ngIf='mozesDaMenjasPass'>
     <div class='card'>
         <div class='card-body'>
-            <h3>Promena passworda: <span *ngIf="greskaZaPass" style="color: red;">Stara i nova lozinka se ne poklapaju!</span></h3> 
+            <h3>Promena passworda: <span *ngIf="greskaZaPass" style="color: red;">Molimo unesite validnu staru lozinku!</span></h3> 
             <div class='table-responsive'>
                 <form class="formAdmin" (ngSubmit) = "onSubmitIzmeniPass()" #izmenaPassForm="ngForm">
                     <label>Unesite stari password</label>
