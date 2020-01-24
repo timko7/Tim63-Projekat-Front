@@ -1,4 +1,4 @@
-import { ZahtevOdsustvo } from './ZahtevOdsustvo';
+import { ZahtevOdsustvo } from './zahtevOdsustvo';
 
 export class OdbijanjeZahtevaOdsustvo {
     zahtevOdsustvo: ZahtevOdsustvo;

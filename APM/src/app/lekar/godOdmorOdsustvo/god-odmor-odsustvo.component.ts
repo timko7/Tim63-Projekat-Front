@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ZahtevOdsustvo } from './ZahtevOdsustvo';
+import { ZahtevOdsustvo } from './zahtevOdsustvo';
 import { LekarServces } from '../lekar.services';
 import { Lekar } from '../lekar';
 import { OdsustvoServices } from './odsustvo.services';

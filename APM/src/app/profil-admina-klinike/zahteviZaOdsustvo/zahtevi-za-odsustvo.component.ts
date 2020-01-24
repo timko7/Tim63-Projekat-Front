@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ZahtevOdsustvo } from 'src/app/lekar/godOdmorOdsustvo/ZahtevOdsustvo';
 import { IAdminKlinike } from '../admin-klinike';
 import { Router } from '@angular/router';
-import { OdsustvoServices } from 'src/app/lekar/godOdmorOdsustvo/odsustvo.services';
 import { AdminKlinikeService } from '../profil-amina-klinike.services';
 import { Lekar } from 'src/app/lekar/lekar';
 import { LekarServces } from 'src/app/lekar/lekar.services';
 import { OdbijanjeZahtevaOdsustvo } from 'src/app/lekar/godOdmorOdsustvo/odbijanjeZahtevaOdsustvo';
+import { OdsustvoServices } from 'src/app/lekar/godOdmorOdsustvo/odsustvo.services';
+import { ZahtevOdsustvo } from 'src/app/lekar/godOdmorOdsustvo/zahtevOdsustvo';
 
 @Component({
   selector: 'pm-zahtevi-za-odsustvo',
