@@ -1,1 +1,26 @@
-<p>god-odmor-odsustvo works!</p>
+<div class="card">
+    <div class="card-body">
+        <h2>Kreiranje zahteva za godisnji odmor ili odsustvo</h2>
+        <form class="dodajZahtev" (ngSubmit) = "onSubmit()" #pregledForm="ngForm">            
+            <label class="label">Datum pocetka: </label>
+            <input type="datetime-local" required name="datumIVremeP" #datumIVremeP="ngModel" [(ngModel)] = "zahtevZaPoslati.datumPocetka" [value]="datumPocetka"> {{ zahtevZaPoslati.datumPocetka }}
+
+            <br>
+            <label class="label">Datum zavrsetka: </label>
+            <input type="datetime-local" required name="datumIVremeZ" #datumIVremeZ="ngModel" [(ngModel)] = "zahtevZaPoslati.datumZavrsetka" [value]="datumZavrsetka"> {{ zahtevZaPoslati.datumZavrsetka }}
+
+            <br>
+            <input type="submit" value="Posalji zahtev" class="btn btn-info">
+        </form>
+
+        <h3>Poslati zahtevi</h3>
+        <h3>Odobreni zahtevi</h3>
+    </div>
+    
+</div>
+
+<div class='card'>
+    <div class='card-body'>
+        <button (click)='onBack()' class="btn btn-info">Nazad</button>
+    </div>
+</div>

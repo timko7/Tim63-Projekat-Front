@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IAdminKlinike } from './admin-klinike';
+import { Korisnik } from '../login/Korisnik';
 
 
 @Injectable()
@@ -17,6 +18,13 @@ export class AdminKlinikeService {
         let param: any = {'id': 0};
         //this.http.get(`${ApiUrl}`, {params: param})
         return this._http.get<IAdminKlinike>("/api/login/vratiUlogovanog");
+    }
+
+    getAdminKlinikeUlogovanogKorisnik() : Observable<Korisnik> {
+        
+        let param: any = {'id': 0};
+        //this.http.get(`${ApiUrl}`, {params: param})
+        return this._http.get<Korisnik>("/api/login/vratiUlogovanog");
     }
 
     promeniLozinku(idAdmina: number, noviPassword: string) {

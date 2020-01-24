@@ -1,0 +1,69 @@
+
+<div class='card'>
+    <div class='card-body'>
+      <h2>Svi pristigli zahtevi lekara za odsustvo/godisnji:</h2>
+      <div class='table-responsive'>
+        <table class='table'
+               *ngIf='sviZahtevi'>
+          <thead>
+            <tr>
+              <th>Id zahteva</th>  
+              <th>Ime lekara</th>
+              <th>Prezime lekara</th>
+              <th>Datum pocetka</th>
+              <th>Datum zavrsetka</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let zahtev of sviZahtevi; index as i'>
+              <td>{{ zahtev.id }}</td>
+              <td>{{ izabraniLekari[i].ime }}</td>
+              <td>{{ izabraniLekari[i].prezime }}</td>
+              <td>{{ zahtev.datumPocetka }}</td>
+              <td>{{ zahtev.datumZavrsetka }}</td>
+              <td><button *ngIf="!zahtev.obradjen" class="btn btn-info" (click) = "obradiZahtev(zahtev)">Obradi zahtev</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+
+<div *ngIf='mozesDaObradis'>
+    <div class='card'>
+      <div class='card-body'>
+        <h3>Obrada zahteva:</h3>
+  
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Id zahteva</th>
+              <th>Datum pocetka</th>
+              <th>Datum zavrsetka</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ zahtevZaObradu.id }}</td>
+              <td>{{ zahtevZaObradu.datumPocetka }}</td>
+              <td>{{ zahtevZaObradu.datumZavrsetka }}</td>
+              <td><button class="btn btn-info" (click) = "odobriZahtev(zahtevZaObradu)">Odobri zahtev</button></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="text" placeholder="Razlog odbijanja" required name="razlog" #razlog="ngModel" [(ngModel)] = "razlogOdbijanja"></td>
+                <td><button class="btn btn-info" (click) = "odbiZahtev(zahtevZaObradu)">Odbi zahtev</button></td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+<div class='card'>
+    <div class='card-body'>
+      <button (click)='onBack()' class="btn btn-info">Nazad</button>
+    </div>
+</div>
