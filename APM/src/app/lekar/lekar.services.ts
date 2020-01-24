@@ -49,4 +49,9 @@ export class LekarServces{
       return this.http.put("/api/lekari/"+lekar.id, lekar);
     }
 
+    promeniLozinku(idLekara: number, noviPassword: string) {
+      return this.http.put("/api/lekari/promeniLozinku/" + idLekara, noviPassword);
+    }
+
+
 }
