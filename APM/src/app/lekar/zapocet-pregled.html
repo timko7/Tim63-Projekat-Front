@@ -1,0 +1,16 @@
+<div>
+
+    <div>
+      Leci se :{{pacijent.ime}}
+    </div>
+  <br>
+  <div><input type="submit" value="Pacijet pregledan" (click)='zavrsiPregled()' class="btn btn-info"></div>
+  <div *ngIf='pregledan'><input type="submit" value="Zakazi novi pregled/operaciju" (click)='zakaziNovi()' class="btn btn-info"></div>
+<div *ngIf='ponovoPregled'>
+    Odaberite datum i satnicu za novi pregled
+    <input type="datetime-local" required  [(ngModel)] = "izabraniDatum">
+    <div><input type="submit" value="Kreiraj zahtev" (click)='kreirajZahtev()' class="btn btn-info"></div>
+</div>
+</div>
+  
+  

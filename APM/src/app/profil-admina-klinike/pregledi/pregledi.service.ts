@@ -19,5 +19,17 @@ export class PreglediService {
   public getPregledeKlinikePoTipu(idTipa:number):Observable<Pregled[]>{
     return this._http.get<Pregled[]>("/api/pregledi/vratiPoTipu/" +idTipa );
   }
+  public zakaziPregled(pregled:Pregled){
+    return this._http.put("/api/pregledi/zakaziPregled/" +pregled.id,pregled );
+  }
+  public nadjiPoLekaru(id:number): Observable<Pregled[]> {
+    return this._http.get<Pregled[]>("/api/pregledi/vratiPoLekaru/"+id);
+  }
+  public nadjiPoPacijentu(id:number): Observable<Pregled[]> {
+    return this._http.get<Pregled[]>("/api/pregledi/vratiPoPacijentu/"+id);
+  }
+  public promeniOdradjen(pregled:Pregled) {
+    return this._http.put<Pregled>("/api/pregledi/odradiPregled/"+pregled.id,pregled);
+  }
 
 }

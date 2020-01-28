@@ -4,16 +4,19 @@
            *ngIf='lekari'>
       <thead>
         <tr>
+          <th>Termin pregleda</th>
           <th>Ime lekara</th>
           <th>Prezime lekara</th>
+          <th>Ocena lekara</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let pregled of zakazaniPregledi; index as i'>
-          <td *ngIf='pregled.odradjen'>{{ lekari[i].ime }}</td>
-          <td *ngIf='pregled.odradjen'>{{ lekari[i].prezime }}</td>
-         <td *ngIf='pregled.odradjen'><input type="number" name="ocena" #ocena="ngModel" [(ngModel)]="lekari[i].ocena"></td>
-          <td *ngIf='pregled.odradjen'><button class="btn btn-info" (click)='oceni(lekari[i])'>Oceni</button></td>
+        <tr *ngFor='let lekar of lekari;index as i'>
+          <td >{{ datumiPregleda[i] }}</td>
+          <td >{{ lekar.ime }}</td>
+          <td >{{ lekar.prezime }}</td>
+         <td ><input type="number" [(ngModel)]='ocenaLekara'></td>
+          <td ><button class="btn btn-info" (click)='oceni(lekar)'>Oceni</button></td>
         </tr>
       </tbody>
     </table>
@@ -27,16 +30,19 @@
                *ngIf='klinike'>
           <thead>
             <tr>
-              <th>Ime lekara</th>
-              <th>Prezime lekara</th>
+              <th>Termin pregleda</th>
+              <th>Ime klinike</th>
+              <th>Adresa klinike</th>
+              <th>Ocena klinike</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let pregled of zakazaniPregledi; index as i'>
-              <td *ngIf='pregled.odradjen'>{{ klinike[i].ime }}</td>
-              <td *ngIf='pregled.odradjen'>{{ klinike[i].adresa }}</td>
-             <td *ngIf='pregled.odradjen'><input type="number" name="ocena" #ocena="ngModel" [(ngModel)]="klinike[i].ocena"></td>
-              <td *ngIf='pregled.odradjen'><button class="btn btn-info" (click)='oceniKliniku(klinike[i])'>Oceni</button></td>
+            <tr *ngFor='let klinika of klinike;index as i'>
+              <td >{{ datumiPregleda[i] }}</td>
+              <td >{{ klinika.ime }}</td>
+              <td >{{ klinika.adresa }}</td>
+             <td ><input type="number" [(ngModel)]='ocenaKlinike'></td>
+              <td ><button class="btn btn-info" (click)='oceniKliniku(klinika)'>Oceni</button></td>
             </tr>
           </tbody>
         </table>

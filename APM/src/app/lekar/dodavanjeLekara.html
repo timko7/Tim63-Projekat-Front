@@ -111,10 +111,9 @@
                     <td><input type="text" name="broj_osiguranika" #broj_osiguranika="ngModel" [(ngModel)]="lekar.broj_osiguranika"></td>
                 </tr>
                 <tr>
-
                     <td>Radno vreme</td>
-                    <td>Od<input type="number" name="radnoVremeOd" #radnoVremeOd="ngModel" [(ngModel)]="lekar.radnoVremeOd" min="6" max="24" required>
-                        Do<input type="number" name="radnoVremeDo" #radnoVremeDo="ngModel" [(ngModel)]="lekar.radnoVremeDo" min="6" max="24" required>
+                    <td>Od<input type="number" name="radnoVremeOd" #radnoVremeOd="ngModel" [(ngModel)]="lekar.radnoVremeOd" required>
+                        Do<input type="number" name="radnoVremeDo" #radnoVremeDo="ngModel" [(ngModel)]="lekar.radnoVremeDo" required>
                     </td>
                 </tr>
                 <tr>

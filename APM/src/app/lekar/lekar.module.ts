@@ -9,6 +9,10 @@ import { HomePageLekarComponent } from './home-page-lekar-component';
 import { ProfilLekaraComponent } from './profil-lekara.component';
 import { PacijentiKlinikeComponent } from './pacijenti-klinike.component';
 import { LoginServces } from '../login/login.services';
+import { ZapocetPregledComponent } from './zapocet-pregled-component';
+import { PreglediService } from '../profil-admina-klinike/pregledi/pregledi.service';
+import { ZakazaniPregledService } from '../home-page-pacijenta/zakazaniPregled.services';
+import { PreglediComponent } from '../profil-admina-klinike/pregledi/pregledi.component';
 
 
 
@@ -18,7 +22,8 @@ import { LoginServces } from '../login/login.services';
 
     HomePageLekarComponent,
     ProfilLekaraComponent,
-    PacijentiKlinikeComponent
+    PacijentiKlinikeComponent,
+    ZapocetPregledComponent,
 
   ],
   imports: [
@@ -27,12 +32,13 @@ import { LoginServces } from '../login/login.services';
       { path: 'lekar', component: HomePageLekarComponent },
       { path: 'lekar/pacijentiKlinike', component: PacijentiKlinikeComponent },
       { path: 'lekar/profilLekara', component: ProfilLekaraComponent },
+      { path: 'lekar/pacijentiKlinike/zapocetPregled', component: ZapocetPregledComponent },
     ]),
     FormsModule
   ],
   providers: [
 
-    LekarServces,LoginServces
+    LekarServces,LoginServces,PreglediService,ZakazaniPregledService,
     
   ]
 })

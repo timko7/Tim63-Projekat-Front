@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Lekar } from './lekar';
 import { Observable } from 'rxjs';
+import { Zahtev } from './zahtev';
+import { Ocena } from '../home-page-pacijenta/ocena';
 
 
 @Injectable()
@@ -31,12 +33,18 @@ export class LekarServces{
     public getLekarePoTipu(idTipa: number): Observable<Lekar[]> {
       return this.http.get<Lekar[]>("/api/lekari/vratiPoTipu/" + idTipa);
   }
+  public pretraziLekare(zahtev: Zahtev): Observable<Lekar[]> {
+    return this.http.post<Lekar[]>("/api/lekari/pretraziLekarePaVratiKlinike",zahtev);
+}
+public pretraziLekarePonovo(zahtev: Zahtev): Observable<Lekar[]> {
+  return this.http.post<Lekar[]>("/api/lekari/pretraziLekare",zahtev);
+}
 
     public obrisi(lekar: Lekar) {
         return this.http.delete("/api/lekari/" + lekar.id);
     }
-    public oceniLekara(lekar:Lekar){
-      return this.http.put("/api/lekari/oceniLekara/"+lekar.id, lekar);
+    public oceniLekara(ocena:Ocena){
+      return this.http.post("/api/lekari/oceniLekara/"+ocena.idLekara, ocena.ocena);
     }
 
     public update(lekar:Lekar){

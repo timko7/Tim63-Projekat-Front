@@ -31,6 +31,7 @@
     <form class="dodajTip" (ngSubmit) = "onSubmit()" #tipForm="ngForm">
         <label>Naziv tipa</label>
         <input type="text" placeholder="Naziv tipa" required name="naziv" #naziv="ngModel" [(ngModel)] = "tip.nazivTipa">
+        <input type="number" placeholder="Cena tipa" required name="cena" #naziv="ngModel" [(ngModel)] = "tip.cena">
         <input type="submit" value="Dodaj" class="btn btn-info">
     </form>
   </div>
@@ -44,6 +45,7 @@
       <form class="dodajTip" (ngSubmit) = "onSubmitIzmeni()" #tipForm="ngForm">
           <label>Unesite novi naziv tipa</label>
           <input type="text" placeholder="Naziv tipa" required name="nazivIzmena" #nazivIzmena="ngModel" [(ngModel)] = "noviNaziv">
+          <input type="number" placeholder="Cena tipa" required name="cena" #naziv="ngModel" [(ngModel)] = "novaCena">
           <input type="submit" value="Izmeni" class="btn btn-info">
       </form>
     </div>

@@ -1,0 +1,23 @@
+<div class='card-body'>
+    <div class='table-responsive'>
+    <table class='table'
+            *ngIf='zahtevi'>
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Id Pacijenta</th>
+            <th>Id Lekara</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let zahtev of zahtevi'>
+            <td>{{ zahtev.id }}</td>
+            <td>{{ zahtev.idPacijenta }}</td>
+            <td>{{ zahtev.idLekara }}</td>
+            <td><button class="btn btn-info" (click)='odobriZahtev(zahtev)'>OdobriZahtev</button></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</div>

@@ -17,6 +17,7 @@
 </div>
 
 <div *ngIf='dugmeZaPretragu==false'>
+  <h3>Pacijenti koji  su zakazali predefinisane preglede</h3>
 <div class='table-responsive'>
     <table class='table'
            *ngIf='zakazaniPregledi'>
@@ -36,8 +37,11 @@
     </table>
   </div>
 </div>
+<div *ngIf='odgovor' style="color: red;">Pregled je vec odradjen</div>
 
-  <div *ngIf='dugmeZaPretragu==true'>
+
+ 
+<div *ngIf='dugmeZaPretragu==true'>
 
  
  <div *ngIf='dodatBroj==false'> 
@@ -52,16 +56,15 @@
            *ngIf='filtriraniPacijenti'>
       <thead>
         <tr>
-          <th>Id pregleda</th>
           <th>Ime pacijenta</th>
           <th>Prezime pacijenta</th>
         </tr>
       </thead>
       <tbody>
-        <tr  *ngFor='let pacijent of filtriraniPacijenti; index1 as ii'>
-          <td>{{pacijent.ime }}</td>
-          <td>{{pacijent.prezime }}</td>
-          <td><button class="btn btn-info" (click)='zapocniPregled(pacijent)'>Zapocni pregled</button></td>
+        <tr  *ngFor='let pregled of filtriraniPacijenti'>
+         
+          <td>{{pregled.ime }}</td>
+          <td>{{pregled.prezime }}</td>
         </tr>
       </tbody>
     </table>

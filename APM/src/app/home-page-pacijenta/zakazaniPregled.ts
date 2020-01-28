@@ -1,6 +1,6 @@
 export class zakazaniPregled {
     id: number;
-    datumVreme: string;
+    datumVreme: Date;
     trajanjePregleda: number;
     idTipa: number;
     idSale: number;
@@ -9,4 +9,6 @@ export class zakazaniPregled {
     cena: number;
     idPacijenta:number;
     odradjen: boolean;
+    rezervisan:boolean;
+    odobren:boolean;
 }

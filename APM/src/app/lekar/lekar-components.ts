@@ -68,7 +68,7 @@ export class LekarComponent implements OnInit {
         this.lekar.adresa="";
         this.lekar.telefon="";
         this.lekar.broj_osiguranika="";
-        this.refresh();
+      //  this.refresh();
       }
 
     refresh(): void {

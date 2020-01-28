@@ -8,7 +8,11 @@
       <select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip">
         <option *ngFor="let tip of tipoviKlinika" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
       </select>
+      <div class='col-md-2'>Pretrazi po datumu</div>
+    <input type="datetime-local" required  [(ngModel)] = "izabraniDatum">
     </div>
+    
+    
     <input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()' class="btn btn-info">
     <br><br>
     <h2>Lista svih klinika:</h2>
@@ -25,12 +29,14 @@
           <tr>
             <th>Naziv</th>
             <th>Adresa</th>
+            <th *ngIf='dugmeZaPretraguKlinike'>Cena pregleda</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor='let klinika of filtriraneKlinike'>
             <td>{{ klinika.ime }}</td>
             <td>{{ klinika.adresa }}</td>
+            <td *ngIf='dugmeZaPretraguKlinike'>{{ izabraniTip.cena }}</td>
             <td><button class="btn btn-info" (click)='idiNaListuLekara(klinika)'>Vidi lekare klinike</button></td>
             <td><button class="btn btn-info" (click)='idiNaPreglede(klinika)'>Vidi unapred definisane preglede klinike</button></td>
           </tr>
@@ -57,6 +63,10 @@
               <div class='col-md-4'><select name="nameTip"  #nameTip="ngModel" [(ngModel)] = "izabraniTip2">
                 <option *ngFor="let tip of tipoviIzabraneKlinike" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
             </select></div>
+            </div>
+            <div class="row" *ngIf='!dugmeZaPretraguKlinike'>
+              <div class='col-md-2'>Pretrazi po datumu</div>
+              <div class='col-md-4'> <input type="datetime-local" required name="datumVreme" #datumVreme="ngModel" [(ngModel)] = "izabraniDatum2" [value]="datumVreme"></div>
             </div>
           <div><input type="submit" value="Pretrazi" (click)='pretraziLekare()' class="btn btn-info"></div>
     </div>
@@ -125,12 +135,12 @@
         <td>{{ izabraneSale[i].naziv }}</td>
         <td>{{ izabraniTipovi[i].nazivTipa }}</td>
         <td>{{ pregled.cena }}</td>
-        <td><button class="btn btn-info" (click)='rezervisiPregled(pregled)'>Rezervisi</button></td>
+        <td ><button  class="btn btn-info" (click)='rezervisiPregled(pregled)'>Rezervisi</button></td>
       </tr>
     </tbody>
   </table>
 </div>
-
+<div *ngIf='pregledRezervisan'>Pregled je vec rezervisan</div>
 
 <div class='card'>
   <div class='card-body'>

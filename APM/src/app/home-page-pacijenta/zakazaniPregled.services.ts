@@ -26,6 +26,9 @@ export class ZakazaniPregledService{
         public nadjiPoLekaru(id:number): Observable<zakazaniPregled[]> {
           return this.http.get<zakazaniPregled[]>("/api/zakazaniPregledi/uzmiZakazane/"+id);
         }
+        public nadjiPoKlinici(id:number): Observable<zakazaniPregled[]> {
+          return this.http.get<zakazaniPregled[]>("/api/zakazaniPregledi/uzmiZakazanePoKlinici/"+id);
+        }
 
         public promeniOdradjen(pregled:zakazaniPregled) {
           return this.http.put<zakazaniPregled>("/api/zakazaniPregledi/zakaziPregled/"+pregled.id,pregled);

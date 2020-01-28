@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import{Pacijent} from '../pacijent/pacijent';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras, Data } from '@angular/router';
 import { LoginServces } from '../login/login.services';
 import { zakazaniPregled } from '../home-page-pacijenta/zakazaniPregled';
 import { ZakazaniPregledService } from '../home-page-pacijenta/zakazaniPregled.services';
 import { Korisnik } from '../login/Korisnik';
 import { VirtualTimeScheduler } from 'rxjs';
 import { PacijentServces } from '../pacijent/pacijent.services';
+import { PreglediService } from '../profil-admina-klinike/pregledi/pregledi.service';
+import { Pregled } from '../profil-admina-klinike/pregledi/pregled';
+import { ZapocetPregledComponent } from './zapocet-pregled-component';
 
 
 @Component({
@@ -17,16 +20,18 @@ import { PacijentServces } from '../pacijent/pacijent.services';
 
 export class PacijentiKlinikeComponent implements OnInit{
 
-    zakazaniPregledi:zakazaniPregled[]=[];
+    zakazaniPregledi:Pregled[]=[];
     filtriraniPacijenti:Pacijent[]=[];
 
     korisnik:Korisnik;
     request:Request;
     pacijentiZaPregled:Pacijent[]=[];
-    pom:zakazaniPregled[]=[];
+
+    pom:Pregled[]=[];
     pomZaPacijente:Pacijent[]=[];
     index:number=0;
     index1:number=0;
+    indexOstali:number=0;
     listaId:number[]=[];
 
     _imePacijenta:string;
@@ -37,11 +42,13 @@ export class PacijentiKlinikeComponent implements OnInit{
     dugmeZaPretragu:boolean=false;
     dodatBroj:boolean=false;
     pomPacijent:Pacijent;
+    odgovor:boolean=false;
         
-    constructor(private route:ActivatedRoute,private router:Router,private paciejentService:PacijentServces,private zkaraniPregledService:ZakazaniPregledService,
-        private loginService:LoginServces ){
+    constructor(private route:ActivatedRoute,private router:Router,private paciejentService:PacijentServces,private pregledService:PreglediService,
+        private loginService:LoginServces,private zakazaniPreglediService:ZakazaniPregledService ){
             this.korisnik=new Korisnik();
             this.pomPacijent=new Pacijent();
+
         
     }   
     get imePacijenta():string{
@@ -82,7 +89,7 @@ export class PacijentiKlinikeComponent implements OnInit{
 
     ngOnInit(): void {
         this.loginService.getKorisnika().subscribe({next: korisnik=>{
-            this.zkaraniPregledService.nadjiPoLekaru(korisnik.id).subscribe({
+            this.pregledService.nadjiPoLekaru(korisnik.id).subscribe({
                 next: pregledi=>{this.zakazaniPregledi=pregledi;
                 
 
@@ -93,25 +100,30 @@ export class PacijentiKlinikeComponent implements OnInit{
                     }
                 }
             });
-        }
-          });
-          this.index=this.zakazaniPregledi.length;
-          this.filtriraniPacijenti=this.pacijentiZaPregled;
-          console.log(this.pacijentiZaPregled);
-    }
-   
-
-    zapocniPregled(pregled:zakazaniPregled){
-        pregled.odradjen=true;
-        this.zkaraniPregledService.promeniOdradjen(pregled).subscribe();
-    }
-
-   /* nadjiPregled(pacijent:Pacijent){
-        this.zkaraniPregledService.nadjiPoPacijentu(pacijent.id).subscribe({
-            next:pregled=>{this.pomPregled=pregled;}
+          }
         });
 
-}*/
+        
+
+        this.index=this.zakazaniPregledi.length;
+          this.filtriraniPacijenti=this.pacijentiZaPregled;
+          console.log(this.pacijentiZaPregled);
+          console.log(this.indexOstali);
+          console.log(this.index);
+    }
+   
+    
+    zapocniPregled(pregled:Pregled){
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            special: JSON.stringify(pregled)
+          }
+        };
+        this.router.navigate(["/lekar/pacijentiKlinike/zapocetPregled"],navigationExtras);
+     
+    }
+
+  
     kraj(){
         this.router.navigate(["/login"]);
     }
@@ -133,9 +145,6 @@ export class PacijentiKlinikeComponent implements OnInit{
                      
          
         }
-       
-        
-         
          
           this.imePacijenta="";
           this.prezimePacijenta="";

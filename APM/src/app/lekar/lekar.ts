@@ -1,3 +1,5 @@
+import { Time } from '@angular/common';
+
 export class Lekar{
     id: number;
     ime:string;
@@ -14,6 +16,5 @@ export class Lekar{
     slobodan: boolean;
     idKlinike: number;
     idTipa: number;
-    ocena:number;
     srednjaOcena:number;
 }
