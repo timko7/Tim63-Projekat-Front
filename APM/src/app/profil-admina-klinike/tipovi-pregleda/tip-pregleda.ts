@@ -3,4 +3,5 @@ export class ITipPregleda {
     nazivTipa: string;
     slobodan: boolean;
     idKlinike: number;
+    cena:number;
 }

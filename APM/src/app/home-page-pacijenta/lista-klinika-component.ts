@@ -14,6 +14,7 @@ import { zakazaniPregled } from './zakazaniPregled';
 import { LoginServces } from '../login/login.services';
 import { ZakazaniPregledService } from './zakazaniPregled.services';
 import { Korisnik } from '../login/Korisnik';
+import { Zahtev } from '../lekar/zahtev';
 
 
 
@@ -30,18 +31,22 @@ export class ListaKlinikaComponent implements OnInit{
   tipoviIzabraneKlinike:ITipPregleda[]=[];
   izabraniTip:ITipPregleda;
   izabraniTip2:ITipPregleda;
-  izabrainDatum:string;
   preglediZaLekre:Pregled[]=[];
   lekarPregleda:Lekar;
+  zahtev:Zahtev;
 
   prikaziLekare:boolean=false;
   tipIzabran:boolean=false;
+  datumIzabran:boolean=false;
+
   filtriraneKlinike:Klinika[];
   izabranaKlinika:Klinika;
   _imeKlinike:string;
   _adresaKlinike:string;
   _imeLekara:string;
   _prezimeLekara:string;
+  _izabraniDatum:Date;
+  _izabraniDatum2:Date;
   dugmeZaPretragu:boolean=false;
   dugmeZaPretraguKlinike:boolean=false;
   dugmeZaPrikazPregleda:boolean=false;
@@ -55,11 +60,13 @@ export class ListaKlinikaComponent implements OnInit{
 
   zakazaniPregled:zakazaniPregled;
   korisnik:Korisnik;
+  pregledRezervisan:boolean=false;
 
+  pomLekari:Lekar[]=[];
 
   constructor(private _router: Router,private klinikaService:KlinikaServices,private lekarServices:LekarServces,
     private pregledService:PreglediService,private tipService:TipoviService,private salaService:SalaServices,private loginService:LoginServces,
-    private zakazaniPregledi:ZakazaniPregledService) {
+    private zakazniPregledService:ZakazaniPregledService) {
 
     this.izabranaKlinika=new Klinika();
     this.izabraniTip=new ITipPregleda();
@@ -69,6 +76,7 @@ export class ListaKlinikaComponent implements OnInit{
     this.izabraniTipovi.splice(0,this.izabraniTipovi.length);
       this.zakazaniPregled=new zakazaniPregled();
       this.korisnik=new Korisnik();
+      this.zahtev=new Zahtev();
   
     
   }
@@ -76,6 +84,13 @@ export class ListaKlinikaComponent implements OnInit{
   
   get imeKlinike():string{
     return this._imeKlinike;
+  }
+
+  get izabraniDatum():Date{
+    return this._izabraniDatum;
+  }
+  get izabraniDatum2():Date{
+    return this._izabraniDatum2;
   }
 
   set imeKlinike(value:string){
@@ -90,6 +105,13 @@ export class ListaKlinikaComponent implements OnInit{
   set adresaKlinike(value:string){
     this._adresaKlinike=value;
     //this.filtriraneKlinike= this.imeKlinike ? this.filtriraj(this.imeKlinike):this.klinike;
+  }
+  set izabraniDatum(value:Date){
+    this._izabraniDatum=value;
+    this.datumIzabran=true;
+  }
+  set izabraniDatum2(value:Date){
+    this._izabraniDatum2=value;
   }
 
   filtriraj(poljeZaFilter:string):Klinika[]{
@@ -139,24 +161,35 @@ export class ListaKlinikaComponent implements OnInit{
     this.dugmeZaPretraguKlinike=true;
     this.tipIzabran=true;
     console.log(this.izabraniTip);
-      for(let klinika of this.klinike){
-       if(klinika.adresa==this.adresaKlinike && klinika.id==this.izabraniTip.idKlinike)
-            this.pom.push(klinika);
-            this.filtriraneKlinike=this.pom;
-      }
-      this.adresaKlinike="";
-      this.pom=[];
-  }
-
+   
+      this.zahtev.adresa=this.adresaKlinike;
+      this.zahtev.termin=this.izabraniDatum;
+      this.zahtev.idTipa=this.izabraniTip.id;
+      this.zahtev.idKlinike=this.izabraniTip.idKlinike;
+      console.log(this.zahtev);
+      this.lekarServices.pretraziLekare(this.zahtev).subscribe({
+        next:lekari=>{this.pomLekari=lekari;
+       console.log(this.pomLekari);
+       for(let lekar of lekari){
+         this.klinikaService.getKlinika(lekar.idKlinike).subscribe({
+           next:klinika=>{this.pom.push(klinika);
+          this.filtriraneKlinike=this.pom;
+        console.log(this.filtriraneKlinike);}
+         });
+       }
+        }
+      });
+    }
+  
   idiNaListuLekara(klinika:Klinika):void{
     this.prikaziLekare=true;
     this.izabranaKlinika=klinika;
   
-        if(this.tipIzabran==true){
-          this.lekarServices.getLekarePoTipu(this.izabraniTip.id).subscribe({
+        if(this.tipIzabran==true && this.datumIzabran==true){
+         /* this.lekarServices.getLekarePoTipu(this.izabraniTip.id).subscribe({
             next:lekari=>{this.lekari=lekari;}
           })
-       
+       */this.lekari=this.pomLekari;
   console.log(this.lekari);
 }
 else{ 
@@ -185,7 +218,7 @@ else{
 pretraziLekare(){
   this.dugmeZaPretragu=true;
   //this.lekarPretrage=new Lekar();
-  if(this.tipIzabran){
+  if(this.tipIzabran && this.datumIzabran){
     for(let lekar of this.lekari){
        if(lekar.ime==this.imeLekara && lekar.prezime==this.prezimeLekara)
           this.lekariPretrage.push(lekar);
@@ -196,11 +229,20 @@ pretraziLekare(){
     this.imeLekara="";
     this.prezimeLekara="";
   }else{
-    for(let lekar of this.lekari){
+    this.zahtev.ime=this.imeLekara;
+    this.zahtev.prezime=this.prezimeLekara;
+    this.zahtev.termin=this.izabraniDatum2;
+    this.zahtev.idTipa=this.izabraniTip2.id;
+    this.zahtev.idKlinike=this.izabraniTip2.idKlinike;
+    this.lekarServices.pretraziLekarePonovo(this.zahtev).subscribe({
+      next:lekari=>{this.pomLekari=lekari;
+      this.lekari=this.pomLekari;}
+    })
+    /*for(let lekar of this.lekari){
       if(lekar.ime==this.imeLekara && lekar.prezime==this.prezimeLekara && lekar.idTipa==this.izabraniTip2.id)
          this.lekariPretrage.push(lekar);
-        this.lekari=this.lekariPretrage;
-        console.log(this.lekari);
+        this.lekari=this.lekariPretrage;*/
+       // console.log(this.lekari);
    }
    //this.dugmeZaPretragu=false;
    this.imeLekara="";
@@ -209,7 +251,7 @@ pretraziLekare(){
   }
    
     
-    }
+    
 
     nazad(){
       this.lekariPretrage=[];
@@ -254,35 +296,34 @@ pretraziLekare(){
     this.index=this.preglediKlinike.length;
  
     }
+
+
 rezervisiPregled(pregled:Pregled){
-  this.zakazaniPregled.idKlinike=pregled.idKlinike;
-  this.zakazaniPregled.idLekara=pregled.idLekara;
-  this.zakazaniPregled.idSale=pregled.idSale;
-  this.zakazaniPregled.idTipa=pregled.idTipa;
-  this.zakazaniPregled.datumVreme=pregled.datumVreme;
-  this.zakazaniPregled.trajanjePregleda=pregled.trajanjePregleda;
-  this.zakazaniPregled.cena=pregled.cena;
   
+  pregled.idPacijenta=this.korisnik.id;
+  this.pregledService.zakaziPregled(pregled).subscribe(result=>alert("rezervisan pregled "),
+  err=>this.pregledRezervisan=true);
   
-  this.zakazaniPregled.idPacijenta=this.korisnik.id;
-  this.zakazaniPregledi.save(this.zakazaniPregled).subscribe();
-  alert("rezervisan pregled ");
-
-
 }
 
 rezervisiPregledPekoLekara(lekar:Lekar){
+  if(this.dugmeZaPretraguKlinike){
   this.zakazaniPregled.idKlinike=lekar.idKlinike;
   this.zakazaniPregled.idLekara=lekar.id;
-  //this.zakazaniPregled.idSale=pregled.idSale;
   this.zakazaniPregled.idTipa=lekar.idTipa;
-  //this.zakazaniPregled.datumVreme=pregled.datumVreme;
-  //this.zakazaniPregled.trajanjePregleda=pregled.trajanjePregleda;
-  //this.zakazaniPregled.cena=pregled.cena;
-  
-  
+  this.zakazaniPregled.datumVreme=this.izabraniDatum;
+  this.zakazaniPregled.cena=this.izabraniTip.cena;
   this.zakazaniPregled.idPacijenta=this.korisnik.id;
-  this.zakazaniPregledi.save(this.zakazaniPregled).subscribe();
+  this.zakazniPregledService.save(this.zakazaniPregled).subscribe();
+}else{
+  this.zakazaniPregled.idKlinike=lekar.idKlinike;
+  this.zakazaniPregled.idLekara=lekar.id;
+  this.zakazaniPregled.idTipa=lekar.idTipa;
+  this.zakazaniPregled.datumVreme=this.izabraniDatum2;
+  this.zakazaniPregled.cena=this.izabraniTip2.cena;
+  this.zakazaniPregled.idPacijenta=this.korisnik.id;
+  this.zakazniPregledService.save(this.zakazaniPregled).subscribe();
+}
   alert("rezervisan pregled ");
 }
     

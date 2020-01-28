@@ -19,6 +19,7 @@ export class TipoviPregledaComponent implements OnInit {
   mozesDaMenjas: boolean = false;
   nazivTipaKojiSeMenja: string = "";
   noviNaziv: string;
+  novaCena:number;
 
 
   constructor(private _router: Router, private tipoviService: TipoviService, private adminKlinikeService: AdminKlinikeService) {
@@ -70,6 +71,7 @@ export class TipoviPregledaComponent implements OnInit {
 
   izmeniTip(tip: ITipPregleda): void {
     this.noviNaziv = "";
+    this.novaCena=null;
     this.mozesDaMenjas = true;
     this.nazivTipaKojiSeMenja = tip.nazivTipa.slice(0, tip.nazivTipa.length);
     this.tipZaIzmenu = tip;
@@ -77,6 +79,7 @@ export class TipoviPregledaComponent implements OnInit {
 
   onSubmitIzmeni() {
     this.tipZaIzmenu.nazivTipa = this.noviNaziv;
+    this.tipZaIzmenu.cena=this.novaCena;
     this.tipoviService.izmeni(this.tipZaIzmenu).subscribe();
     this.mozesDaMenjas = false;
     this.nazivTipaKojiSeMenja = "";

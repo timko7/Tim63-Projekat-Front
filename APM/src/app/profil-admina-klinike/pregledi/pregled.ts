@@ -7,4 +7,7 @@ export class Pregled {
     idLekara: number;
     idKlinike:number;
     cena: number;
+    idPacijenta:number;
+    odradjen:boolean;
+    rezervisan:boolean;
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Klinika } from './klinika';
+import { Ocena } from '../home-page-pacijenta/ocena';
 
 
 
@@ -27,8 +28,8 @@ export class KlinikaServices{
         public vratiKlinikuPoId(id:number){
           return this.http.get<Klinika>("/api/klinike/" +id);
         }
-        public oceniKliniku(k:Klinika){
-          return this.http.put("/api/klinike/oceniKliniku/"+k.id, k);
+        public oceniKliniku(ocena:Ocena){
+          return this.http.post("/api/klinike/oceniKliniku/"+ocena.idKlinike, ocena.ocena);
         }
 
     
