@@ -8,7 +8,8 @@ import { Korisnik } from '../login/Korisnik';
 
 @Component({
 
-    templateUrl : './profil-lekara.html'
+    templateUrl : './profil-lekara.html',
+    styleUrls: ['./profil-lekara.component.css']
 
 })
 
@@ -20,7 +21,11 @@ export class ProfilLekaraComponent implements OnInit{
     lekar:Lekar;
     request:Request;
 
-   
+    mozesDaMenjasPass: boolean = false;
+    stariPassword: string;
+    noviPassword: string;
+    promenioPass: boolean = false;
+    greskaZaPass: boolean = false;
 
     ngOnInit(): void {
        
@@ -37,8 +42,16 @@ export class ProfilLekaraComponent implements OnInit{
     preuzmiPodatke(){
         this.pacijentService.getKorisnika().subscribe({
             next: korisnik=>{this.korisnik=korisnik;
+                if(this.korisnik == null) {
+                    this.router.navigate(["/welcome"]);
+                  }
                 this.lekarService.findLekar(this.korisnik.id).subscribe({
-                   next:lekar=>{this.lekar=lekar;}
+                   next:lekar=>{
+                       this.lekar=lekar;
+                       if(this.lekar.prviPutLogovan == true) {
+                            alert("Prvi put ste ulogovani!\nMolimo promenite lozinku!");
+                       }
+                    }
                 })
             }
         })
@@ -47,6 +60,8 @@ export class ProfilLekaraComponent implements OnInit{
     }
     izmeni(novi:Lekar){
         this.mozesDaMenjas=true;
+        this.mozesDaMenjasPass = false;
+        this.greskaZaPass = false;
         this.lekartZaIzmenu=novi;
 
     }
@@ -54,12 +69,49 @@ export class ProfilLekaraComponent implements OnInit{
         this.lekarService.update(this.lekartZaIzmenu).subscribe();
         this.mozesDaMenjas=false;
     }
+
+    izmeniPassword() {
+        this.mozesDaMenjasPass = true;
+        this.mozesDaMenjas = false;
+        this.greskaZaPass = false;
+        this.stariPassword = "";
+        this.noviPassword = "";
+    }
+
+
+    onSubmitIzmeniPass() {
+      if(this.stariPassword == this.lekar.password) {
+          this.lekarService.promeniLozinku(this.lekar.id, this.noviPassword).subscribe(()=>this.krajIzmene());
+          this.mozesDaMenjasPass = false;
+      } else {
+        this.greskaZaPass = true;
+      }
+    }
+
+    krajIzmene(): void {
+        this.promenioPass = true;
+        alert("Promenili ste lozinku.\nMolimo ulogujte se ponovo.")
+        this.logOut();
+    }
+
+
+
     
     logOut(){
-        this.pacijentService.IzlogujSe(this.request).subscribe(result=>this.kraj());
+        if(this.lekar.prviPutLogovan == true && this.promenioPass == false) {
+            alert("Prvi put ste ulogovani i niste promenili lozinku!\nMolimo promenite lozinku!");
+        } 
+        else {
+            this.pacijentService.IzlogujSe(this.request).subscribe(result=>this.kraj());
+        }
+
     }
     kraj(){
-        this.router.navigate(["/login"]);
+        window.location.reload();
+        this.router.navigate(["/welcome"]);
+    }
+    ponisti() {
+        this.mozesDaMenjas = false;
     }
   
 }

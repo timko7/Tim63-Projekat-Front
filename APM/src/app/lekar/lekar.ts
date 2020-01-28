@@ -17,4 +17,5 @@ export class Lekar{
     idKlinike: number;
     idTipa: number;
     srednjaOcena:number;
+    prviPutLogovan: boolean;
 }

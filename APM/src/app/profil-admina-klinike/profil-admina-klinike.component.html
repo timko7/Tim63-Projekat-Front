@@ -8,7 +8,11 @@
             <a [routerLink]="['./lekari']">Lekari</a>
             <a [routerLink]="['./sale']">Sale</a>
             <a [routerLink]="['./pregledi']">Pregledi</a>
+
             <a [routerLink]="['./listaZahtevaZaPreglede']">Lista zahteva za preglede</a>
+
+            <a [routerLink]="['./zahteviZaOdsustvo']">Zahtevi za godisnji odmor ili odsustvo</a>
+
             <a href="#" (click)='odjaviSe()'>Odjavi se</a>
         </div>
     </div>
@@ -73,7 +77,7 @@
 <div *ngIf='mozesDaMenjasPass'>
     <div class='card'>
         <div class='card-body'>
-            <h3>Promena passworda: <span *ngIf="greskaZaPass" style="color: red;">Stara i nova lozinka se ne poklapaju!</span></h3> 
+            <h3>Promena passworda: <span *ngIf="greskaZaPass" style="color: red;">Molimo unesite validnu staru lozinku!</span></h3> 
             <div class='table-responsive'>
                 <form class="formAdmin" (ngSubmit) = "onSubmitIzmeniPass()" #izmenaPassForm="ngForm">
                     <label>Unesite stari password</label>

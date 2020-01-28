@@ -1,7 +1,29 @@
-<h1>Dobro dosli</h1>
+<div class="card">
+    <div class="card-body">
+        <h1>Pocetna stranica lekara klinike</h1>
+        <h3>Dobro dosli: "{{lekar.ime}} {{lekar.prezime}}"</h3>
+        <div class="topnav">
+            <a [routerLink]="['./profilLekara']">Moj profil</a>
+            <a [routerLink]="['./pacijentiKlinike']">Lista svih pacijenata</a>
+            <a [routerLink]="['./radniKalendar']">Radni kalendar</a>
+            <a [routerLink]="['./godisnjiOdmorOdsustvo']">Kreiraj godisnji odmor/odusustvo</a>
+            <a [routerLink]="['./zapocinjanjePregledaIUnosInf']">Zapocinjanje pregleda, i unos informacija o pregledu</a>
+            <a [routerLink]="['./zakazivanjePregledaOperacija']">Zakazivanje pregleda/operacija</a>
+
+            <!-- <a href="#" (click)='odjaviSe()'>Odjavi se</a> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<h1>Dobro dosli</h1>
 <div class="topnav">
     <a [routerLink]="['./pacijentiKlinike']">Lista svih pacijenata</a>
     <a [routerLink]="['./profilLekara']">Vas profil</a>
-    <!-- <a [routerLink]="['./lekari']">Lekari</a> -->
-   <!-- <a [routerLink]="['./sale']">Sale</a>-->
-  </div>
+     <a [routerLink]="['./lekari']">Lekari</a> -->
+   <!-- <a [routerLink]="['./sale']">Sale</a>
+  </div>-->
