@@ -34,15 +34,21 @@ export class OceniComponent implements OnInit{
     ocena:Ocena;
     _ocenaLekara:number;
     _ocenaKlinike:number;
+    dugmeOceniLekara:boolean=false;
+    dugmeOceniKliniku:boolean=false;
 
     datumiPregleda:string[]=[];
+    izabraniLekar:Lekar;
+    izabranaKlinika:Klinika;
  
 
     constructor(private route:ActivatedRoute,private router:Router,private lekarService:LekarServces,private zkaraniPregledService:ZakazaniPregledService,
         private loginService:LoginServces,private klinikaService:KlinikaServices,private preglediService:PreglediService ){
             this.korisnik=new Korisnik();
             this.ocena=new Ocena();
-        
+            this.izabraniLekar=new Lekar();
+            this.izabranaKlinika=new Klinika();
+
     }   
 
     ngOnInit(): void {
@@ -85,15 +91,29 @@ export class OceniComponent implements OnInit{
       }
 
     oceni(lekar:Lekar){
-        this.ocena.idLekara=lekar.id;
-        this.ocena.ocena=this.ocenaLekara;
-        this.lekarService.oceniLekara(this.ocena).subscribe();
+        this.dugmeOceniLekara=true;
+        this.izabraniLekar=lekar;
     }
+ oceniLekara(){
+    this.ocena.idLekara=this.izabraniLekar.id;
+    this.ocena.ocena=this.ocenaLekara;
+    this.lekarService.oceniLekara(this.ocena).subscribe();
+    this.ocenaLekara=null;
+    this.dugmeOceniLekara=false;
 
+}
     oceniKliniku(k:Klinika){
-        this.ocena.idKlinike=k.id;
+       this.dugmeOceniKliniku=true;
+       this.izabranaKlinika=k;
+        
+    }
+    posaljiOcenuKlinike(){
+        this.ocena.idKlinike=this.izabranaKlinika.id;
         this.ocena.ocena=this.ocenaKlinike;
         this.klinikaService.oceniKliniku(this.ocena).subscribe();
+        this.ocenaKlinike=null;
+        this.dugmeOceniKliniku=false;
+    
     }
 
     kraj(){

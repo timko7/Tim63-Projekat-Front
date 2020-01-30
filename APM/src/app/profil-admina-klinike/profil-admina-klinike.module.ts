@@ -31,7 +31,7 @@ import { ZahteviZaOdsustvoComponent } from './zahteviZaOdsustvo/zahtevi-za-odsus
     ProfilKlinikeComponent,
     PreglediComponent,
 
-    ListaZahtevaComponent
+    ListaZahtevaComponent,
 
     ZahteviZaOdsustvoComponent
 
