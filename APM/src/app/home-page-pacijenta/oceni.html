@@ -15,12 +15,16 @@
           <td >{{ datumiPregleda[i] }}</td>
           <td >{{ lekar.ime }}</td>
           <td >{{ lekar.prezime }}</td>
-         <td ><input type="number" [(ngModel)]='ocenaLekara'></td>
           <td ><button class="btn btn-info" (click)='oceni(lekar)'>Oceni</button></td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+
+<div *ngIf='dugmeOceniLekara==true'>
+ Ocenite lekara: {{izabraniLekar.ime}}  <input type="number" [(ngModel)]='ocenaLekara'> 
+ <button class="btn btn-info" (click)='oceniLekara()'>Oceni</button>
 </div>
 
 
@@ -41,10 +45,14 @@
               <td >{{ datumiPregleda[i] }}</td>
               <td >{{ klinika.ime }}</td>
               <td >{{ klinika.adresa }}</td>
-             <td ><input type="number" [(ngModel)]='ocenaKlinike'></td>
               <td ><button class="btn btn-info" (click)='oceniKliniku(klinika)'>Oceni</button></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+    <div *ngIf='dugmeOceniKliniku==true'>
+      Ocenite kliniku: {{izabranaKlinika.ime}}  <input type="number" [(ngModel)]='ocenaKlinike'> 
+      <button class="btn btn-info" (click)='posaljiOcenuKlinike()'>Oceni</button>
+     </div>

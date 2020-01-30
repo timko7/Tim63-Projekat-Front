@@ -8,6 +8,7 @@ import { Korisnik } from '../login/Korisnik';
 import { VirtualTimeScheduler } from 'rxjs';
 import { Pregled } from '../profil-admina-klinike/pregledi/pregled';
 import { PacijentServces } from '../pacijent/pacijent.services';
+import { PreglediService } from '../profil-admina-klinike/pregledi/pregledi.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class ZapocetPregledComponent implements OnInit{
 
     
         
-    constructor(private route: ActivatedRoute, private router: Router,private pacijentService:PacijentServces,private zakazaniPreglediService:ZakazaniPregledService){
+    constructor(private route: ActivatedRoute, private router: Router,private pacijentService:PacijentServces,private zakazaniPreglediService:ZakazaniPregledService,
+      private pregledService:PreglediService){
         this.route.queryParams.subscribe(params => {
             if (params && params.special) {
               this.data = JSON.parse(params.special);
@@ -59,9 +61,10 @@ export class ZapocetPregledComponent implements OnInit{
 
     zavrsiPregled(){
          this.pregledan=true;
-          //  this.pregledService.promeniOdradjen(pregled).subscribe(result=>alert("Pregled odradjen"),
+           this.pregledService.promeniOdradjen(this.pregled).subscribe(result=>alert("Pregled odradjen"));
+              }//,
        // err=>this.odgovor=true);
-    }
+
     zakaziNovi(){
         this.ponovoPregled=true;
 
