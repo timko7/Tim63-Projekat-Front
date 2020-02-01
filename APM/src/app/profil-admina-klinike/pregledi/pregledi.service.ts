@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pregled } from './pregled';
 import { Observable } from 'rxjs';
+import { zakazaniPregled } from 'src/app/home-page-pacijenta/zakazaniPregled';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class PreglediService {
   }
   public promeniOdradjen(pregled:Pregled) {
     return this._http.put<Pregled>("/api/pregledi/odradiPregled/"+pregled.id,pregled);
+  }
+
+  public promeniOdradjenZahtev(pregledZahtev:zakazaniPregled) {
+    return this._http.put<zakazaniPregled>("/api/zakazaniPregledi/odradiZahtev/" + pregledZahtev.id, pregledZahtev);
   }
 
 }

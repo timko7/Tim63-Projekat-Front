@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Sala } from './sala';
 import { Observable } from 'rxjs';
+import { stringify } from 'querystring';
+import { KalendarZauzecaSale } from './kalendarZauzecaSale';
+import { SalaITermin } from '../lista-zahteva/salaITermin';
 
 @Injectable()
 export class SalaServices {
@@ -29,4 +32,17 @@ export class SalaServices {
     public izmeni(sala: Sala) {     // /api/sale/izmeni/{naziv}
         return this._http.put("/api/sale/izmeni/" + sala.naziv, sala);
     }
+
+    public pretraziSaluPoNazivuDatumuKlinike(idKlinike: number, naziv: string, datum: string): Observable<Sala[]> {
+        return this._http.get<Sala[]>("/api/sale/pretrazi/" + "/" + idKlinike + "/" + naziv + "/" + datum);
+    }
+
+    public getKalendarZauzecaSale(idSale: number): Observable<KalendarZauzecaSale[]> {
+        return this._http.get<KalendarZauzecaSale[]>("/api/kalendarSale/getPoIdSale/" + idSale);
+    }
+
+    public getPrviSledeciSlobodan(idKlinike: number, datum: string): Observable<SalaITermin> {
+        return this._http.get<SalaITermin>("/api/sale/prvaSlobodna/" + idKlinike + "/"+ datum);
+    }
+
 }

@@ -7,7 +7,7 @@ import { SalaServices } from '../sale/sala.services';
 import { LekarServces } from 'src/app/lekar/lekar.services';
 import { AdminKlinikeService } from '../profil-amina-klinike.services';
 import { IAdminKlinike } from '../admin-klinike';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ZakazaniPregledService } from 'src/app/home-page-pacijenta/zakazaniPregled.services';
 import { zakazaniPregled } from 'src/app/home-page-pacijenta/zakazaniPregled';
 
@@ -37,7 +37,17 @@ export class ListaZahtevaComponent implements OnInit {
     
   }
   odobriZahtev(zahtev:zakazaniPregled){
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(zahtev)
+      }
+    };
+    this._router.navigate(["/adminKlinike/listaZahtevaZaPreglede/odobrenjeZahteva"], navigationExtras);
 
+  }
+
+  onBack(): void {
+    this._router.navigate(['/adminKlinike']);
   }
 
 
