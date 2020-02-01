@@ -18,6 +18,8 @@ import { ListaZahtevaComponent } from './lista-zahteva/lista-zahteva-components'
 import { ZakazaniPregledService } from '../home-page-pacijenta/zakazaniPregled.services';
 
 import { ZahteviZaOdsustvoComponent } from './zahteviZaOdsustvo/zahtevi-za-odsustvo.component';
+import { OdobrenjeZahtevaComponent } from './lista-zahteva/odobrenje-zahteva.component';
+import { PregledOdZahtevaServices } from './lista-zahteva/pregled-od-zahteva.service';
 
 
 
@@ -33,7 +35,9 @@ import { ZahteviZaOdsustvoComponent } from './zahteviZaOdsustvo/zahtevi-za-odsus
 
     ListaZahtevaComponent,
 
-    ZahteviZaOdsustvoComponent
+    ZahteviZaOdsustvoComponent,
+
+    OdobrenjeZahtevaComponent
 
   ],
   imports: [
@@ -47,6 +51,7 @@ import { ZahteviZaOdsustvoComponent } from './zahteviZaOdsustvo/zahtevi-za-odsus
       { path: 'adminKlinike/pregledi', component: PreglediComponent },
 
       { path: 'adminKlinike/listaZahtevaZaPreglede', component: ListaZahtevaComponent },
+      { path: 'adminKlinike/listaZahtevaZaPreglede/odobrenjeZahteva', component: OdobrenjeZahtevaComponent },
 
       { path: 'adminKlinike/zahteviZaOdsustvo', component: ZahteviZaOdsustvoComponent },
 
@@ -59,6 +64,7 @@ import { ZahteviZaOdsustvoComponent } from './zahteviZaOdsustvo/zahtevi-za-odsus
     SalaServices,
     LekarServces,
     PreglediService,
+    PregledOdZahtevaServices,
     ZakazaniPregledService
   ]
 })

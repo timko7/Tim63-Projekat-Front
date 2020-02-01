@@ -1,0 +1,124 @@
+<div class='card'>
+    <div class='card-body'>
+        <h3>Odobrenje zahteva:</h3>
+        <label>Datum i vreme zahteva:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.datumVreme}}</b></label>
+        <br>
+
+        <label>Id zahteva:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.id}}</b></label>
+        <br>
+
+        <label>Id klinike:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.idKlinike}}</b></label>
+        <br>
+
+        <label>Id lekara:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.idLekara}}</b></label>
+        <br>
+
+        <label>Id pacijenta:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.idPacijenta}}</b></label>
+        <br>
+
+        <label>Id tipa:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.idTipa}}</b></label>
+        <br>
+
+        <label>Trajanje pregleda:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.trajanjePregleda}}</b></label>
+        <br>
+
+        <label>Cena:</label>&nbsp;
+        <label><b>{{zahtevZaOdobriti.cena}}</b></label>
+        <br>
+        
+    </div>
+</div>
+
+
+
+
+<div class='card'>
+    <div class='card-body'>
+        <h3>Sve sale:</h3>
+
+        <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <!-- <th>ID sale</th> -->
+                        <th>Naziv sale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let sala of sveSale'>
+                        <!-- <td>{{ sala.id }}</td> -->
+                        <td>{{ sala.naziv }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class='card'>
+    <div class='card-body'>
+        <h3>Pretraga sale za pregled:</h3>
+        <label>Pretrazi po nazivu i datumu:</label>&nbsp;<br>
+        <input type="text" [(ngModel)]='nazivSalePretrazivanje'>&nbsp;
+        <input type="datetime-local" required name="datumIVreme" #datumIVreme="ngModel" [(ngModel)]='datumSalePretrazivanjeStr' [value] = 'datumSalePretrazivanjeStr'>
+        <br>
+        <button (click)='pretraziSale()' class="btn btn-info">Pretrazi</button> <span *ngIf="nepronadjeneSale" style="color: red;">Nije pronadjena nijedna sala!</span>
+        
+        <table class='table'>
+            <thead>
+                <tr>
+                    <!-- <th>ID sale</th> -->
+                    <th>Naziv sale</th>
+                    <th>Kalendar zauzeca sale</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let sala of pretrazeneSale'>
+                    <!-- <td>{{ sala.id }}</td> -->
+                    <td>{{ sala.naziv }}</td>
+                    <td>
+                        <table class="table" style="border: solid rgb(4, 2, 85); border-width: 1.5px;">
+                            <thead>
+                                <tr>
+                                    <th>Datum od</th>
+                                    <th>Datum do</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let kalendarSale of kalendarZauzecaSale'>
+                                    <td>{{ kalendarSale.datumOd }}</td>
+                                    <td>{{ kalendarSale.datumDo }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <input type="button" value="Izaberi salu" class="btn btn-info" (click)='izaberiSalu(sala)'>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="isIzabranaSala">
+            <p>Izabrana je sala: '{{ izabranaSala.naziv }}'. Mozete napraviti pregled.</p>
+            <input type="button" value="Napravi pregled" class="btn btn-info" (click)='napraviPregled()'>
+        </div>
+
+        <button class="btn btn-info" (click) = 'prviSledeciSlobodan()'>Prvi sledeci slobodan termin</button>
+        
+        <div *ngIf='kliknutoPrviSlobodan'>
+            <h4>Prvi sledeci slobodan termin: '{{ prvaSalaITermin.datum }}', u sali: '{{ prvaSalaITermin.sala.naziv }}'.</h4>
+            <button class="btn btn-info" (click) = 'izaberiPrviSledeciSlobodan()'>Napravi pregled od ovog termina</button>
+        </div>
+
+    </div>
+</div>
+
+
