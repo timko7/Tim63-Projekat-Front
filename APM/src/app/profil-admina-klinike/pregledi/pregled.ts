@@ -1,6 +1,6 @@
 export class Pregled {
     id: number;
-    datumVreme: string;
+    datumVreme: Date;
     trajanjePregleda: number;
     idTipa: number;
     idSale: number;

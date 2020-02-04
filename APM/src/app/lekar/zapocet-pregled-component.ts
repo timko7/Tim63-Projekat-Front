@@ -9,6 +9,7 @@ import { VirtualTimeScheduler } from 'rxjs';
 import { Pregled } from '../profil-admina-klinike/pregledi/pregled';
 import { PacijentServces } from '../pacijent/pacijent.services';
 import { PreglediService } from '../profil-admina-klinike/pregledi/pregledi.service';
+import { PregledOdZahtevaServices } from '../profil-admina-klinike/lista-zahteva/pregled-od-zahteva.service';
 
 
 @Component({
@@ -26,11 +27,13 @@ export class ZapocetPregledComponent implements OnInit{
     ponovoPregled:boolean=false;
     zahtev:zakazaniPregled;
     _izabraniDatum:Date;
+    _trajanjePregleda:number;
+    postojiTrajanje:boolean=false;
 
     
         
     constructor(private route: ActivatedRoute, private router: Router,private pacijentService:PacijentServces,private zakazaniPreglediService:ZakazaniPregledService,
-      private pregledService:PreglediService){
+      private pregledService:PreglediService,private preglediOdZahtevaService:PregledOdZahtevaServices){
         this.route.queryParams.subscribe(params => {
             if (params && params.special) {
               this.data = JSON.parse(params.special);
@@ -45,6 +48,11 @@ export class ZapocetPregledComponent implements OnInit{
 
     ngOnInit(): void {
         this.pregled=this.data;
+        
+        if(this.pregled.trajanjePregleda!=0){
+          this.postojiTrajanje=true;
+        }
+       
      console.log(this.pregled);
      this.pacijentService.vratiKorisnika(this.pregled.idPacijenta).subscribe({
          next:pacijent=>{this.pacijent=pacijent}
@@ -59,9 +67,28 @@ export class ZapocetPregledComponent implements OnInit{
        
       }
 
+      get trajanjePregleda():number{
+        return this._trajanjePregleda;
+      }
+    
+      set trajanjePregleda(value:number){
+        this._trajanjePregleda=value;
+       
+      }
+
     zavrsiPregled(){
-         this.pregledan=true;
-           this.pregledService.promeniOdradjen(this.pregled).subscribe(result=>alert("Pregled odradjen"));
+      
+      if(this.postojiTrajanje==true){
+      this.pregledan=true;
+      this.pregledService.promeniOdradjen(this.pregled).subscribe(result=>alert("Pregled odradjen"));
+    }
+    else{
+      this.pregled.trajanjePregleda=this.trajanjePregleda;
+      this.pregled.odradjen=true;
+      this.preglediOdZahtevaService.promeniOdradjen(this.pregled).subscribe(result=>alert("Pregled zavrsen"));
+      this.trajanjePregleda=null;
+      this.pregledan=true;
+    }
               }//,
        // err=>this.odgovor=true);
 

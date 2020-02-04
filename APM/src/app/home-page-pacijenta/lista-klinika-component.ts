@@ -15,7 +15,7 @@ import { LoginServces } from '../login/login.services';
 import { ZakazaniPregledService } from './zakazaniPregled.services';
 import { Korisnik } from '../login/Korisnik';
 import { Zahtev } from '../lekar/zahtev';
-
+import { Time } from '@angular/common';
 
 
 @Component({
@@ -63,6 +63,8 @@ export class ListaKlinikaComponent implements OnInit{
   pregledRezervisan:boolean=false;
 
   pomLekari:Lekar[]=[];
+  terminiLekara:Array<number[]>=[];
+  izabraniTermin:number;
 
   constructor(private _router: Router,private klinikaService:KlinikaServices,private lekarServices:LekarServces,
     private pregledService:PreglediService,private tipService:TipoviService,private salaService:SalaServices,private loginService:LoginServces,
@@ -77,6 +79,7 @@ export class ListaKlinikaComponent implements OnInit{
       this.zakazaniPregled=new zakazaniPregled();
       this.korisnik=new Korisnik();
       this.zahtev=new Zahtev();
+      
   
     
   }
@@ -176,31 +179,46 @@ export class ListaKlinikaComponent implements OnInit{
           this.filtriraneKlinike=this.pom;
         console.log(this.filtriraneKlinike);}
          });
+         
        }
         }
       });
+      
     }
   
   idiNaListuLekara(klinika:Klinika):void{
     this.prikaziLekare=true;
     this.izabranaKlinika=klinika;
+    this.terminiLekara=[];
   
         if(this.tipIzabran==true && this.datumIzabran==true){
          /* this.lekarServices.getLekarePoTipu(this.izabraniTip.id).subscribe({
             next:lekari=>{this.lekari=lekari;}
           })
        */this.lekari=this.pomLekari;
+      for(let lekar of this.lekari){
+        this.lekarServices.vratiTermine(lekar.id,this.izabraniDatum).subscribe({
+          next:termini=>{this.terminiLekara.push(termini);
+            console.log(this.terminiLekara);
+            console.log(this.terminiLekara[0]);
+          }
+        });
+      }
   console.log(this.lekari);
+  this.index=this.terminiLekara.length;
+
 }
 else{ 
    
   //this.lekarPretrage=new Lekar();
   this.lekariPretrage=[];
+  this.terminiLekara=[];
    this.klinikaService.vratiKliniku(this.izabranaKlinika).subscribe({
      next: klinika => {
         this.lekarServices.getLekare(this.izabranaKlinika.id).subscribe({
           next: lekari => {
             this.lekari = lekari;
+         
           }
         });
         this.tipService.getTipovi(this.izabranaKlinika.id).subscribe({
@@ -210,25 +228,38 @@ else{
         })
       }
     });
-
+    this.index=this.terminiLekara.length;
 
 }
        
 }
 pretraziLekare(){
   this.dugmeZaPretragu=true;
+  this.terminiLekara=[];
   //this.lekarPretrage=new Lekar();
   if(this.tipIzabran && this.datumIzabran){
     for(let lekar of this.lekari){
        if(lekar.ime==this.imeLekara && lekar.prezime==this.prezimeLekara)
           this.lekariPretrage.push(lekar);
          this.lekari=this.lekariPretrage;
+         
          console.log(this.lekari);
+    }
+    for(let lekar of this.lekari){
+      this.lekarServices.vratiTermine(lekar.id,this.izabraniDatum).subscribe({
+        next:termini=>{this.terminiLekara.push(termini);
+          console.log(this.terminiLekara);
+          console.log(this.terminiLekara[0]);
+          this.index=this.terminiLekara.length;
+        }
+      });
     }
     //this.dugmeZaPretragu=false;
     this.imeLekara="";
     this.prezimeLekara="";
+   
   }else{
+    this.terminiLekara=[];
     this.zahtev.ime=this.imeLekara;
     this.zahtev.prezime=this.prezimeLekara;
     this.zahtev.termin=this.izabraniDatum2;
@@ -236,17 +267,25 @@ pretraziLekare(){
     this.zahtev.idKlinike=this.izabraniTip2.idKlinike;
     this.lekarServices.pretraziLekarePonovo(this.zahtev).subscribe({
       next:lekari=>{this.pomLekari=lekari;
-      this.lekari=this.pomLekari;}
+      this.lekari=this.pomLekari;
+      for(let lekar of this.lekari){
+        this.lekarServices.vratiTermine(lekar.id,this.izabraniDatum2).subscribe({
+          next:termini=>{this.terminiLekara.push(termini);
+            console.log(this.terminiLekara);
+            console.log(this.terminiLekara[0]);
+            this.index=this.terminiLekara.length;
+          }
+        });
+      }
+    }
     })
-    /*for(let lekar of this.lekari){
-      if(lekar.ime==this.imeLekara && lekar.prezime==this.prezimeLekara && lekar.idTipa==this.izabraniTip2.id)
-         this.lekariPretrage.push(lekar);
-        this.lekari=this.lekariPretrage;*/
-       // console.log(this.lekari);
+     console.log(this.lekari);
+      
    }
    //this.dugmeZaPretragu=false;
    this.imeLekara="";
    this.prezimeLekara="";
+  
 
   }
    
@@ -255,12 +294,15 @@ pretraziLekare(){
 
     nazad(){
       this.lekariPretrage=[];
+      this.terminiLekara=[];
       this.klinikaService.vratiKliniku(this.izabranaKlinika).subscribe({
         next: klinika => {
   
           this.lekarServices.getLekare(this.izabranaKlinika.id).subscribe({
             next: lekari => {
               this.lekari = lekari;
+
+           
             }
           });
         }
@@ -311,7 +353,7 @@ rezervisiPregledPekoLekara(lekar:Lekar){
   this.zakazaniPregled.idKlinike=lekar.idKlinike;
   this.zakazaniPregled.idLekara=lekar.id;
   this.zakazaniPregled.idTipa=lekar.idTipa;
-  this.zakazaniPregled.datumVreme=this.izabraniDatum;
+  this.zakazaniPregled.datumVreme=this.napraviDatum();
   this.zakazaniPregled.cena=this.izabraniTip.cena;
   this.zakazaniPregled.idPacijenta=this.korisnik.id;
   this.zakazniPregledService.save(this.zakazaniPregled).subscribe();
@@ -319,12 +361,40 @@ rezervisiPregledPekoLekara(lekar:Lekar){
   this.zakazaniPregled.idKlinike=lekar.idKlinike;
   this.zakazaniPregled.idLekara=lekar.id;
   this.zakazaniPregled.idTipa=lekar.idTipa;
-  this.zakazaniPregled.datumVreme=this.izabraniDatum2;
+  this.zakazaniPregled.datumVreme=this.napraviDatum2();
   this.zakazaniPregled.cena=this.izabraniTip2.cena;
   this.zakazaniPregled.idPacijenta=this.korisnik.id;
   this.zakazniPregledService.save(this.zakazaniPregled).subscribe();
 }
   alert("rezervisan pregled ");
 }
-    
+
+
+napraviDatum():Date{
+  
+  let pom=this.izabraniTermin;
+  if(pom>=10){
+    let vreme=this.izabraniDatum.toString()+'T'+pom.toString()+":00:00.000Z"
+    let datum=new Date(vreme);
+    return datum;
+  }
+  let vreme=this.izabraniDatum.toString()+'T0'+pom.toString()+":00:00.000Z"
+  let datum=new Date(vreme);
+  return datum;
+ 
+}
+napraviDatum2():Date{
+  
+  let pom=this.izabraniTermin;
+  if(pom>=10){
+    let vreme=this.izabraniDatum2.toString()+'T'+pom.toString()+":00:00.000Z"
+    let datum=new Date(vreme);
+    return datum;
+  }
+  let vreme=this.izabraniDatum2.toString()+'T0'+pom.toString()+":00:00.000Z"
+  let datum=new Date(vreme);
+  return datum;
+ 
+}
+      
 }

@@ -15,6 +15,8 @@ import { Ocena } from './ocena';
 import { PreglediService } from '../profil-admina-klinike/pregledi/pregledi.service';
 import { Pregled } from '../profil-admina-klinike/pregledi/pregled';
 import { ThrowStmt } from '@angular/compiler';
+import { PregledOdZahtevaServices } from '../profil-admina-klinike/lista-zahteva/pregled-od-zahteva.service';
+import { PregledOdZahteva } from '../profil-admina-klinike/lista-zahteva/pregled-od-zahteva';
 
 
 @Component({
@@ -26,6 +28,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class OceniComponent implements OnInit{
 
     pregledi:Pregled[]=[];
+    preglediOdZahteva:PregledOdZahteva[]=[];
     korisnik:Korisnik;
     request:Request;
     lekari:Lekar[]=[];
@@ -37,13 +40,14 @@ export class OceniComponent implements OnInit{
     dugmeOceniLekara:boolean=false;
     dugmeOceniKliniku:boolean=false;
 
-    datumiPregleda:string[]=[];
+    datumiPregleda:Date[]=[];
     izabraniLekar:Lekar;
     izabranaKlinika:Klinika;
  
 
     constructor(private route:ActivatedRoute,private router:Router,private lekarService:LekarServces,private zkaraniPregledService:ZakazaniPregledService,
-        private loginService:LoginServces,private klinikaService:KlinikaServices,private preglediService:PreglediService ){
+        private loginService:LoginServces,private klinikaService:KlinikaServices,private preglediService:PreglediService,
+        private pregldediOdZahtevaService:PregledOdZahtevaServices ){
             this.korisnik=new Korisnik();
             this.ocena=new Ocena();
             this.izabraniLekar=new Lekar();
@@ -54,22 +58,31 @@ export class OceniComponent implements OnInit{
     ngOnInit(): void {
         this.loginService.getKorisnika().subscribe({next: korisnik=>{
             this.preglediService.nadjiPoPacijentu(korisnik.id).subscribe({
-                    next:pregledi=>{this.pregledi=pregledi;
-                    
-                        for(let pregled of this.pregledi){
-                            if(pregled.odradjen){
-                            this.lekarService.findLekar(pregled.idLekara).subscribe({
-                                next: lekar=>{this.lekari.push(lekar);}
-                            });
-                    
-                            this.klinikaService.vratiKlinikuPoId(pregled.idKlinike).subscribe({
-                                next: klinika=>{this.klinike.push(klinika);}
-                            });
-                            this.datumiPregleda.push(pregled.datumVreme);
-                        }
-                    }
+                    next:pregledi=>{this.pregledi=pregledi;}
+            })
+            this.pregldediOdZahtevaService.vratiPoPacijentu(korisnik.id).subscribe({
+                next:pregledi=>{this.preglediOdZahteva=pregledi;
+                
+                for(let pregled of this.preglediOdZahteva){
+                    this.pregledi.push(pregled);
                 }
-            });
+                for(let pregled of this.pregledi){
+                    if(pregled.odradjen){
+                    this.lekarService.findLekar(pregled.idLekara).subscribe({
+                        next: lekar=>{this.lekari.push(lekar);}
+                    });
+            
+                    this.klinikaService.vratiKlinikuPoId(pregled.idKlinike).subscribe({
+                        next: klinika=>{this.klinike.push(klinika);}
+                    });
+                    this.datumiPregleda.push(pregled.datumVreme);
+                }
+            }
+        }
+        })  
+                        
+                           
+                
         }
           });
           this.index=this.datumiPregleda.length;

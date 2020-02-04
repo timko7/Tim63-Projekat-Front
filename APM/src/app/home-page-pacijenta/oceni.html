@@ -23,7 +23,7 @@
 </div>
 
 <div *ngIf='dugmeOceniLekara==true'>
- Ocenite lekara: {{izabraniLekar.ime}}  <input type="number" [(ngModel)]='ocenaLekara'> 
+ Ocenite lekara: {{izabraniLekar.ime}}  <input type="number" [(ngModel)]='ocenaLekara' min="1" max="5"> 
  <button class="btn btn-info" (click)='oceniLekara()'>Oceni</button>
 </div>
 
@@ -53,6 +53,6 @@
     </div>
 
     <div *ngIf='dugmeOceniKliniku==true'>
-      Ocenite kliniku: {{izabranaKlinika.ime}}  <input type="number" [(ngModel)]='ocenaKlinike'> 
+      Ocenite kliniku: {{izabranaKlinika.ime}}  <input type="number" [(ngModel)]='ocenaKlinike' min="1" max="5"> 
       <button class="btn btn-info" (click)='posaljiOcenuKlinike()'>Oceni</button>
      </div>

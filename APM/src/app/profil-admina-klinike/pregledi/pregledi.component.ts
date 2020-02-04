@@ -10,6 +10,7 @@ import { IAdminKlinike } from '../admin-klinike';
 import { Pregled } from './pregled';
 import { PreglediService } from './pregledi.service';
 import { Router } from '@angular/router';
+import { Time } from '@angular/common';
 
 @Component({
   templateUrl: './pregledi.component.html',
@@ -33,7 +34,7 @@ export class PreglediComponent implements OnInit {
 
   constructor(private _router:Router, private adminKlinikeService: AdminKlinikeService, private tipService: TipoviService, private saleService: SalaServices, private lekarService: LekarServces, private pregledService: PreglediService) { 
     this.pregledZaDodati = new Pregled();
-    this.pregledZaDodati.datumVreme = this.toDateString(new Date);
+    //this.pregledZaDodati.datumVreme = this.toDateString(new Date);
     this.izabraniTip = new ITipPregleda();
     this.izabranaSala = new Sala();
     this.izabraniLekar = new Lekar();
@@ -79,7 +80,7 @@ export class PreglediComponent implements OnInit {
     //this.pregledZaDodati.datumVreme = this.toDateString(this.izabraniDatum);
     let datumVremeSada: string = this.toDateString(new Date);
 
-    if (datumVremeSada > this.pregledZaDodati.datumVreme) {
+    if (datumVremeSada > this.pregledZaDodati.datumVreme.toString()) {
       alert("Uneti datum i vreme su prosli!\nPonovite unos datuma i vremena!");
       this.mozesDodati = false;
     }
@@ -120,6 +121,5 @@ export class PreglediComponent implements OnInit {
   }
 
   
-  
-
+ 
 }
