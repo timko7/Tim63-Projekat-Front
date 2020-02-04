@@ -10,6 +10,8 @@ import { PacijentServces } from '../pacijent/pacijent.services';
 import { PreglediService } from '../profil-admina-klinike/pregledi/pregledi.service';
 import { Pregled } from '../profil-admina-klinike/pregledi/pregled';
 import { ZapocetPregledComponent } from './zapocet-pregled-component';
+import { PregledOdZahtevaServices } from '../profil-admina-klinike/lista-zahteva/pregled-od-zahteva.service';
+import { PregledOdZahteva } from '../profil-admina-klinike/lista-zahteva/pregled-od-zahteva';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class PacijentiKlinikeComponent implements OnInit{
 
     zakazaniPregledi:Pregled[]=[];
     filtriraniPacijenti:Pacijent[]=[];
+    zakazaniPreglediOdZahteva:PregledOdZahteva[]=[];
 
     korisnik:Korisnik;
     request:Request;
@@ -45,7 +48,7 @@ export class PacijentiKlinikeComponent implements OnInit{
     odgovor:boolean=false;
         
     constructor(private route:ActivatedRoute,private router:Router,private paciejentService:PacijentServces,private pregledService:PreglediService,
-        private loginService:LoginServces,private zakazaniPreglediService:ZakazaniPregledService ){
+        private loginService:LoginServces,private zakazaniPreglediService:ZakazaniPregledService,private pregledOdZahteva:PregledOdZahtevaServices ){
             this.korisnik=new Korisnik();
             this.pomPacijent=new Pacijent();
 
@@ -90,18 +93,28 @@ export class PacijentiKlinikeComponent implements OnInit{
     ngOnInit(): void {
         this.loginService.getKorisnika().subscribe({next: korisnik=>{
             this.pregledService.nadjiPoLekaru(korisnik.id).subscribe({
-                next: pregledi=>{this.zakazaniPregledi=pregledi;
-                
-
-                    for(let pregled of this.zakazaniPregledi){
-                        this.paciejentService.vratiKorisnika(pregled.idPacijenta).subscribe({
-                            next: pacijent=>{this.pacijentiZaPregled.push(pacijent);}
-                        });
-                    }
-                }
+                next: pregledi=>{this.zakazaniPregledi=pregledi}
             });
+            this.pregledOdZahteva.vratiPoLekaru(korisnik.id).subscribe({
+              next:pregldi=>{this.zakazaniPreglediOdZahteva=pregldi;
+                for(let pregled of this.zakazaniPreglediOdZahteva){
+                  this.zakazaniPregledi.push(pregled);
+            }
+
+            for(let pregled of this.zakazaniPregledi){
+              this.paciejentService.vratiKorisnika(pregled.idPacijenta).subscribe({
+                next: pacijent=>{this.pacijentiZaPregled.push(pacijent);
+                console.log("alooo"+this.pacijentiZaPregled);
+              }
+                          });
+            }
+          }
+            })     
           }
         });
+          
+
+          
 
         
 

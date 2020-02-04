@@ -9,7 +9,7 @@
         <option *ngFor="let tip of tipoviKlinika" [ngValue]="tip"> {{ tip.nazivTipa }} </option>
       </select>
       <div class='col-md-2'>Pretrazi po datumu</div>
-    <input type="datetime-local" required  [(ngModel)] = "izabraniDatum">
+    <input type="date" required  [(ngModel)] = "izabraniDatum">
     </div>
     
     
@@ -66,7 +66,7 @@
             </div>
             <div class="row" *ngIf='!dugmeZaPretraguKlinike'>
               <div class='col-md-2'>Pretrazi po datumu</div>
-              <div class='col-md-4'> <input type="datetime-local" required name="datumVreme" #datumVreme="ngModel" [(ngModel)] = "izabraniDatum2" [value]="datumVreme"></div>
+              <div class='col-md-4'> <input type="date" required name="datumVreme" #datumVreme="ngModel" [(ngModel)] = "izabraniDatum2" [value]="datumVreme"></div>
             </div>
           <div><input type="submit" value="Pretrazi" (click)='pretraziLekare()' class="btn btn-info"></div>
     </div>
@@ -86,11 +86,11 @@
                 <th>Adresa</th>
                 <th>Telefon</th>
                 <th>Radno vreme</th>
-                <th>Zauzetost</th>
+                <th>Slobodni termini</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor='let lekar of lekari'>
+            <tr *ngFor='let lekar of lekari;index as i'>
                 <td>{{ lekar.ime }}</td>
                 <td>{{ lekar.prezime }}</td>
                 <td>{{ lekar.email }}</td>
@@ -99,8 +99,10 @@
                 <td>{{ lekar.adresa }}</td>
                 <td>{{ lekar.telefon }}</td>
                 <td>{{ lekar.radnoVremeOd }} -- {{ lekar.radnoVremeDo }}</td>
-                <td>{{ lekar.slobodan ? 'Nema zakazan pregled' : 'Ima zakazan pregled'}}</td>
-                <td><button class="btn btn-info" (click)='rezervisiPregledPekoLekara(lekar)'>Rezervisi</button></td>
+                <td><select name="termin"  #termin="ngModel" [(ngModel)] = "izabraniTermin">
+                  <option *ngFor="let termin of terminiLekara[i]" [ngValue]="termin">{{termin}}</option>
+                </select></td>
+                <td><button class="btn btn-info" (click)='rezervisiPregledPekoLekara(lekar)'>Rezervisi</button></td><!--''-->
             </tr>
             </tbody>
         </table>

@@ -9,4 +9,5 @@ export class PregledOdZahteva {
     cena: number;
     idPacijenta:number;
     odradjen: boolean;
+    rezervisan:boolean;
 }

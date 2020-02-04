@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Lekar } from './lekar';
 import { Observable } from 'rxjs';
 import { Zahtev } from './zahtev';
@@ -10,6 +10,7 @@ import { Ocena } from '../home-page-pacijenta/ocena';
 export class LekarServces{
           
     private pacijetUrl:string;
+    
 
     constructor(private http:HttpClient){
       //  this.pacijetUrl='http//localhost:8080/api/pacijenti';
@@ -44,6 +45,14 @@ export class LekarServces{
 }
 public pretraziLekarePonovo(zahtev: Zahtev): Observable<Lekar[]> {
   return this.http.post<Lekar[]>("/api/lekari/pretraziLekare",zahtev);
+}
+
+
+public vratiTermine(idLekara: number,datum:Date): Observable<number[]> {
+  let params = new HttpParams();
+  params = params.append('datum', datum.toString());
+
+  return this.http.get<number[]>("/api/lekari/vratiTermine/"+idLekara,{params:params});
 }
 
     public obrisi(lekar: Lekar) {
