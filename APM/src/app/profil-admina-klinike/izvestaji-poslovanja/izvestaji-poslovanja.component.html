@@ -1,0 +1,75 @@
+
+<div class='card'>
+    <div class='card-body'>
+        <h1>Izvestaji o poslovanju klinike: <u>'{{ klinika.ime }}'</u></h1>
+
+
+    </div>
+</div>
+
+
+<div class='card'>
+    <div class='card-body'>
+        <h3>Prosecna ocena klinike:</h3>
+
+        <p>Proseccna ocena klinike je: <b>{{ prOcenaKlinike }}</b></p>
+
+    </div>
+</div>
+
+
+
+<div class='card'>
+    <div class='card-body'>
+        <h3>Prosecna ocena svakog lekara klinike:</h3>
+
+        <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Email</th>
+                        <th>Prosecna ocena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let lekar of lekariKlinike; index as i'>
+                        <td>{{ lekar.ime }}</td>
+                        <td>{{ lekar.prezime }}</td>
+                        <td>{{ lekar.email }}</td>
+                        <td>{{ lekar.srednjaOcena }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<div class='card'>
+    <div class='card-body'>
+        <h3>Prihod klinike u odredjenom vremenskom periodu:</h3>
+
+        <label>Odaberite pocetak i kraj vremenskog perioda</label>
+        <br>
+        <input type="datetime-local" required name="datumIVreme1" #datumIVreme1="ngModel" [(ngModel)] = "pocetak" [value]="pocetak">
+        <input type="datetime-local" required name="datumIVreme2" #datumIVreme2="ngModel" [(ngModel)] = "kraj" [value]="kraj">
+        <button (click)='vratiPrihod()' class="btn btn-info">Prikazi prihod</button>
+
+        <br>
+        <label>Prihod za odabrani period je: <b>{{ prihod }}</b></label>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="card">
+    <div class="card-body">
+        <button (click)='onBack()' class="btn btn-info">Nazad</button>
+    </div>
+</div>
