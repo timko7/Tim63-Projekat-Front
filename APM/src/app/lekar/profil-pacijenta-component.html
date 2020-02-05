@@ -1,0 +1,53 @@
+<div class='card'>
+    <div class='card-body'>
+        <h2>Profil odabranog pacijenta</h2>
+        <form  #lekarForm="ngForm">
+            <div class='table-responsive'>
+            <table class="table" style="width: 500px;">
+                <tr>
+                    <td>Ime</td>
+                    <td>{{pacijent.ime}}</td>
+                </tr>
+                <tr>
+                    <td>Prezime</td>
+                    <td>{{pacijent.prezime}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{pacijent.email}}</td>
+                </tr>
+                <tr>
+                    <td>Grad</td>
+                    <td>{{pacijent.grad}}</td>
+                </tr>
+                <tr>
+                    <td>Drzava</td>
+                    <td>{{pacijent.drzava}}</td>
+                </tr>
+                <tr>
+                    <td>Adresa</td>
+                    <td>{{pacijent.adresa}}</td>
+                </tr>
+                <tr>
+                    <td>Telefon</td>
+                    <td>{{pacijent.telefon}}</td>
+                </tr>
+                <tr>
+                    <td>Broj osiguranika</td>
+                    <td>{{pacijent.broj_osiguranika}}</td>
+                </tr>
+            </table>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<div class='card'>
+    <div class='card-body'>
+        <button (click)='onBack()' class="btn btn-info">Nazad na lekara</button>
+    </div>
+</div>
+
+

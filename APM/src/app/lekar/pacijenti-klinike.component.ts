@@ -93,21 +93,36 @@ export class PacijentiKlinikeComponent implements OnInit{
     ngOnInit(): void {
         this.loginService.getKorisnika().subscribe({next: korisnik=>{
             this.pregledService.nadjiPoLekaru(korisnik.id).subscribe({
-                next: pregledi=>{this.zakazaniPregledi=pregledi}
-            });
-            this.pregledOdZahteva.vratiPoLekaru(korisnik.id).subscribe({
-              next:pregldi=>{this.zakazaniPreglediOdZahteva=pregldi;
-                for(let pregled of this.zakazaniPreglediOdZahteva){
-                  this.zakazaniPregledi.push(pregled);
-            }
+                next: pregledi=>{
+                  this.zakazaniPregledi=pregledi;
+                  this.pregledOdZahteva.vratiPoLekaru(korisnik.id).subscribe({
+                    next:pregldi=>{
+                      this.zakazaniPreglediOdZahteva=pregldi;
+                      for(let pregled of this.zakazaniPreglediOdZahteva){
+                        this.zakazaniPregledi.push(pregled);
+                      }
+                      for(let pregled of this.zakazaniPregledi){
+                        this.paciejentService.vratiKorisnika(pregled.idPacijenta).subscribe({
+                          next: pacijent=>{this.pacijentiZaPregled.push(pacijent);
+                          console.log("alooo"+this.pacijentiZaPregled);
+                        }
+                       });
+                      }
+                    }
+                  });
+            // this.pregledOdZahteva.vratiPoLekaru(korisnik.id).subscribe({
+            //   next:pregldi=>{this.zakazaniPreglediOdZahteva=pregldi;
+            //     for(let pregled of this.zakazaniPreglediOdZahteva){
+            //       this.zakazaniPregledi.push(pregled);
+            // }
 
-            for(let pregled of this.zakazaniPregledi){
-              this.paciejentService.vratiKorisnika(pregled.idPacijenta).subscribe({
-                next: pacijent=>{this.pacijentiZaPregled.push(pacijent);
-                console.log("alooo"+this.pacijentiZaPregled);
-              }
-                          });
-            }
+            // for(let pregled of this.zakazaniPregledi){
+            //   this.paciejentService.vratiKorisnika(pregled.idPacijenta).subscribe({
+            //     next: pacijent=>{this.pacijentiZaPregled.push(pacijent);
+            //     console.log("alooo"+this.pacijentiZaPregled);
+            //   }
+            //  });
+            // }
           }
             })     
           }
@@ -164,5 +179,20 @@ export class PacijentiKlinikeComponent implements OnInit{
           this.brojPacijenta=null;
          
       }
+
   
-    }
+  vidiProfil(idPacijenta: number) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(idPacijenta)
+      }
+    };
+    this.router.navigate(["/lekar/pacijentiKlinike/profil/"],navigationExtras);
+  }
+
+  onBack(): void {
+    this.router.navigate(['/lekar']);
+  }
+
+
+}
