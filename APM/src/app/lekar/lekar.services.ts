@@ -62,4 +62,9 @@ public pretraziLekarePonovo(zahtev: Zahtev): Observable<Lekar[]> {
     }
 
 
+    public getSrednjaOcenaLekara(id:number): Observable<number>{
+      return this.http.get<number>("/api/lekari/srednjaOcena/" + id);
+    }
+
+
 }

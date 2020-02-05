@@ -20,6 +20,8 @@ import { ZakazaniPregledService } from '../home-page-pacijenta/zakazaniPregled.s
 import { ZahteviZaOdsustvoComponent } from './zahteviZaOdsustvo/zahtevi-za-odsustvo.component';
 import { OdobrenjeZahtevaComponent } from './lista-zahteva/odobrenje-zahteva.component';
 import { PregledOdZahtevaServices } from './lista-zahteva/pregled-od-zahteva.service';
+import { IzvestajiPoslovanjaComponent } from './izvestaji-poslovanja/izvestaji-poslovanja.component';
+import { IzvestajiService } from './izvestaji-poslovanja/izvestaji.service';
 
 
 
@@ -37,7 +39,9 @@ import { PregledOdZahtevaServices } from './lista-zahteva/pregled-od-zahteva.ser
 
     ZahteviZaOdsustvoComponent,
 
-    OdobrenjeZahtevaComponent
+    OdobrenjeZahtevaComponent,
+
+    IzvestajiPoslovanjaComponent
 
   ],
   imports: [
@@ -55,6 +59,8 @@ import { PregledOdZahtevaServices } from './lista-zahteva/pregled-od-zahteva.ser
 
       { path: 'adminKlinike/zahteviZaOdsustvo', component: ZahteviZaOdsustvoComponent },
 
+      { path: 'adminKlinike/izvestajiPoslovanjaKlinike', component: IzvestajiPoslovanjaComponent },
+
     ]),
     FormsModule
   ],
@@ -65,7 +71,8 @@ import { PregledOdZahtevaServices } from './lista-zahteva/pregled-od-zahteva.ser
     LekarServces,
     PreglediService,
     PregledOdZahtevaServices,
-    ZakazaniPregledService
+    ZakazaniPregledService,
+    IzvestajiService,
   ]
 })
 export class ProfilAdminaKlinikeModule { }
