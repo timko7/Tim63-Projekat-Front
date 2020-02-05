@@ -20,6 +20,7 @@ import { GodOdmorOdsustvoComponent } from './godOdmorOdsustvo/god-odmor-odsustvo
 import { ZapocinjanjePregledaIUnosInfComponent } from './zapocinjanjePregledaIUnosInf/zapocinjanje-pregleda-iunos-inf.component';
 import { ZakazivanjePregledaOperacijaComponent } from './zakazivanjePregledaOperacija/zakazivanje-pregleda-operacija.component';
 import { OdsustvoServices } from './godOdmorOdsustvo/odsustvo.services';
+import { ProfilPacijentaComponent } from './profil-pacijenta-component';
 
 
 
@@ -37,7 +38,8 @@ import { OdsustvoServices } from './godOdmorOdsustvo/odsustvo.services';
     RadniKalendarComponent,
     GodOdmorOdsustvoComponent,
     ZapocinjanjePregledaIUnosInfComponent,
-    ZakazivanjePregledaOperacijaComponent
+    ZakazivanjePregledaOperacijaComponent,
+    ProfilPacijentaComponent,
 
 
   ],
@@ -49,6 +51,8 @@ import { OdsustvoServices } from './godOdmorOdsustvo/odsustvo.services';
       { path: 'lekar/profilLekara', component: ProfilLekaraComponent },
 
       { path: 'lekar/pacijentiKlinike/zapocetPregled', component: ZapocetPregledComponent },
+      { path: 'lekar/pacijentiKlinike/profil', component: ProfilPacijentaComponent },
+
 
       { path: 'lekar/radniKalendar', component: RadniKalendarComponent },
       { path: 'lekar/godisnjiOdmorOdsustvo', component: GodOdmorOdsustvoComponent },
