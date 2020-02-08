@@ -8,6 +8,7 @@
             <th>Id zahteva</th>
             <th>Id Pacijenta</th>
             <th>Id Lekara</th>
+            <th>Datum i vreme zahteva</th>
         </tr>
         </thead>
         <tbody>
@@ -15,6 +16,7 @@
             <td>{{ zahtev.id }}</td>
             <td>{{ zahtev.idPacijenta }}</td>
             <td>{{ zahtev.idLekara }}</td>
+            <td>{{ zahtev.datumVreme }}</td>
             <td><button class="btn btn-info" (click)='odobriZahtev(zahtev)' *ngIf='!zahtev.odradjen'>Odobri zahtev</button>
                 <span *ngIf='zahtev.odradjen'>Zahtev je odradjen.</span>
             </td>

@@ -113,5 +113,9 @@ export class ProfilLekaraComponent implements OnInit{
     ponisti() {
         this.mozesDaMenjas = false;
     }
+
+    onBack() {
+        this.router.navigate(["./lekar"]);
+    }
   
 }
