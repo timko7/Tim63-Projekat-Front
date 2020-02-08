@@ -23,5 +23,9 @@ export class PregledOdZahtevaServices {
     public promeniOdradjen(pregled:PregledOdZahteva) {
         return this._http.put<PregledOdZahteva>("/api/preglediOdZahteva/odradiPregled/"+pregled.id,pregled);
       }
+      public otkaziPregled(pregled:PregledOdZahteva) {
+        return this._http.delete("/api/preglediOdZahteva/otkaziPregled/"+pregled.id);
+      }
+
 
 }

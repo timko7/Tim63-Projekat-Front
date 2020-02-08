@@ -137,7 +137,8 @@
         <td>{{ izabraneSale[i].naziv }}</td>
         <td>{{ izabraniTipovi[i].nazivTipa }}</td>
         <td>{{ pregled.cena }}</td>
-        <td ><button  class="btn btn-info" (click)='rezervisiPregled(pregled)'>Rezervisi</button></td>
+        <td ><button  class="btn btn-info" (click)='rezervisiPregled(pregled)'*ngIf='!pregled.rezervisan'>Rezervisi</button>
+        <span *ngIf='pregled.rezervisan'>Pregled je rezervisan.</span></td>
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,18 @@
+<div class='table-responsive'>
+    <table class='table'
+            *ngIf='pregledi'>
+      <thead>
+        <tr>
+          <th>Datum pregleda</th>
+          <th>Lekar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let pregled of pregledi;index as i'>
+          <td>{{ pregled.datumVreme }}</td>
+          <td>{{ lekari[i].ime }} {{lekari[i].prezime}}</td>
+          <td><button class="btn btn-info" (click)='otkaziPregled(pregled)'>Otkazi pregled</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
