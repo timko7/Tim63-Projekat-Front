@@ -104,7 +104,9 @@ export class ZapocetPregledComponent implements OnInit{
         this.zahtev.idTipa=this.pregled.idTipa;
         this.zahtev.cena=this.pregled.cena;
         this.zahtev.datumVreme=this.izabraniDatum;
-        this.zakazaniPreglediService.save(this.zahtev).subscribe();
+        this.zakazaniPreglediService.save(this.zahtev).subscribe({
+          error: error => alert('Neuspesno dodavanje zahteva za pregled. ')
+        });
       
     }
 

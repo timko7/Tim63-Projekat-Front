@@ -8,12 +8,14 @@
           <thead>
             <tr>
               <th>Naziv tipa</th>
+              <th>Cena tipa</th>
               <th>Slobodan tip</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor='let tip of tipovi'>
               <td>{{ tip.nazivTipa }}</td>
+              <td>{{ tip.cena }}</td>
               <td>{{ tip.slobodan ? 'Nema zakazanih pregleda' : 'Ima zakazanih pregleda'}}</td>
               <td><button *ngIf="tip.slobodan" class="btn btn-info" (click) = "obrisiTip(tip)">Obrisi tip</button></td>
               <td><button *ngIf="tip.slobodan" class="btn btn-info" (click)='izmeniTip(tip)'>Izmeni tip</button></td>

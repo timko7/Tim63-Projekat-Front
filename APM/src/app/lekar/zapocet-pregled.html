@@ -1,19 +1,25 @@
-<div>
+<div class='card'>
+  <div class='card-body'>
+      <h3>Leci se: {{pacijent.ime}} {{ pacijent.prezime }}; broj osiguranika: {{ pacijent.broj_osiguranika }}</h3>
 
-    <div>
-      Leci se :{{pacijent.ime}}
-    </div>
+    <!-- </div> -->
   <br>
   <div *ngIf='!postojiTrajanje'>
     <input type="number" required  [(ngModel)] = "trajanjePregleda">
   </div>
+  <br>
+
   <div><input type="submit" value="Pacijet pregledan" (click)='zavrsiPregled()' class="btn btn-info"></div>
+  <br>
   <div *ngIf='pregledan'><input type="submit" value="Zakazi novi pregled/operaciju" (click)='zakaziNovi()' class="btn btn-info"></div>
+  <br>
 <div *ngIf='ponovoPregled'>
     Odaberite datum i satnicu za novi pregled
     <input type="datetime-local" required  [(ngModel)] = "izabraniDatum">
     <div><input type="submit" value="Kreiraj zahtev" (click)='kreirajZahtev()' class="btn btn-info"></div>
 </div>
 </div>
+</div>
+
   
   

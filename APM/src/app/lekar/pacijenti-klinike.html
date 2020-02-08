@@ -1,4 +1,5 @@
-<div>
+<div class='card'>
+  <div class='card-body'>
 
   <div class="row">
     <div class='col-md-2'>Pretrazi po imenu</div>
@@ -12,10 +13,15 @@
       <div class='col-md-2'>Pretrazi po jedinstvenom broju</div>
       <div class='col-md-4'><input type="text" [(ngModel)]='brojPacijenta'></div>
     </div>
-  <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()'></div>
+  <div class="row"><input type="submit" value="Pretrazi" (click)='preuzmiZaPretragu()' class="btn btn-info"></div>
+  </div>
+
 
 </div>
 
+
+<div class='card'>
+  <div class='card-body'>
 <div *ngIf='dugmeZaPretragu==false'>
   <h3>Pacijenti i pregledi koji su zakazani:</h3>
 <div class='table-responsive'>
@@ -25,17 +31,21 @@
         <tr>
           <th>Ime pacijenta</th>
           <th>Prezime pacijenta</th>
+          <th>Jednistveni broj pacijenta</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor='let pregled of zakazaniPregledi; index as i'>
           <td>{{pacijentiZaPregled[i].ime }}</td>
           <td>{{pacijentiZaPregled[i].prezime }}</td>
+          <td>{{pacijentiZaPregled[i].broj_osiguranika}}</td>
           <td><button class="btn btn-info" (click)='zapocniPregled(pregled)'>Zapocni pregled</button></td>
           <td><button class="btn btn-info" (click)='vidiProfil(pacijentiZaPregled[i].id)'>Vidi profil pacijenta</button></td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
   </div>
 </div>
 <div *ngIf='odgovor' style="color: red;">Pregled je vec odradjen</div>
