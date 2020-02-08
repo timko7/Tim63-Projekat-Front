@@ -17,8 +17,6 @@ import { PreglediComponent } from '../profil-admina-klinike/pregledi/pregledi.co
 
 import { RadniKalendarComponent } from './radniKalendar/radni-kalendar.component';
 import { GodOdmorOdsustvoComponent } from './godOdmorOdsustvo/god-odmor-odsustvo.component';
-import { ZapocinjanjePregledaIUnosInfComponent } from './zapocinjanjePregledaIUnosInf/zapocinjanje-pregleda-iunos-inf.component';
-import { ZakazivanjePregledaOperacijaComponent } from './zakazivanjePregledaOperacija/zakazivanje-pregleda-operacija.component';
 import { OdsustvoServices } from './godOdmorOdsustvo/odsustvo.services';
 import { ProfilPacijentaComponent } from './profil-pacijenta-component';
 
@@ -37,8 +35,6 @@ import { ProfilPacijentaComponent } from './profil-pacijenta-component';
 
     RadniKalendarComponent,
     GodOdmorOdsustvoComponent,
-    ZapocinjanjePregledaIUnosInfComponent,
-    ZakazivanjePregledaOperacijaComponent,
     ProfilPacijentaComponent,
 
 
@@ -56,8 +52,6 @@ import { ProfilPacijentaComponent } from './profil-pacijenta-component';
 
       { path: 'lekar/radniKalendar', component: RadniKalendarComponent },
       { path: 'lekar/godisnjiOdmorOdsustvo', component: GodOdmorOdsustvoComponent },
-      { path: 'lekar/zapocinjanjePregledaIUnosInf', component: ZapocinjanjePregledaIUnosInfComponent },
-      { path: 'lekar/zakazivanjePregledaOperacija', component: ZakazivanjePregledaOperacijaComponent },
 
     ]),
     FormsModule
