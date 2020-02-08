@@ -18,6 +18,7 @@ import { Zahtev } from '../lekar/zahtev';
 import { Time } from '@angular/common';
 
 
+
 @Component({
   templateUrl: './listaKlinika.html',
 
@@ -57,7 +58,7 @@ export class ListaKlinikaComponent implements OnInit{
   izabraneSale: Sala[] = [];
   izabraniTipovi: ITipPregleda[] = [];
   index: number = 0;
-
+  
   zakazaniPregled:zakazaniPregled;
   korisnik:Korisnik;
   pregledRezervisan:boolean=false;
@@ -176,6 +177,13 @@ export class ListaKlinikaComponent implements OnInit{
        for(let lekar of lekari){
          this.klinikaService.getKlinika(lekar.idKlinike).subscribe({
            next:klinika=>{this.pom.push(klinika);
+            for (let i = 0; i < this.pom.length-1; i++){
+              for (let j = 0; j < this.pom.length; j++){
+                  if(this.pom[i].id==this.pom[j].id)
+                    this.pom.splice(this.pom.indexOf(this.pom[j]),1);
+              }
+              }
+            
           this.filtriraneKlinike=this.pom;
         console.log(this.filtriraneKlinike);}
          });
@@ -201,11 +209,12 @@ export class ListaKlinikaComponent implements OnInit{
           next:termini=>{this.terminiLekara.push(termini);
             console.log(this.terminiLekara);
             console.log(this.terminiLekara[0]);
+            this.index=this.terminiLekara.length;
           }
         });
       }
   console.log(this.lekari);
-  this.index=this.terminiLekara.length;
+ 
 
 }
 else{ 

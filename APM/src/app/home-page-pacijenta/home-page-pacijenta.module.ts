@@ -10,6 +10,7 @@ import { KlinikaServices } from '../klinika/klinika.services';
 import { LekarServces } from '../lekar/lekar.services';
 import { ZakazaniPregledService } from './zakazaniPregled.services';
 import { OceniComponent } from './oceni-lekara-kliniku.component';
+import { ListaPregledaComponent } from './lista-pregleda-component';
 
 
 
@@ -19,7 +20,8 @@ import { OceniComponent } from './oceni-lekara-kliniku.component';
     HomePagePacijentComponent,
     ListaKlinikaComponent,
     HomeComponent,
-    OceniComponent
+    OceniComponent,
+    ListaPregledaComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { OceniComponent } from './oceni-lekara-kliniku.component';
       { path: 'homePagePacijent/listaKlinika', component: ListaKlinikaComponent },
       { path: 'homePagePacijent/homePage', component: HomeComponent },
       { path: 'homePagePacijent/oceni', component: OceniComponent },
+      { path: 'homePagePacijent/pregledi', component: ListaPregledaComponent },
 
     ]),
     FormsModule, 

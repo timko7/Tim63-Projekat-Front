@@ -39,6 +39,7 @@ export class OceniComponent implements OnInit{
     _ocenaKlinike:number;
     dugmeOceniLekara:boolean=false;
     dugmeOceniKliniku:boolean=false;
+    mozesDodati:boolean=false;
 
     datumiPregleda:Date[]=[];
     izabraniLekar:Lekar;
@@ -108,11 +109,22 @@ export class OceniComponent implements OnInit{
         this.izabraniLekar=lekar;
     }
  oceniLekara(){
+    if(this.ocenaLekara<1){
+        alert("Ne moze se uneti negativna ocena");
+        this.mozesDodati=false;
+    }
+   else if(this.ocenaLekara>5){
+        alert("Ne moze se uneti ocena veca od 5");
+        this.mozesDodati=false;
+    }
+    else{
+        this.mozesDodati=true;
+    }if(this.mozesDodati==true){
     this.ocena.idLekara=this.izabraniLekar.id;
     this.ocena.ocena=this.ocenaLekara;
     this.lekarService.oceniLekara(this.ocena).subscribe();
     this.ocenaLekara=null;
-    this.dugmeOceniLekara=false;
+    this.dugmeOceniLekara=false;}
 
 }
     oceniKliniku(k:Klinika){
@@ -121,17 +133,31 @@ export class OceniComponent implements OnInit{
         
     }
     posaljiOcenuKlinike(){
+       
+        if(this.ocenaKlinike<1){
+            alert("Ne moze se uneti negativna ocena");
+            this.mozesDodati=false;
+        }
+       else if(this.ocenaKlinike>5){
+            alert("Ne moze se uneti ocena veca od 5");
+            this.mozesDodati=false;
+        }
+        else{
+            this.mozesDodati=true;
+        }
+        if(this.mozesDodati==true){
         this.ocena.idKlinike=this.izabranaKlinika.id;
         this.ocena.ocena=this.ocenaKlinike;
         this.klinikaService.oceniKliniku(this.ocena).subscribe();
         this.ocenaKlinike=null;
         this.dugmeOceniKliniku=false;
+        }
     
     }
 
+    
     kraj(){
         this.router.navigate(["/login"]);
     }
     
-   
 }

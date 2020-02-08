@@ -37,4 +37,8 @@ export class PreglediService {
     return this._http.put<zakazaniPregled>("/api/zakazaniPregledi/odradiZahtev/" + pregledZahtev.id, pregledZahtev);
   }
 
+  public otkaziPregled(pregled:Pregled) {
+    return this._http.put<Pregled>("/api/pregledi/otkaziPregled/" +pregled.id,pregled);
+  }
+
 }
