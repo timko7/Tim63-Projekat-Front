@@ -23,6 +23,7 @@ import { PregledOdZahteva } from '../profil-admina-klinike/lista-zahteva/pregled
 export class PacijentiKlinikeComponent implements OnInit{
 
     zakazaniPregledi:Pregled[]=[];
+    pomPregledi:Pregled[]=[];
     filtriraniPacijenti:Pacijent[]=[];
     zakazaniPreglediOdZahteva:PregledOdZahteva[]=[];
 
@@ -94,7 +95,12 @@ export class PacijentiKlinikeComponent implements OnInit{
         this.loginService.getKorisnika().subscribe({next: korisnik=>{
             this.pregledService.nadjiPoLekaru(korisnik.id).subscribe({
                 next: pregledi=>{
-                  this.zakazaniPregledi=pregledi;
+                  this.pomPregledi=pregledi;
+                  for(let pregled of this.pomPregledi){
+                    if(pregled.rezervisan==true){
+                      this.zakazaniPregledi.push(pregled);
+                                        }
+                  }
                   this.pregledOdZahteva.vratiPoLekaru(korisnik.id).subscribe({
                     next:pregldi=>{
                       this.zakazaniPreglediOdZahteva=pregldi;
@@ -102,12 +108,19 @@ export class PacijentiKlinikeComponent implements OnInit{
                         this.zakazaniPregledi.push(pregled);
                       }
                       for(let pregled of this.zakazaniPregledi){
+                    
                         this.paciejentService.vratiKorisnika(pregled.idPacijenta).subscribe({
                           next: pacijent=>{this.pacijentiZaPregled.push(pacijent);
                           console.log("alooo"+this.pacijentiZaPregled);
+                          
                         }
                        });
+                        
+                        this.index=this.pacijentiZaPregled.length;
+                       
                       }
+              
+                      
                     }
                   });
             // this.pregledOdZahteva.vratiPoLekaru(korisnik.id).subscribe({
@@ -127,13 +140,9 @@ export class PacijentiKlinikeComponent implements OnInit{
             })     
           }
         });
+       
           
-
-          
-
-        
-
-        this.index=this.zakazaniPregledi.length;
+      
           this.filtriraniPacijenti=this.pacijentiZaPregled;
           console.log(this.pacijentiZaPregled);
           console.log(this.indexOstali);
