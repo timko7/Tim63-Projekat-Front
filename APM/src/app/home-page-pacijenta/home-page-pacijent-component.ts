@@ -5,6 +5,7 @@ import { Routes, Router } from '@angular/router';
 
 @Component({
   templateUrl: './home-page-pacijent.html',
+  styleUrls: ['./home-page-pacijent.css']
 
 })
 export class HomePagePacijentComponent{
