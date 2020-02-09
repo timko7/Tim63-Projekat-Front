@@ -84,7 +84,7 @@
                 <th>Grad</th>
                 <th>Drzava</th>
                 <th>Adresa</th>
-                <th>Telefon</th>
+                <th>Srednja Ocena</th>
                 <th>Radno vreme</th>
                 <th>Slobodni termini</th>
             </tr>
@@ -97,7 +97,7 @@
                 <td>{{ lekar.grad }}</td>
                 <td>{{ lekar.drzava }}</td>
                 <td>{{ lekar.adresa }}</td>
-                <td>{{ lekar.telefon }}</td>
+                <td>{{ lekar.srednjaOcena }}</td>
                 <td>{{ lekar.radnoVremeOd }} -- {{ lekar.radnoVremeDo }}</td>
                 <td><select name="termin"  #termin="ngModel" [(ngModel)] = "izabraniTermin">
                   <option *ngFor="let termin of terminiLekara[i]" [ngValue]="termin">{{termin}}</option>
